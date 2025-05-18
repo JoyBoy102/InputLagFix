@@ -15,6 +15,12 @@ namespace INPUTLAGFIX.Models
     {
         public ObservableCollection<string>AllLogMessages = new ObservableCollection<string>();
         public ScreenResolution SelectedResolution;
+        private DevConManager _devConManager;
+
+        public RegeditManager()
+        {
+            _devConManager = new DevConManager();
+        }
         private string DeleteFolder(string folderPath)
         {
             string[] folderPathParts = folderPath.Split('\\');
@@ -120,7 +126,9 @@ namespace INPUTLAGFIX.Models
                 }
 
                 AllLogMessages.Add($"Удалено {deletedCount} подразделов с SIMULATED");
-                RemoveDevice("MONITOR\\HKM2500");
+                AllLogMessages.Add(_devConManager.ReinstallDeviceDriver("MONITOR\\HKM2500"));
+                Thread.Sleep(3000);
+                AllLogMessages.Add(_devConManager.RestartDeviceDriver("PCI\\VEN_10DE&DEV_2803&SUBSYS_F3061569&REV_A1"));
             }
             catch (UnauthorizedAccessException)
             {
@@ -143,31 +151,19 @@ namespace INPUTLAGFIX.Models
             foreach (string subKeyName in subKeyNames)
             {
                 string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", 1920, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", 1080, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", 1920, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", 1080, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
                 AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
                 AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", 1080, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", 1920, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", 1920, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", 1080, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", SelectedResolution.Height, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", SelectedResolution.Width, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
             }
         }
 
-        public static void RemoveDevice(string hardwareId)
-        {
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = "devcon.exe",
-                Arguments = $"remove \"{hardwareId}\"",
-                Verb = "runas", // Запуск от имени администратора
-                UseShellExecute = true,
-                CreateNoWindow = true
-            };
-
-            Process.Start(psi)?.WaitForExit();
-        }
+        
     }
 }

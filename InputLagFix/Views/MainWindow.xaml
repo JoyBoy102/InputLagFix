@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:INPUTLAGFIX"
         xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="700"
+        Title="MainWindow" Height="300" Width="450"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:RegeditManagerViewModel/>
@@ -22,10 +22,10 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Content="FIX" 
+            <Button Grid.Column="1" Content="FIX INPUT LAG" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Padding="15,5" FontSize="14" FontWeight="SemiBold"
-                Command="{Binding FixMonitorResolutionsCommand}"/>
+                Command="{Binding FixMonitorResolutionsCommand}" Width="150"/>
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text = "Выберите ваше разрешение монитора:"></TextBlock>
                 <ComboBox
