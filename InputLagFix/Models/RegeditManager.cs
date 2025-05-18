@@ -6,12 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace INPUTLAGFIX.Models
 {
     public class RegeditManager
     {
         public ObservableCollection<string>AllLogMessages = new ObservableCollection<string>();
+        public ScreenResolution SelectedResolution;
         private string DeleteFolder(string folderPath)
         {
             string[] folderPathParts = folderPath.Split('\\');
@@ -68,15 +71,9 @@ namespace INPUTLAGFIX.Models
             string subKeyPath = string.Join("\\", valuePathParts, 1, valuePathParts.Length - 1);
             using (RegistryKey key = rootKey.CreateSubKey(subKeyPath))
             {
-                if (ValueExists(valuePath, valueName))
-                {
-                    key.SetValue(valueName, value, valueKind);
-                    return $"Значение {valueName} в подразделе {valuePath} успешно изменено на {value}";
-                }
-                else
-                {
-                    return $"Значение {valueName} в подразделе {valuePath} успешно создано и изменено на {value}";
-                }
+                key.SetValue(valueName, value, valueKind);
+                key.Flush();
+                return $"Значение {valueName} в подразделе {valuePath} успешно изменено на {value}";
             }
         }
 
@@ -123,6 +120,7 @@ namespace INPUTLAGFIX.Models
                 }
 
                 AllLogMessages.Add($"Удалено {deletedCount} подразделов с SIMULATED");
+                RemoveDevice("MONITOR\\HKM2500");
             }
             catch (UnauthorizedAccessException)
             {
@@ -144,32 +142,32 @@ namespace INPUTLAGFIX.Models
 
             foreach (string subKeyName in subKeyNames)
             {
-                // Проверяем, начинается ли имя подраздела с "SIMULATED"
-                if (subKeyName.StartsWith("SIMULATED", StringComparison.OrdinalIgnoreCase))
-                {
-                    string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
-                    string result = DeleteFolder(fullPath);
-
-                    if (result.Contains("удален"))
-                        deletedCount++;
-                    AllLogMessages.Add(result);
-                }
-                else
-                {
-                    string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", 780, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", 438, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", 780, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", 438, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", 7680, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", 7680, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.left", 780, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", 438, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", 780, RegistryValueKind.DWord));
-                    AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", 438, RegistryValueKind.DWord));
-                }
-
+                string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", 1920, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", 1080, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", 1920, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", 1080, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", 1080, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", 1920, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", 1920, RegistryValueKind.DWord));
+                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", 1080, RegistryValueKind.DWord));
             }
+        }
+
+        public static void RemoveDevice(string hardwareId)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = "devcon.exe",
+                Arguments = $"remove \"{hardwareId}\"",
+                Verb = "runas", // Запуск от имени администратора
+                UseShellExecute = true,
+                CreateNoWindow = true
+            };
+
+            Process.Start(psi)?.WaitForExit();
         }
     }
 }
