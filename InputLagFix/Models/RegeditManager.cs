@@ -122,13 +122,22 @@ namespace INPUTLAGFIX.Models
 
                 using (RegistryKey configKey = rootKey.OpenSubKey(subKeyPath))
                 {
-                    DeleteAllSimulatedMonitorsAndChangeToCorrectValues(configKey, MonitorsConfigsFolder, ref deletedCount);
+                   DeleteAllSimulatedMonitorsAndChangeToCorrectValues(configKey, MonitorsConfigsFolder, ref deletedCount);
                 }
 
                 AllLogMessages.Add($"Удалено {deletedCount} подразделов с SIMULATED");
-                AllLogMessages.Add(_devConManager.ReinstallDeviceDriver("MONITOR\\HKM2500"));
-                Thread.Sleep(3000);
-                AllLogMessages.Add(_devConManager.RestartDeviceDriver("PCI\\VEN_10DE&DEV_2803&SUBSYS_F3061569&REV_A1"));
+                List<string> monitorIds = _devConManager.GetMonitorId();
+                foreach (string monitorId in monitorIds)
+                {
+                    AllLogMessages.Add(_devConManager.ReinstallDeviceDriver(monitorId));
+                    Thread.Sleep(3000);
+                }
+                List<string> GpuIds = _devConManager.GetGpuId();
+                foreach (string GpuId in GpuIds)
+                {
+                    AllLogMessages.Add(_devConManager.RestartDeviceDriver(GpuId));
+                    Thread.Sleep(3000);
+                }
             }
             catch (UnauthorizedAccessException)
             {

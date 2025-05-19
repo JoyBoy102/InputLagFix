@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,7 +69,7 @@ namespace INPUTLAGFIX.Models
                 }
 
                 // Небольшая задержка для завершения операции
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
 
                 // Шаг 2: Сканирование для повторного обнаружения монитора
                 processInfo.Arguments = "rescan"; // Автоматическая переустановка драйвера
@@ -85,6 +86,82 @@ namespace INPUTLAGFIX.Models
             {
                 return $"Ошибка: {ex.Message}";
             }
+        }
+
+        public List<string> GetMonitorId()
+        {
+            List<string> res = new List<string>();
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Service = 'monitor'"))
+                {
+                    foreach (ManagementObject device in searcher.Get())
+                    {
+                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
+                        if (!string.IsNullOrEmpty(pnpDeviceId) && pnpDeviceId.Contains("DISPLAY"))
+                        {
+                            pnpDeviceId = pnpDeviceId.Replace("DISPLAY", "MONITOR");
+                            string[] deviceIdParts = pnpDeviceId.Split("\\");
+                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Add($"Ошибка при поиске монитора: {ex.Message}");
+            }
+            return res;
+        }
+
+        public List<string> GetGpuId()
+        {
+            List<string> res = new List<string>();
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController"))
+                {
+                    foreach (ManagementObject device in searcher.Get())
+                    {
+                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
+                        if (!string.IsNullOrEmpty(pnpDeviceId))
+                        {
+                            string[] deviceIdParts = pnpDeviceId.Split("\\");
+                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Add($"Ошибка при поиске видеокарты: {ex.Message}");
+            }
+            return res;
+        }
+
+        public List<string> GetMouseIds()
+        {
+            List<string> res = new List<string>();
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PointingDevice"))
+                {
+                    foreach (ManagementObject device in searcher.Get())
+                    {
+                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
+                        if (!string.IsNullOrEmpty(pnpDeviceId))
+                        {
+                            string[] deviceIdParts = pnpDeviceId.Split("\\");
+                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Add($"Ошибка при поиске мыши: {ex.Message}");
+            }
+            return res;
         }
     }
 }
