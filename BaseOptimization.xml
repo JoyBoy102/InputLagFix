@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BaseOptimization>
+	<MouseAccelerationOff ruName ="Отключить акселерацию мыши">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Control Panel\Mouse</valuePath>
+			<valueName>MouseSpeed</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\Control Panel\Mouse</valuePath>
+			<valueName>MouseThreshold1</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>6</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_CURRENT_USER\Control Panel\Mouse</valuePath>
+			<valueName>MouseThreshold2</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>10</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</ThirdSetting>
+	</MouseAccelerationOff>
+
+	<DriversAutoUpdateOff ruName ="Отключить автообновление драйверов">
+		<FirstSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching</valuePath>
+			<valueName>SearchOrderConfig</valueName>
+			<value_if_true>3</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate</valuePath>
+			<valueName>ExcludeWUDriversInQualityUpdate</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+	</DriversAutoUpdateOff>
+
+	<UWPAppsBackgroundRunningOff ruName = "Отключить работу UWP приложений на фоне">
+		<FirstSetting>
+			<valuePath>HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications</valuePath>
+			<valueName>GlobalUserDisabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\Software\Microsoft\Windows\CurrentVersion\Search</valuePath>
+			<valueName>BackgroundAppGlobalToggle</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\SYSTEM\CurrentControlSet\Services\embeddedmode</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+	
+</UWPAppsBackgroundRunningOff>
+</BaseOptimization>

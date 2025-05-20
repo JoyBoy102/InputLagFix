@@ -62,7 +62,7 @@ namespace INPUTLAGFIX.Models
             }
         }
 
-        private string ChangeRegistryValue(string valuePath, string valueName, object value, RegistryValueKind valueKind)
+        public string ChangeRegistryValue(string valuePath, string valueName, object value, RegistryValueKind valueKind)
         {
             string[] valuePathParts = valuePath.Split('\\');
             if (valuePathParts.Length < 2)

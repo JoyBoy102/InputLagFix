@@ -9,8 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BaseOptimization.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Cake.Powershell" Version="4.0.0" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BaseOptimization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
