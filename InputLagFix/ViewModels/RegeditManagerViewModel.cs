@@ -26,6 +26,7 @@ namespace INPUTLAGFIX.ViewModels
             _settingsCategories = new ObservableCollection<SettingsCategory>
             {
                 new SettingsCategory { CategoryName = "Основная оптимизация", Settings = _xmlManager.GetCollectionOfSettings("BaseOptimization.xml") },
+                new SettingsCategory { CategoryName = "Настройки безопасности и конфиденциальности", Settings = _xmlManager.GetCollectionOfSettings("SecuritySettings.xml") }
             };
             ApplySettingsCommand = new RelayCommand(ApplySettings);
         }

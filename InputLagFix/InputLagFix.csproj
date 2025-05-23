@@ -10,15 +10,26 @@
 
   <ItemGroup>
     <None Remove="BaseOptimization.xml" />
+    <None Remove="SecuritySettings.xml" />
+    <None Remove="ToggleDefender.bat" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Cake.Powershell" Version="4.0.0" />
+    <PackageReference Include="FluentWPF" Version="0.10.2" />
+    <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="BaseOptimization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SecuritySettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

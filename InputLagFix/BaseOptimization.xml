@@ -63,6 +63,325 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</ThirdSetting>
-	
-</UWPAppsBackgroundRunningOff>
+	</UWPAppsBackgroundRunningOff>
+
+	<MapsAutoUpdateOff ruName = "Отключить автообновление карт">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\Maps</valuePath>
+			<valueName>AutoUpdateEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</MapsAutoUpdateOff>
+
+	<StoreAppsAutoUpdateOff ruName = "Отключить автообновление приложений магазина">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore</valuePath>
+			<valueName>AutoDownload</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</StoreAppsAutoUpdateOff>
+
+	<WindowsTransparencyOff ruName = "Отключить эффекты прозрачности Windows">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize</valuePath>
+			<valueName>EnableTransparency</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize</valuePath>
+			<valueName>EnableBlurBehind</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</WindowsTransparencyOff>
+
+	<SimplifyWindowsInterface ruName = "Упростить интерфейс Windows">
+		<FirstSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer</valuePath>
+			<valueName>TurnOffSPIAnimations</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>TaskbarAnimations</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKCU\Software\Microsoft\Windows\DWM</valuePath>
+			<valueName>AlwaysHibernateThumbnails</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKCU\Control Panel\Desktop\WindowMetrics</valuePath>
+			<valueName>MinAnimate</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>IconsOnly</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>ListviewShadow</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>ListviewAlphaSelect</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKCU\Control Panel\Desktop</valuePath>
+			<valueName>DragFullWindows</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\DWM</valuePath>
+			<valueName>EnableAeroPeek</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+		<TenSetting>
+			<valuePath>HKEY_CURRENT_USER\Control Panel\Desktop</valuePath>
+			<valueName>FontSmoothing</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</TenSetting>
+		<ElevenSetting>
+			<valuePath>HKCU\Control Panel\Desktop</valuePath>
+			<valueName>UserPreferencesMask</valueName>
+			<value_if_true>90 12 03 80 10 00 00 00</value_if_true>
+			<value_if_false>9E 3E 07 80 12 00 00 00</value_if_false>
+			<valueKind>REG_BINARY</valueKind>
+		</ElevenSetting>
+		<TwelveSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer</valuePath>
+			<valueName>ShellState</valueName>
+			<value_if_true>24 00 00 00 3E A8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 13 00 00 00 00 00 00 00 73 00 00 00</value_if_true>
+			<value_if_false>24 00 00 00 3E A8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 13 00 00 00 00 00 00 00 63 00 00 00</value_if_false>
+			<valueKind>REG_BINARY</valueKind>
+		</TwelveSetting>
+		<ThirteenSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects</valuePath>
+			<valueName>VisualFXSetting</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirteenSetting>
+	</SimplifyWindowsInterface>
+
+	<GameBarOff ruName="Отключить GameBar">
+		<FirstSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>AutoGameModeEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>GamePanelStartupTipIndex</valueName>
+			<value_if_true>3</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>ShowStartupPanel</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>UseNexusForGameBarEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>AllowAutoGameMode</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\GameBar</valuePath>
+			<valueName>AllowAutoGameMode</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR</valuePath>
+			<valueName>AppCaptureEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR</valuePath>
+			<valueName>AllowGameDVR</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR</valuePath>
+			<valueName>value</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+	</GameBarOff>
+
+	<DeliveryOptimizationOff ruName="Отключить оптимизацию доставки">
+		<FirstSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization</valuePath>
+			<valueName>DODownloadMode</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</DeliveryOptimizationOff>
+
+	<EdgeBackgroundOff ruName="Отключить ускорение запуска и фоновую работу Microsoft Edge">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge</valuePath>
+			<valueName>StartupBoostEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge</valuePath>
+			<valueName>BackgroundModeEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</EdgeBackgroundOff>
+
+	<HagsOn ruName="Включить планирование GPU">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers</valuePath>
+			<valueName>HwSchMode</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</HagsOn>
+
+	<WindowsUpdatesOff ruName="Отключить полностью обновления Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</valuePath>
+			<valueName>NoAutoUpdate</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</valuePath>
+			<valueName>ScheduledInstallDay</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate</valuePath>
+			<valueName>DisableWindowsUpdateAccess</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</valuePath>
+			<valueName>AUOptions</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+	</WindowsUpdatesOff>
+
+	<SysMainServiceOff ruName="Отключить службу SysMain">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</SysMainServiceOff>
+		
+	<SearchIndexingOff ruName="Отключить индексацию поиска Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</SearchIndexingOff>
 </BaseOptimization>

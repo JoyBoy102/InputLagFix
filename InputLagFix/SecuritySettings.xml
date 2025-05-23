@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SecuritySettings>
+	<DefenderNotificationsOff ruName ="Отключить уведомления защитника Windows">
+		<FirstSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance</valuePath>
+			<valueName>Enabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance</valuePath>
+			<valueName>Enabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications</valuePath>
+			<valueName>DisableNotifications</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications</valuePath>
+			<valueName>DisableNotifications</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FourthteenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting</valuePath>
+			<valueName>DisableEnhancedNotifications</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthteenSetting>
+		<FiveSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications</valuePath>
+			<valueName>NoToastApplicationNotification</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications</valuePath>
+			<valueName>NoToastApplicationNotificationOnLockScreen</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+	</DefenderNotificationsOff>
+
+	<SecurityCenterOff ruName="Отключить центр безопасности Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</valuePath>
+			<valueName>SecurityHealth</valueName>
+			<value_if_true>delete</value_if_true>
+			<value_if_false>%windir%\system32\SecurityHealthSystray.exe</value_if_false>
+			<valueKind>REG_EXPAND_SZ</valueKind>
+		</SecondSetting>
+	</SecurityCenterOff>
+
+	<VBSOff ruName="Отключить VBS(Virtualization Based Security)">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\DeviceGuard</valuePath>
+			<valueName>EnableVirtualizationBasedSecurity</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</VBSOff>
+
+	<SmartScreenOff ruName="Отключить Smartscreen">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System</valuePath>
+			<valueName>EnableSmartScreen</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</SmartScreenOff>
+
+	<WindowsFirewallOff ruName="Отключить брандмауэр Windows">
+		<FirstSetting>
+			<valuePath>HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile</valuePath>
+			<valueName>EnableFirewall</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile</valuePath>
+			<valueName>EnableFirewall</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile</valuePath>
+			<valueName>EnableFirewall</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+	</WindowsFirewallOff>
+
+	<WindowsPlatformBinaryTable ruName="Отключить WPBT(Windows Platform Binary Table)">
+		<FirstSetting>
+			<valuePath>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager</valuePath>
+			<valueName>DisableWpbtExecution</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</WindowsPlatformBinaryTable>
+
+	<AMSIoff ruName="Отключить AMSI(Antimalware Scan Interface)">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Wbem</valuePath>
+			<valueName>AmsiEnable</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</AMSIoff>
+
+	<CodeIntegrityOff ruName="Отключить Code Integrity">
+		<FirstSetting>
+			<valuePath>HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy</valuePath>
+			<valueName>VerifiedAndReputablePolicyState</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</CodeIntegrityOff>
+
+	<BitLockerOff ruName="Отключить автошифрование устройств через BitLocker">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker</valuePath>
+			<valueName>PreventDeviceEncryption</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</BitLockerOff>
+
+	<UACoff ruName="Отключить контроль учетных записей (UAC)">
+		<FirstSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</valuePath>
+			<valueName>PromptOnSecureDesktop</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</valuePath>
+			<valueName>ConsentPromptBehaviorAdmin</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>5</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</UACoff>
+
+	<WindowsDefenderOff ruName="Отключить защитник Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
+			<valueName>DisableAntiSpyware</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+			<valueName>DisableRealtimeMonitoring</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SevenTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
+			<valueName>DisableAntiVirus</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenTeenSetting>
+	</WindowsDefenderOff>
+</SecuritySettings>
+
+
+

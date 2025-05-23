@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 
 namespace INPUTLAGFIX.Models
@@ -21,22 +25,27 @@ namespace INPUTLAGFIX.Models
         {
             _devConManager = new DevConManager();
         }
-        private string DeleteFolder(string folderPath)
+
+        public string DeleteKey(string keyName, string subKeyPath)
         {
-            string[] folderPathParts = folderPath.Split('\\');
-            if (folderPathParts.Length < 2)
+            string[] subKeyPathPathParts = subKeyPath.Split('\\');
+            if (subKeyPathPathParts.Length < 2)
             {
-                return $"Неверный путь в реестре: {folderPath}";
+                return $"Неверный путь в реестре: {subKeyPath}";
             }
-            RegistryKey rootKey = GetRootKey(folderPathParts[0]);
+            RegistryKey rootKey = GetRootKey(subKeyPathPathParts[0]);
             if (rootKey == null)
             {
-                return $"Неизвестный корневой раздел реестра {folderPathParts[0]}";
+                return $"Неизвестный корневой раздел реестра {subKeyPathPathParts[0]}";
             }
-            string subKeyPath = string.Join("\\", folderPathParts, 1, folderPathParts.Length - 1);
-            rootKey.DeleteSubKeyTree(subKeyPath);
-            rootKey.Close();
-            return $"Подраздел {folderPath} удален";
+            string KeyPath = string.Join("\\", subKeyPathPathParts, 1, subKeyPathPathParts.Length - 1);
+            using (RegistryKey targetKey = rootKey.OpenSubKey(KeyPath, true))
+            {
+                if (targetKey == null)
+                    return $"Ключ {subKeyPath} не найден";
+                targetKey.DeleteValue(keyName, false); // false - не выбрасывать исключение если ключ не существует
+                return $"Ключ {keyName} удален из {subKeyPath}";
+            }
         }
 
         private RegistryKey GetRootKey(string rootKeyName)
@@ -75,34 +84,28 @@ namespace INPUTLAGFIX.Models
                 return $"Неизвестный корневой раздел реестра {valuePathParts[0]}";
             }
             string subKeyPath = string.Join("\\", valuePathParts, 1, valuePathParts.Length - 1);
-            using (RegistryKey key = rootKey.CreateSubKey(subKeyPath))
+            
+            using (RegistryKey key = rootKey.CreateSubKey(subKeyPath, true))
             {
-                key.SetValue(valueName, value, valueKind);
-                key.Flush();
+                if (valueKind!=RegistryValueKind.Binary)
+                    key.SetValue(valueName, value, valueKind);
+                else
+                {
+                    byte[] byteArrVal = ConvertStringSettingToBytes(value);
+                    key.SetValue(valueName, byteArrVal, valueKind);
+                }
+                    key.Flush();
                 return $"Значение {valueName} в подразделе {valuePath} успешно изменено на {value}";
             }
         }
 
-        private bool ValueExists(string keyPath, string valueName)
+        private byte[] ConvertStringSettingToBytes(object value)
         {
-            try
-            {
-                string[] pathParts = keyPath.Split('\\');
-                RegistryKey rootKey = GetRootKey(pathParts[0]);
-
-                if (rootKey == null) return false;
-
-                string subKeyPath = string.Join("\\", pathParts, 1, pathParts.Length - 1);
-
-                using (RegistryKey key = rootKey.OpenSubKey(subKeyPath))
-                {
-                    return key?.GetValue(valueName) != null;
-                }
-            }
-            catch
-            {
-                return false;
-            }
+            string valueInStr = value.ToString();
+            byte[] byteArray = valueInStr.Split(' ')
+                           .Select(hex => Convert.ToByte(hex, 16))
+                           .ToArray();
+            return byteArray;
         }
 
         public void MonitorInputLagFix()

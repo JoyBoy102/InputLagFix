@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="768"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:RegeditManagerViewModel/>
@@ -15,27 +16,33 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="130"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0">
+            <TabItem Header="Оптимизация Windows">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
 
-            <ListBox Grid.Column="0" Name="CategoriesList" ItemsSource="{Binding SettingsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedCategory}">
-            </ListBox>
-            <ListBox x:Name="CategoryListBox" Grid.Column="1" ItemsSource="{Binding SelectedCategory.Settings}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox Content="{Binding ruName}" IsChecked="{Binding CheckedState}"></CheckBox>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            
-        </Grid>
-        <Button Grid.Row="1" Content="Применить" Width="200" Height="30" Command="{Binding ApplySettingsCommand}"></Button>
-        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="LightGray">
+                    <ListBox Grid.Column="0" Name="CategoriesList" ItemsSource="{Binding SettingsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedCategory}">
+                    </ListBox>
+                    <ListBox x:Name="CategoryListBox" Grid.Column="1" ItemsSource="{Binding SelectedCategory.Settings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding ruName}" IsChecked="{Binding CheckedState}"></CheckBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Grid.Row="1" Content="Применить" Width="200" Height="30" Command="{Binding ApplySettingsCommand}" Grid.ColumnSpan="2"></Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
             <ListBox ItemsSource="{Binding LogMessages}" 
              Background="Transparent" BorderThickness="0"
              ScrollViewer.VerticalScrollBarVisibility="Auto">

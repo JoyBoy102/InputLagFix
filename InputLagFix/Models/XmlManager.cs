@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ namespace INPUTLAGFIX.Models
         private Dictionary<string, RegistryValueKind> stringToObject = new Dictionary<string, RegistryValueKind>()
         {
             { "REG_SZ", RegistryValueKind.String },
-            { "REG_DWORD", RegistryValueKind.DWord }
+            { "REG_DWORD", RegistryValueKind.DWord },
+            { "REG_BINARY", RegistryValueKind.Binary},
+            { "REG_EXPAND_SZ", RegistryValueKind.ExpandString }
         };
         public ObservableCollection<Optimization> GetCollectionOfSettings(string xml)
         {
@@ -33,11 +36,13 @@ namespace INPUTLAGFIX.Models
                         valueName = setting.Element("valueName")?.Value,
                         valueKind = stringToObject[setting.Element("valueKind")?.Value],
                         value_if_false = setting.Element("value_if_false")?.Value,
-                        value_if_true = setting.Element("value_if_true")?.Value
+                        value_if_true = setting.Element("value_if_true")?.Value,
                     };
                     settingsList.Add(sett);
                 }
-                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName});
+                
+                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName });
+                
             }
             return res;
         }
