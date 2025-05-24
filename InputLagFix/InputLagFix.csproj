@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="BaseOptimization.xml" />
+    <None Remove="PowerRun.exe" />
     <None Remove="SecuritySettings.xml" />
     <None Remove="ToggleDefender.bat" />
   </ItemGroup>
@@ -24,6 +25,9 @@
 
   <ItemGroup>
     <Content Include="BaseOptimization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PowerRun.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

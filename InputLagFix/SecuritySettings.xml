@@ -178,20 +178,83 @@
 			<value_if_false>delete</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FirstSetting>
-		<FiveSetting>
-			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
 			<valueName>DisableRealtimeMonitoring</valueName>
 			<value_if_true>1</value_if_true>
 			<value_if_false>delete</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
-		</FiveSetting>
-		<SevenTeenSetting>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+			<valueName>DisableBehaviorMonitoring</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+			<valueName>DisableOnAccessProtection</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
 			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
 			<valueName>DisableAntiVirus</valueName>
 			<value_if_true>1</value_if_true>
 			<value_if_false>delete</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
-		</SevenTeenSetting>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
+			<valueName>DisableSpecialRunningModes</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
+			<valueName>DisableRoutinelyTakingAction</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
+			<valueName>ServiceKeepAlive</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+			<valueName>DisableRealtimeMonitoring</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+		<TenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection</valuePath>
+			<valueName>DisableScanOnRealtimeEnable</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TenSetting>
+		<ElevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\Signature Updates</valuePath>
+			<valueName>ForceUpdateFromMU</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ElevenSetting>
+		<TwelveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\Spynet</valuePath>
+			<valueName>DisableBlockAtFirstSeen</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TwelveSetting>
 	</WindowsDefenderOff>
 </SecuritySettings>
 
