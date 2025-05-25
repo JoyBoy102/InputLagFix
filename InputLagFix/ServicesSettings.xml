@@ -282,12 +282,19 @@
 			<valueKind>REG_DWORD</valueKind>
 		</FourtySetting>
 		<FourtyOneSetting>
-			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc_3bba8</valuePath>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc_3a58f</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourtyOneSetting>
+		<FourtyTwoSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc_3a58f</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourtyTwoSetting>
 	</UselessServicesOff>
 
 	<PrinterServiceOff ruName="Отключить службу принтера">
@@ -333,6 +340,20 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WiaRpc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PrintWorkflowUserSvc_3a58f</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
 	</PrinterServiceOff>
 
 	<BluetoothServicesOff ruName="Отключить службы bluetooth">
@@ -385,6 +406,13 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BluetoothUserService_3a58f</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
 	</BluetoothServicesOff>
 
 	<VPNServicesOff ruName="Отключить службы, необходимые для работы VPN и Proxy">
@@ -686,9 +714,6 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</EightSetting>
-		<NineSetting>
-			
-		</NineSetting>
 	</MicrosoftStoreServiceOff>
 
 	<WIFIServicesOff ruName="Отключить службы, необходимые для работы WI-FI">
