@@ -12,7 +12,9 @@
     <None Remove="BaseOptimization.xml" />
     <None Remove="PowerRun.exe" />
     <None Remove="SecuritySettings.xml" />
+    <None Remove="ServicesSettings.xml" />
     <None Remove="ToggleDefender.bat" />
+    <None Remove="WindowsCustomizationSettings.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,12 @@
 
   <ItemGroup>
     <Content Include="SecuritySettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ServicesSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WindowsCustomizationSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -43,6 +43,27 @@
 			<value_if_false>2</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc_496cc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc_496cc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Beep</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
 	</UselessServicesOff>
 
 	<PrinterServiceOff ruName="Отключить службу принтера">
@@ -101,6 +122,13 @@
 			<value_if_false>2</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IKEEXT</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
 	</VPNServicesOff>
 
 	<LocalNetworkServicesOff ruName="Отключить службы, необходимые для работы локальной сети">
@@ -132,6 +160,21 @@
 			<value_if_false>2</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SSDPSRV</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\upnphost</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		
 	</LocalNetworkServicesOff>
 
 	<WindowsDiagnosticServices ruName="Отключить службы, необходимые для диагностики ПК">
@@ -163,6 +206,13 @@
 			<value_if_false>2</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
 	</WindowsDiagnosticServices>
 	
 	<WindowsMediaPlayerService ruName="Отключить службу, необходимую для работы WindowsMediaPlayer">
@@ -220,6 +270,13 @@
 			<value_if_false>2</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cbdhsvc_496cc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
 	</AdvancedClipboardServiceOff>
 
 	<MicrosoftStoreServiceOff ruName="Службы, необходимые для работы Microsoft Store">
@@ -244,20 +301,41 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</ThirdSetting>
-		<SecondSetting>
+		<FourthSetting>
 			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VaultSvc</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
-		</SecondSetting>
-		<SecondSetting>
+		</FourthSetting>
+		<FiveSetting>
 			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
-		</SecondSetting>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\StorSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UnistoreSvc_496cc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UserDataSvc_496cc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
 	</MicrosoftStoreServiceOff>
 
 	<WIFIServicesOff ruName="Отключить службы, необходимые для работы WI-FI">
@@ -320,26 +398,33 @@
 
 	<XboxLiveServicesOff ruName="Отключить службы, необходимые для работы XboxLive">
 		<FirstSetting>
-			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iphlpsvc</valuePath>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
-			<value_if_false>2</value_if_false>
+			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FirstSetting>
 		<SecondSetting>
-			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NcaSvc</valuePath>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblGameSave</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SecondSetting>
 		<ThirdSetting>
-			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc</valuePath>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblAuthManager</valuePath>
 			<valueName>Start</valueName>
 			<value_if_true>4</value_if_true>
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IKEEXT</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
 	</XboxLiveServicesOff>
 
 	<BrightnessServiceOff ruName="Отключить службу, необходимую для настройки яркости">
