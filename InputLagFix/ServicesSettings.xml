@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ServicesSettings>
+	<UselessServicesOff ruName="Отключить бесполезные службы">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppReadiness</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FontCache</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TrkWks</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc_4efd4</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tcpipreg</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+	</UselessServicesOff>
+
+	<PrinterServiceOff ruName="Отключить службу принтера">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</PrinterServiceOff>
+
+	<BluetoothServicesOff ruName="Отключить службы bluetooth">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NcbService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DeviceAssociationService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</BluetoothServicesOff>
+
+	<VPNServicesOff ruName="Отключить службы, необходимые для работы VPN и Proxy">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iphlpsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Wcmsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</VPNServicesOff>
+
+	<LocalNetworkServicesOff ruName="Отключить службы, необходимые для работы локальной сети">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lmhosts</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Wcmsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</LocalNetworkServicesOff>
+
+	<WindowsDiagnosticServices ruName="Отключить службы, необходимые для диагностики ПК">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DPS</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdiSystemHost</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</WindowsDiagnosticServices>
+	
+	<WindowsMediaPlayerService ruName="Отключить службу, необходимую для работы WindowsMediaPlayer">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WPDBusEnum</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</WindowsMediaPlayerService>
+
+	<DataUsageServiceOff ruName="Отключить службу, необходимую для ограничения использования данных трафика или проверки количества использованных данных">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DusmSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</DataUsageServiceOff>
+
+	<CompatibilityServiceOff ruName="Служба, необходимая для работы совместимости программ или игр">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</CompatibilityServiceOff>
+
+	<AutoDetectCDServiceOff ruName="Служба, необходимая для автообнаружения подключенных внешних накопителей">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ShellHWDetection</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</AutoDetectCDServiceOff>
+
+	<AdvancedClipboardServiceOff ruName="Службы, необходимые для работы расширенного буфера обмена через Win+V">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TokenBroker</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cbdhsvc_4efd4</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</AdvancedClipboardServiceOff>
+
+	<MicrosoftStoreServiceOff ruName="Службы, необходимые для работы Microsoft Store">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\InstallService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TokenBroker</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VaultSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</MicrosoftStoreServiceOff>
+
+	<WIFIServicesOff ruName="Отключить службы, необходимые для работы WI-FI">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Wcmsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iphlpsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NcaSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</WIFIServicesOff>
+
+	<WindowsAccountServicesOff ruName="Отключить службы, необходимые для работы учетной записи Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VaultSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</WindowsAccountServicesOff>
+
+	<BitLockerServiceOff ruName="Отключить службу шифрофания дисков BitLocker">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BDESVC</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</BitLockerServiceOff>
+
+	<XboxLiveServicesOff ruName="Отключить службы, необходимые для работы XboxLive">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iphlpsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NcaSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+	</XboxLiveServicesOff>
+
+	<BrightnessServiceOff ruName="Отключить службу, необходимую для настройки яркости">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</BrightnessServiceOff>
+</ServicesSettings>

@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WindowsCustomizationSettings>
+	<InternetSearchResultsOff ruName="Отключить результаты из интернета в поиске">
+		<FirstSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer</valuePath>
+			<valueName>DisableSearchBoxSuggestions</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search</valuePath>
+			<valueName>BingSearchEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</InternetSearchResultsOff>
+	<DisableMainThingsInSearch ruName="Отключить 'Главное' в поиске">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings</valuePath>
+			<valueName>IsDynamicSearchBoxEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</DisableMainThingsInSearch>
+	<RecomendedAppsInSearchOff ruName="Отключить рекомендуемые приложения в меню Пуск">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start</valuePath>
+			<valueName>HideRecommendedSection</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer</valuePath>
+			<valueName>HideRecommendedSection</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Education</valuePath>
+			<valueName>IsEducationEnvironment</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+	</RecomendedAppsInSearchOff>
+	<WindowsCopilotOff ruName="Отключить Windows Copilot">
+		<FirstSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot</valuePath>
+			<valueName>TurnOffWindowsCopilot</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI</valuePath>
+			<valueName>DisableAIDataAnalysis</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</WindowsCopilotOff>
+	<AddOwnerSettingInContextMenu ruName="Добавить кнопку 'Стать владельцем' в контекстное меню">
+		<FirstSetting>
+			<valuePath>HKCR\*\shell\runas</valuePath>
+			<valueName></valueName>
+			<value_if_true>TakeOwnership</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCR\*\shell\runas</valuePath>
+			<valueName>HasLUAShield</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKCR\*\shell\runas</valuePath>
+			<valueName>NoWorkingDirectory</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKCR\*\shell\runas</valuePath>
+			<valueName>NeverDefault</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKEY_CLASSES_ROOT\*\shell\runas\command</valuePath>
+			<valueName></valueName>
+			<value_if_true>cmd.exe /c takeown /f "%1" &amp;&amp; icacls "%1" /grant *S-1-3-4:F /c /l</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKEY_CLASSES_ROOT\*\shell\runas\command</valuePath>
+			<valueName>IsolatedCommand</valueName>
+			<value_if_true>cmd.exe /c takeown /f "%1" &amp;&amp; icacls "%1" /grant *S-1-3-4:F /c /l</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas</valuePath>
+			<valueName></valueName>
+			<value_if_true>TakeOwnership</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>	
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas</valuePath>
+			<valueName>HasLUAShield</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas</valuePath>
+			<valueName>NoWorkingDirectory</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</NineSetting>
+		<TenSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas</valuePath>
+			<valueName>NeverDefault</valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</TenSetting>
+		<ElevenSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas\command</valuePath>
+			<valueName></valueName>
+			<value_if_true>cmd.exe /c takeown /f "%1" &amp;&amp; icacls "%1" /grant *S-1-3-4:F /c /l</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</ElevenSetting>
+		<TwelveSetting>
+			<valuePath>HKEY_CLASSES_ROOT\Directory\shell\runas\command</valuePath>
+			<valueName>IsolatedCommand</valueName>
+			<value_if_true>cmd.exe /c takeown /f "%1" &amp;&amp; icacls "%1" /grant *S-1-3-4:F /c /l</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</TwelveSetting>
+	</AddOwnerSettingInContextMenu>
+
+	<ShowIconsInTaskBarOn ruName="Отображать все иконки на панели задач">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</valuePath>
+			<valueName>EnableAutoTray</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</ShowIconsInTaskBarOn>
+
+	<OldContextMenu ruName="Включить контекстное меню как в Windows 10">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32</valuePath>
+			<valueName></valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}</valuePath>
+			<valueName></valueName>
+			<value_if_true></value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+	</OldContextMenu>
+
+	<Windows11WidgetsOff ruName = "Отключить виджеты Windows 11">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh</valuePath>
+			<valueName>AllowNewsAndInterests</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</Windows11WidgetsOff>
+
+	<StickyKeysOff ruName="Отключить залипание клавиш">
+		<FirstSetting>
+			<valuePath>HKCU\Control Panel\Accessibility\StickyKeys</valuePath>
+			<valueName>Flags</valueName>
+			<value_if_true>506</value_if_true>
+			<value_if_false>510</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\Control Panel\Accessibility\Keyboard Response</valuePath>
+			<valueName>Flags</valueName>
+			<value_if_true>122</value_if_true>
+			<value_if_false>126</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKCU\Control Panel\Accessibility\ToggleKeys</valuePath>
+			<valueName>Flags</valueName>
+			<value_if_true>58</value_if_true>
+			<value_if_false>62</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</ThirdSetting>
+	</StickyKeysOff>
+
+	<FastStartOn ruName="Ускорить запуск Windows">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize</valuePath>
+			<valueName>StartupDelayInMSec</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize</valuePath>
+			<valueName>WaitforIdleState</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</FastStartOn>
+
+	<RecentAppsInStartMenuOff ruName="Отключить отображение недавно используемых элементов в меню 'Пуск'">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</valuePath>
+			<valueName>ShowRecent</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</valuePath>
+			<valueName>ShowFrequent</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</RecentAppsInStartMenuOff>
+
+	<TrackOfRecentlyOpenedDocumentsOff ruName="Отключить отслеживание недавно открытых документов">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>Start_TrackDocs</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</TrackOfRecentlyOpenedDocumentsOff>
+
+	<DelayOfOpenningContextMenuOff ruName="Отключить задержку появления контекстного меню">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Control Panel\Desktop</valuePath>
+			<valueName>MenuShowDelay</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>400</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+	</DelayOfOpenningContextMenuOff>
+
+	<ShowTaskViewOff ruName="Отключить показ просмотра задач">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>ShowTaskViewButton</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</ShowTaskViewOff>
+
+	<ChatViewOff ruName="Отключить кнопку чата на панели задач Windows 11">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</valuePath>
+			<valueName>TaskbarMn</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</ChatViewOff>
+
+	<CompressBackgroundImgOff ruName="Отключить сжатие фона рабочего стола"> 
+		<FirstSetting>
+			<valuePath>HKCU\Control Panel\Desktop</valuePath>
+			<valueName>JPEGImportQuality</valueName>
+			<value_if_true>100</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</CompressBackgroundImgOff>
+
+	<WindowsSpotlightOff ruName="Отключить WindowsSpotlight">
+		<FirstSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent</valuePath>
+			<valueName>DisableWindowsSpotlightFeatures</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent</valuePath>
+			<valueName>DisableWindowsSpotlightWindowsWelcomeExperience</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent</valuePath>
+			<valueName>DisableWindowsSpotlightOnActionCenter</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent</valuePath>
+			<valueName>DisableWindowsSpotlightOnSettings</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent</valuePath>
+			<valueName>DisableThirdPartySuggestions</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel</valuePath>
+			<valueName>{2cc5ca98-6485-489a-920e-b3e88a6ccce3}</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+	</WindowsSpotlightOff>
+
+	<DynamicLightingOff ruName="Отключить динамическое освещение">
+		<FirstSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Lighting</valuePath>
+			<valueName>AmbientLightingEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_CURRENT_USER\Software\Microsoft\Lighting</valuePath>
+			<valueName>ControlledByForegroundApp</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</DynamicLightingOff>
+</WindowsCustomizationSettings>
