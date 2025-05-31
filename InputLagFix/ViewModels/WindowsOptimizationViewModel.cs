@@ -12,16 +12,18 @@ using System.Windows.Input;
 
 namespace INPUTLAGFIX.ViewModels
 {
-    public class RegeditManagerViewModel : INotifyPropertyChanged
+    public class WindowsOptimizationViewModel : INotifyPropertyChanged
     {
         private RegeditManager _regeditManager;
         private XmlManager _xmlManager;
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
         public ICommand ApplySettingsCommand { get; }
-        public RegeditManagerViewModel()
+        
+        public WindowsOptimizationViewModel()
         {
             _regeditManager = new RegeditManager();
+            
             _xmlManager = new XmlManager();
             _settingsCategories = new ObservableCollection<SettingsCategory>
             {
@@ -61,6 +63,7 @@ namespace INPUTLAGFIX.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private void ApplySettings()
         {
             foreach (var setting in _selectedSettingsCategory.Settings)
@@ -68,7 +71,6 @@ namespace INPUTLAGFIX.ViewModels
                 setting.ApplyOptimization(ref _regeditManager);
             }
         }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

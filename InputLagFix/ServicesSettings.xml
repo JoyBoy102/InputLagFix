@@ -295,6 +295,34 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourtyTwoSetting>
+		<FourtyThreeSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourtyThreeSetting>
+		<FourtyFourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourtyFourthSetting>
+		<FourtyFiveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PrintWorkflowUserSvc_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourtyFiveSetting>
+		<FourtySixSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BluetoothUserService_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourtySixSetting>
 	</UselessServicesOff>
 
 	<PrinterServiceOff ruName="Отключить службу принтера">
@@ -354,6 +382,13 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PrintWorkflowUserSvc_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
 	</PrinterServiceOff>
 
 	<BluetoothServicesOff ruName="Отключить службы bluetooth">
@@ -413,6 +448,13 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BluetoothUserService_3b53a</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
 	</BluetoothServicesOff>
 
 	<VPNServicesOff ruName="Отключить службы, необходимые для работы VPN и Proxy">

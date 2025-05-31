@@ -5,13 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INPUTLAGFIX"
         xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
+        xmlns:v="clr-namespace:INPUTLAGFIX.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="768"
-        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <vm:RegeditManagerViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -19,29 +16,17 @@
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0">
             <TabItem Header="Оптимизация Windows">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <ListBox Grid.Column="0" Name="CategoriesList" ItemsSource="{Binding SettingsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedCategory}">
-                    </ListBox>
-                    <ListBox x:Name="CategoryListBox" Grid.Column="1" ItemsSource="{Binding SelectedCategory.Settings}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding ruName}" IsChecked="{Binding CheckedState}"></CheckBox>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <Button Grid.Row="1" Content="Применить" Width="200" Height="30" Command="{Binding ApplySettingsCommand}" Grid.ColumnSpan="2"></Button>
-                </Grid>
+                <ContentControl>
+                    <v:WindowsOptimization></v:WindowsOptimization>
+                </ContentControl>
+            </TabItem>
+            <TabItem Header="Удаление программ">
+                <ContentControl>
+                    <v:DeleteProgramsTabPage />
+                </ContentControl>
             </TabItem>
         </TabControl>
+        <!--
         <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
             <ListBox ItemsSource="{Binding LogMessages}" 
              Background="Transparent" BorderThickness="0"
@@ -53,5 +38,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
+        -->
     </Grid>
 </Window>
