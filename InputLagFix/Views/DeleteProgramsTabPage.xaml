@@ -13,10 +13,26 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}">
         </ListBox>
         <ContentControl Grid.Column="1" Content="{Binding SelectedDeleteItemsCategory.Control}" DataContext="{StaticResource SharedDelProgramsVM}">
             
         </ContentControl>
+        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray" Grid.ColumnSpan="2">
+            <ListBox ItemsSource="{Binding LogMessages}" 
+             Background="Transparent" BorderThickness="0"
+             ScrollViewer.VerticalScrollBarVisibility="Auto"
+             ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontFamily="Consolas" Margin="2"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </Grid>
 </UserControl>

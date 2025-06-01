@@ -1,4 +1,7 @@
-﻿using INPUTLAGFIX.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using INPUTLAGFIX.Models;
+using INPUTLAGFIX.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +11,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using INPUTLAGFIX.Views;
 namespace INPUTLAGFIX.ViewModels
 {
     public class DeleteProgramsTabPageViewModel : INotifyPropertyChanged
@@ -19,10 +20,11 @@ namespace INPUTLAGFIX.ViewModels
         private ObservableCollection<DeleteItem> _notRecentlyDeletedItems;
         private ObservableCollection<DeleteItem> _uwpDeleteItems;
         private Uninstaller _uninstaller;
-        public ICommand UninstallProgrammInRecentlyDeletedCommand { get; }
-        public ICommand UninstallProgrammInNotRecentlyDeletedCommand { get; }
+        public IAsyncRelayCommand<DeleteItem> UninstallProgrammInRecentlyDeletedCommand { get; }
+        public IAsyncRelayCommand<DeleteItem> UninstallProgrammInNotRecentlyDeletedCommand { get; }
+        public IAsyncRelayCommand<DeleteItem> UninstallUWPProgramCommand { get; }
         private DeleteItemsCategory _selectedDeleteItemCategory;
-
+        private ObservableCollection<string> _logmessages;
         public DeleteProgramsTabPageViewModel()
         {
             _uninstaller = new Uninstaller();
@@ -31,10 +33,11 @@ namespace INPUTLAGFIX.ViewModels
             _deleteItemsCategories = new ObservableCollection<DeleteItemsCategory>
             {
                 new DeleteItemsCategory { CategoryName = "Все программы", RecentlyDeletedItems = _recentlyDeletedItems, NotRecentlyDeletedItems = _notRecentlyDeletedItems, Control = new NotUWP()},
-                new DeleteItemsCategory { CategoryName = "Программы UWP", }
+                new DeleteItemsCategory { CategoryName = "Программы UWP", AllItems = _uninstaller.DeletedItemsUWP, Control = new UWP()}
             };
-            UninstallProgrammInRecentlyDeletedCommand = new RelayCommand<DeleteItem>(UninstallProgrammInRecentlyDeleted);
-            UninstallProgrammInNotRecentlyDeletedCommand = new RelayCommand<DeleteItem>(UninstallProgrammInNotRecentlyDeleted);
+            UninstallProgrammInRecentlyDeletedCommand = new AsyncRelayCommand<DeleteItem>(UninstallProgrammInRecentlyDeletedAsync);
+            UninstallProgrammInNotRecentlyDeletedCommand = new AsyncRelayCommand<DeleteItem>(UninstallProgrammInNotRecentlyDeletedAsync);
+            UninstallUWPProgramCommand = new AsyncRelayCommand<DeleteItem>(UninstallUWPProgramm);
         }
 
         public ObservableCollection<DeleteItemsCategory> DeleteItemsCategories
@@ -57,29 +60,56 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        private void UninstallProgrammInRecentlyDeleted(DeleteItem item)
+        public ObservableCollection<string> LogMessages
         {
-            bool res;
-            if (!item.isUWP)
-                res = _uninstaller.UninstallProgramm(item.UninstallString);
-            else
-                res = _uninstaller.UninstallUWPProgramm(item.UninstallString);
-            if (res)
+            get => _uninstaller.AllLogMessages;
+            set
             {
-                SelectedDeleteItemsCategory.RecentlyDeletedItems.Remove(item);
+                _uninstaller.AllLogMessages = value;
+                OnPropertyChanged();
             }
         }
 
-        private void UninstallProgrammInNotRecentlyDeleted(DeleteItem item)
+        private async Task UninstallProgrammInRecentlyDeletedAsync(DeleteItem item)
         {
             bool res;
             if (!item.isUWP)
-                res = _uninstaller.UninstallProgramm(item.UninstallString);
+                res = await _uninstaller.UninstallProgramm(item.UninstallString, item.DisplayName);
             else
-                res = _uninstaller.UninstallUWPProgramm(item.UninstallString);
+                res = false;
+            if (res)
+            {
+                SelectedDeleteItemsCategory.RecentlyDeletedItems.Remove(item);
+                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
+            }
+        }
+
+        private async Task UninstallProgrammInNotRecentlyDeletedAsync(DeleteItem item)
+        {
+            bool res;
+            if (!item.isUWP)
+                res = await _uninstaller.UninstallProgramm(item.UninstallString, item.DisplayName);
+            else
+                res = false;
             if (res)
             {
                 SelectedDeleteItemsCategory.NotRecentlyDeletedItems.Remove(item);
+                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
+            }
+        }
+
+        private async Task UninstallUWPProgramm(DeleteItem item)
+        {
+            bool res;
+            if (item.isUWP)
+            {
+                res = await _uninstaller.UninstallUWPProgrammAsync(item.UninstallString);
+            }
+            else res = false;
+            if (res)
+            {
+                SelectedDeleteItemsCategory.AllItems.Remove(item);
+                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
             }
         }
 

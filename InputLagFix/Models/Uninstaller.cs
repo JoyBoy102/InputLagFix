@@ -5,11 +5,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.Management.Deployment;
 
 namespace INPUTLAGFIX.Models
 {
@@ -25,6 +26,7 @@ namespace INPUTLAGFIX.Models
         public ObservableCollection<DeleteItem> RecentlyDeletedItems = new ObservableCollection<DeleteItem>();
         public ObservableCollection<DeleteItem> NotRecentlyDeletedItems = new ObservableCollection<DeleteItem>();
         public ObservableCollection<DeleteItem> DeletedItemsUWP = new ObservableCollection<DeleteItem>();
+        public ObservableCollection<string> AllLogMessages = new ObservableCollection<string>();
 
         public Uninstaller()
         {
@@ -35,7 +37,7 @@ namespace INPUTLAGFIX.Models
             DeletedItemsUWP = new ObservableCollection<DeleteItem>(GetDeleteItemsUWP());
         }
 
-        public bool UninstallProgramm(string uninstallString)
+        public async Task<bool> UninstallProgramm(string uninstallString, string displayName)
         {
             try
             {
@@ -44,39 +46,43 @@ namespace INPUTLAGFIX.Models
                 psi.Arguments = $"/c \"{uninstallString}\" /S";
                 psi.UseShellExecute = false;
                 psi.CreateNoWindow = true;
+                psi.RedirectStandardError = true;
+                psi.RedirectStandardOutput = true;
                 Process process = new Process();
                 process.StartInfo = psi;
                 process.Start();
                 process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    AllLogMessages.Add($"Не удалось удалить программу {displayName}");
+                }
                 return process.ExitCode == 0? true: false;
             }
             catch (Win32Exception ex)
             {
-                MessageBox.Show($"Ошибка запуска: {ex.Message}");
+                MessageBox.Show($"Ошибка: {ex.Message}");
+                AllLogMessages.Add($"Ошибка: {ex.Message}");
                 return false;
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show($"Неизвестная ошибка: {ex.Message}");
+                AllLogMessages.Add($"Неизвестная ошибка: {ex.Message}");
                 return false;
             }
         }
 
-        public bool UninstallUWPProgramm(string packageFullName)
+        public async Task<bool> UninstallUWPProgrammAsync(string packageFullName)
         {
-            try
-            {
-                using (PowerShell ps = PowerShell.Create())
-                {
-                    ps.AddCommand("Remove-AppxPackage").AddParameter("Package", packageFullName);
-                    var results = ps.Invoke();
-                }
+            var packageManager = new PackageManager();
+            var removalResult = await packageManager.RemovePackageAsync(packageFullName);
+            if (removalResult.IsRegistered)
                 return true;
-            }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Ошибка: {ex.Message}");
+                MessageBox.Show($"Ошибка: {removalResult.ErrorText}");
+                AllLogMessages.Add($"Ошибка: {removalResult.ErrorText}");
                 return false;
             }
         }
@@ -124,22 +130,25 @@ namespace INPUTLAGFIX.Models
 
         public List<DeleteItem> GetDeleteItemsUWP()
         {
-            /*
+           
             var packages = new List<DeleteItem>();
             var packageManager = new PackageManager();
-            foreach (var package in packageManager.FindPackages())
+            foreach (var package in packageManager.FindPackagesForUser(""))
             {
-                DeleteItem deleteItem = new DeleteItem();
-                deleteItem.InstallDate = DateTime.MinValue;
-                deleteItem.isUWP = true;
-                deleteItem.DisplayName = package.Id.Name;
-                deleteItem.UninstallString = package.Id.Name;
-                packages.Add(deleteItem);
+                if (package.Status.VerifyIsOK() && package.IsFramework == false && package.SignatureKind != Windows.ApplicationModel.PackageSignatureKind.System && Directory.Exists(package.InstalledLocation.Path))
+                {
+                    DeleteItem deleteItem = new DeleteItem();
+                    deleteItem.InstallDate = DateTime.MinValue;
+                    deleteItem.isUWP = true;
+                    deleteItem.DisplayName = package.Id.Name;
+                    deleteItem.UninstallString = package.Id.FullName;
+                    deleteItem.LogoUri = package.Logo;
+                    packages.Add(deleteItem);
+                }
             }
             
             return packages;
-            */
-            return new List<DeleteItem>();
+            
         }
     }
 }

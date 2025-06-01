@@ -8,7 +8,10 @@
         xmlns:v="clr-namespace:INPUTLAGFIX.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="768"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FontSize="14"
+        FontWeight="DemiBold"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

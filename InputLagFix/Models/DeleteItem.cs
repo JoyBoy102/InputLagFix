@@ -12,6 +12,7 @@ namespace INPUTLAGFIX.Models
         public string UninstallString { get; set; }
         public string DisplayName { get; set; }
 
+        public Uri LogoUri {  get; set; }
         public DateTime InstallDate { get; set; }
 
         public bool isUWP { get; set; }

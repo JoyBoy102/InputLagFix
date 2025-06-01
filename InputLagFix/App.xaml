@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:INPUTLAGFIX"
              StartupUri="Views\MainWindow.xaml"
-             xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels">
-            
+             xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
     <Application.Resources>
-        <vm:DeleteProgramsTabPageViewModel x:Key="SharedDelProgramsVM"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Light" />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
+            <vm:DeleteProgramsTabPageViewModel x:Key="SharedDelProgramsVM"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

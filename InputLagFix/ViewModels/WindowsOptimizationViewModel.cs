@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using INPUTLAGFIX.Models;
+﻿using INPUTLAGFIX.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace INPUTLAGFIX.ViewModels
 {
@@ -18,7 +19,7 @@ namespace INPUTLAGFIX.ViewModels
         private XmlManager _xmlManager;
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
-        public ICommand ApplySettingsCommand { get; }
+        public IRelayCommand ApplySettingsCommand { get; }
         
         public WindowsOptimizationViewModel()
         {
