@@ -87,6 +87,13 @@
 			<value_if_false>delete</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer</valuePath>
+			<valueName>SmartScreenEnabled</valueName>
+			<value_if_true>Off</value_if_true>
+			<value_if_false>On</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
 	</SmartScreenOff>
 
 	<WindowsFirewallOff ruName="Отключить брандмауэр Windows">

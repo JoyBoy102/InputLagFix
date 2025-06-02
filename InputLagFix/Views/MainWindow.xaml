@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
         xmlns:v="clr-namespace:INPUTLAGFIX.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1024" Width="768"
+        Title="MainWindow" Height="1024" Width="1600"
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         FontWeight="DemiBold"
@@ -26,6 +26,11 @@
             <TabItem Header="Удаление программ">
                 <ContentControl>
                     <v:DeleteProgramsTabPage />
+                </ContentControl>
+            </TabItem>
+            <TabItem Header="Автозагрузки">
+                <ContentControl>
+                    <v:AutoRuns/>
                 </ContentControl>
             </TabItem>
         </TabControl>

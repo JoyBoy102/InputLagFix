@@ -580,7 +580,104 @@
 			<value_if_false>3</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</SixSetting>
-		
+		<SevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CscService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dot3svc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+		<TenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\fdPHost</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TenSetting>
+		<ElevenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lltdsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ElevenSetting>
+		<TwelveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSDTC</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TwelveSetting>
+		<ThirteenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PeerDistSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirteenSetting>
+		<FourhteenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\QWAVE</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourhteenSetting>
+		<FiveTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveTeenSetting>
+		<SixTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Wecsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixTeenSetting>
+		<SevenTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinRM</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenTeenSetting>
+		<EightTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightTeenSetting>
+		<NineTeenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\workfolderssvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineTeenSetting>
+		<TwentySetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TwentySetting>
 	</LocalNetworkServicesOff>
 
 	<WindowsDiagnosticServices ruName="Отключить службы, необходимые для диагностики ПК">
@@ -856,4 +953,54 @@
 			<valueKind>REG_DWORD</valueKind>
 		</FirstSetting>
 	</BrightnessServiceOff>
+
+	<RaidServiceOff ruName="Отключить службу RAID">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\smphost</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</RaidServiceOff>
+
+	<LanguageDownloadServiceOff ruName="Отключить службу, необходимую для загрузки языков">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LxpSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</LanguageDownloadServiceOff>
+
+	<OnlineTimeUpdateServiceOff ruName="Отключить службу, необходимую для онлайн установки времени">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</OnlineTimeUpdateServiceOff>
+
+	<InsiderServiceOff ruName="Отключить инсайдерскую службу">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wisvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</InsiderServiceOff>
+
+	<OnlineUpdateDriversServiceOff ruName="Отключить службу онлайн обновления драйверов">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DsmSvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</OnlineUpdateDriversServiceOff>
 </ServicesSettings>

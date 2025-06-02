@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:INPUTLAGFIX.Views"
              xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024">
+             d:DesignHeight="768" d:DesignWidth="1600">
     <UserControl.DataContext>
         <vm:WindowsOptimizationViewModel/>
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -20,8 +20,18 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="0" Name="CategoriesList" ItemsSource="{Binding SettingsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedCategory}">
-            
+        <ListBox Grid.Column="0" 
+                 Name="CategoriesList" 
+                 ItemsSource="{Binding SettingsCategories}" 
+                 SelectedItem="{Binding SelectedCategory}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding CategoryName}" 
+                       TextWrapping="Wrap" 
+                       Margin="2"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <ListBox x:Name="CategoryListBox" Grid.Column="1" ItemsSource="{Binding SelectedCategory.Settings}" MaxHeight="700" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.ItemTemplate>
