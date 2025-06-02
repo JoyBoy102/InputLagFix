@@ -6,51 +6,77 @@
              xmlns:local="clr-namespace:INPUTLAGFIX.Views"
              xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1600">
-    <UserControl.DataContext>
-        <vm:WindowsOptimizationViewModel/>
-    </UserControl.DataContext>
+             d:DesignHeight="768" d:DesignWidth="1600"
+             DataContext="{StaticResource SharedWinOptimizationVM}"
+             Background="#FF2D2D30">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
+        
+        <!-- Левая панель категорий -->
         <ListBox Grid.Column="0" 
                  Name="CategoriesList" 
                  ItemsSource="{Binding SettingsCategories}" 
                  SelectedItem="{Binding SelectedCategory}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Padding="5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding CategoryName}" 
-                       TextWrapping="Wrap" 
-                       Margin="2"/>
+                               TextWrapping="Wrap" 
+                               Margin="2"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="CategoryListBox" Grid.Column="1" ItemsSource="{Binding SelectedCategory.Settings}" MaxHeight="700" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox Content="{Binding ruName}" IsChecked="{Binding CheckedState}"></CheckBox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button Grid.Row="1" Content="Применить" Width="200" Height="30" Command="{Binding ApplySettingsCommand}" Grid.ColumnSpan="2"></Button>
-        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="LightGray" Grid.ColumnSpan="2">
-            <ListBox ItemsSource="{Binding LogMessages}" 
-                     Background="Transparent" BorderThickness="0"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Visible">          
+        
+        <!-- Правая панель настроек -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ListBox x:Name="CategoryListBox" 
+                     ItemsSource="{Binding SelectedCategory.Settings}" 
+                     BorderThickness="0"
+                     Padding="10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" FontFamily="Consolas" Margin="2"/>
+                        <CheckBox Content="{Binding ruName}" 
+                                    IsChecked="{Binding CheckedState}"
+                                    Padding="5"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+        
+        <!-- Панель логов -->
+        <Border Grid.Row="1" 
+                Grid.ColumnSpan="2" 
+                Background="#FF1E1E1E"
+                BorderThickness="0,1,0,0" 
+                BorderBrush="#FF007ACC">
+            <ListBox ItemsSource="{Binding LogMessages}" 
+                     Background="Transparent" 
+                     BorderThickness="0"
+                     Foreground="LightGray"
+                     FontFamily="Consolas"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <TextBlock Text="{Binding}" 
+                                               Margin="5,2"
+                                               TextWrapping="Wrap"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Border>
     </Grid>

@@ -11,13 +11,22 @@
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         FontWeight="DemiBold"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        DataContext="{StaticResource SharedWinOptimizationVM}">
+    <Window.Resources>
+        
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0">
+        <DockPanel Grid.Row="0" LastChildFill="False" Margin="5">
+                <TextBlock Text="WindowsTweaker" FontSize="20" Foreground="Crimson" DockPanel.Dock="Left"></TextBlock>
+                <Button Content="Применить настройки" DockPanel.Dock="Right" Command="{Binding ApplySettingsCommand}"></Button>
+        </DockPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="Оптимизация Windows">
                 <ContentControl>
                     <v:WindowsOptimization></v:WindowsOptimization>
