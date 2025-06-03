@@ -18,8 +18,8 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding DisplayName}" Grid.Column="1" />
-                        <Image Source="{Binding LogoUri}" Width="32" Height="32" Grid.Column="0"></Image>
+                        <TextBlock Text="{Binding DisplayName}" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Image Source="{Binding LogoUri}" Width="45" Height="45" Grid.Column="0"></Image>
                         <Button Content="Удалить" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Right" Command="{Binding DataContext.UninstallUWPProgramCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
