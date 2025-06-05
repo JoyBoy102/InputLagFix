@@ -21,29 +21,27 @@ namespace INPUTLAGFIX.Models
              @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
              @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
         };
-        private DateTime _currentDateTime;
         private List<DeleteItem> _allDeleteItems = new List<DeleteItem>();
-        public ObservableCollection<DeleteItem> RecentlyDeletedItems = new ObservableCollection<DeleteItem>();
-        public ObservableCollection<DeleteItem> NotRecentlyDeletedItems = new ObservableCollection<DeleteItem>();
         public ObservableCollection<DeleteItem> DeletedItemsUWP = new ObservableCollection<DeleteItem>();
+        public ObservableCollection<DeleteItem> AllDeleteItems = new ObservableCollection<DeleteItem>();
         public ObservableCollection<string> AllLogMessages = new ObservableCollection<string>();
+        private RegeditManager _regeditManager;
 
         public Uninstaller()
         {
-            _currentDateTime = DateTime.Now;
             GetAllItemsForUninstall();
-            RecentlyDeletedItems = new ObservableCollection<DeleteItem>(_allDeleteItems.Where(x=> (_currentDateTime - x.InstallDate).Days <= 4));
-            NotRecentlyDeletedItems = new ObservableCollection<DeleteItem>(_allDeleteItems.Where(x => (_currentDateTime - x.InstallDate).Days > 4));
             DeletedItemsUWP = new ObservableCollection<DeleteItem>(GetDeleteItemsUWP());
+            AllDeleteItems = new ObservableCollection<DeleteItem>(_allDeleteItems);
+            _regeditManager = new RegeditManager();
         }
 
-        public async Task<bool> UninstallProgramm(string uninstallString, string displayName)
+        public async Task<bool> UninstallProgramm(DeleteItem item)
         {
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = "cmd.exe";
-                psi.Arguments = $"/c \"{uninstallString}\" /S";
+                psi.Arguments = $"/c \"{item.UninstallString}\" /S";
                 psi.UseShellExecute = false;
                 psi.CreateNoWindow = true;
                 psi.RedirectStandardError = true;
@@ -54,9 +52,10 @@ namespace INPUTLAGFIX.Models
                 process.WaitForExit();
                 if (process.ExitCode != 0)
                 {
-                    AllLogMessages.Add($"Не удалось удалить программу {displayName}");
+                    AllLogMessages.Add($"Не удалось удалить программу {item.DisplayName}");
                 }
-                return process.ExitCode == 0? true: false;
+                _regeditManager.DeleteSubKey(item.keyname, item.subkeyname);
+                return process.ExitCode == 0 ? true : false;
             }
             catch (Win32Exception ex)
             {
@@ -73,10 +72,10 @@ namespace INPUTLAGFIX.Models
             }
         }
 
-        public async Task<bool> UninstallUWPProgrammAsync(string packageFullName)
+        public async Task<bool> UninstallUWPProgrammAsync(DeleteItem item)
         {
             var packageManager = new PackageManager();
-            var removalResult = await packageManager.RemovePackageAsync(packageFullName);
+            var removalResult = await packageManager.RemovePackageAsync(item.UninstallString);
             if (removalResult.IsRegistered)
                 return true;
             else
@@ -91,16 +90,15 @@ namespace INPUTLAGFIX.Models
         {
             foreach (var registryPath in registryPaths)
             {
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath))
-                {
-                    if (key != null)
-                        _allDeleteItems.AddRange(GetDeleteItemsFromKey(key));
-                }
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath);
+                if (key != null)
+                    _allDeleteItems.AddRange(GetDeleteItemsFromKey(key, $"HKEY_LOCAL_MACHINE\\{registryPath}"));
+
+
             }
-            //var filteredByDateResult = result.Where(x => (_currentDateTime - x.InstallDate).Days <= 4).ToList();
         }
 
-        public List<DeleteItem> GetDeleteItemsFromKey(RegistryKey key)
+        public List<DeleteItem> GetDeleteItemsFromKey(RegistryKey key, string regPath)
         {
             List<DeleteItem> result = new List<DeleteItem>();
             foreach (var subkeyname in key.GetSubKeyNames())
@@ -109,17 +107,12 @@ namespace INPUTLAGFIX.Models
                 {
                     string uninsString = subkey.GetValue("UninstallString", "").ToString();
                     string displayName = subkey.GetValue("DisplayName", "").ToString();
-                    string installDateInString = subkey.GetValue("InstallDate", "").ToString();
  
                     if (!string.IsNullOrEmpty(uninsString) && !string.IsNullOrEmpty(displayName))
                     {
                         if (uninsString.Contains("C:\\Program Files"))
                         {
-                            DateTime installDate = new DateTime();
-                            if (!string.IsNullOrEmpty(installDateInString))
-                                installDate = DateTime.ParseExact(installDateInString, "yyyyMMdd", CultureInfo.InvariantCulture);
-                            else installDate = DateTime.MinValue;
-                            DeleteItem item = new DeleteItem { DisplayName = displayName, UninstallString = uninsString, InstallDate = installDate, isUWP = false};
+                            DeleteItem item = new DeleteItem { DisplayName = displayName, UninstallString = uninsString, isUWP = false, keyname = subkeyname, subkeyname = regPath};
                             result.Add(item);
                         }
                     }
@@ -138,7 +131,6 @@ namespace INPUTLAGFIX.Models
                 if (package.Status.VerifyIsOK() && package.IsFramework == false && package.SignatureKind != Windows.ApplicationModel.PackageSignatureKind.System && Directory.Exists(package.InstalledLocation.Path))
                 {
                     DeleteItem deleteItem = new DeleteItem();
-                    deleteItem.InstallDate = DateTime.MinValue;
                     deleteItem.isUWP = true;
                     deleteItem.DisplayName = package.Id.Name;
                     deleteItem.UninstallString = package.Id.FullName;

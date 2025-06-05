@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -13,9 +14,12 @@ namespace INPUTLAGFIX.Models
         public string DisplayName { get; set; }
 
         public Uri LogoUri {  get; set; }
-        public DateTime InstallDate { get; set; }
 
         public bool isUWP { get; set; }
+
+        public string keyname;
+        public string subkeyname;
+
 
     }
 }

@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}">
+        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}" Style="{StaticResource ListBoxStyle}">
             
         </ListBox>
         <ContentControl Grid.Column="1" Content="{Binding SelectedDeleteItemsCategory.Control}" DataContext="{StaticResource SharedDelProgramsVM}">

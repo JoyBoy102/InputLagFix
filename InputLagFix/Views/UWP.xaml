@@ -9,7 +9,8 @@
     <Grid>
         <ListBox ItemsSource="{Binding SelectedDeleteItemsCategory.AllItems}"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 MaxHeight="768" HorizontalContentAlignment="Stretch">  
+                 MaxHeight="768" HorizontalContentAlignment="Stretch"
+                 Style="{StaticResource ListBoxStyle}">  
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

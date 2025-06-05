@@ -12,42 +12,24 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Expander Grid.Row="0" Header="Недавно установленные программы">
-            <ListBox ItemsSource="{Binding SelectedDeleteItemsCategory.RecentlyDeletedItems}"
+
+        <ListBox ItemsSource="{Binding SelectedDeleteItemsCategory.AllItems}"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     MaxHeight="768" HorizontalContentAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding DisplayName}" Grid.Column="0" />
-                            <Button Content="Удалить" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Right" Command="{Binding DataContext.UninstallProgrammInRecentlyDeletedCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Expander>
-        <Expander Grid.Row="1" Header="Остальные программы">
-            <ListBox Grid.Row="1"
-                     ItemsSource="{Binding SelectedDeleteItemsCategory.NotRecentlyDeletedItems}"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     MaxHeight="768" HorizontalContentAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding DisplayName}" Grid.Column="0" />
-                            <Button Content="Удалить" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Right" Command="{Binding DataContext.UninstallProgrammInNotRecentlyDeletedCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Expander>
+                     MaxHeight="768" HorizontalContentAlignment="Stretch"
+                     Style="{StaticResource ListBoxStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding DisplayName}" Grid.Column="0" VerticalAlignment="Center"/>
+                        <Button Content="Удалить" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Right" Command="{Binding DataContext.UninstallProgrammDeletedCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
     </Grid>
 </UserControl>

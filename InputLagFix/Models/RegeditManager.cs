@@ -48,6 +48,30 @@ namespace INPUTLAGFIX.Models
             }
         }
 
+        public string DeleteSubKey(string keyName, string subKeyPath)
+        {
+            string[] subKeyPathPathParts = subKeyPath.Split('\\');
+            if (subKeyPathPathParts.Length < 2)
+            {
+                return $"Неверный путь в реестре: {subKeyPath}";
+            }
+            RegistryKey rootKey = GetRootKey(subKeyPathPathParts[0]);
+            if (rootKey == null)
+            {
+                return $"Неизвестный корневой раздел реестра {subKeyPathPathParts[0]}";
+            }
+            string KeyPath = string.Join("\\", subKeyPathPathParts, 1, subKeyPathPathParts.Length - 1);
+            using (RegistryKey targetKey = rootKey.OpenSubKey(KeyPath, true))
+            {
+                if (targetKey == null)
+                    return $"Ключ {subKeyPath} не найден";
+                targetKey.DeleteSubKey(keyName);
+                return $"Ключ {keyName} удален из {subKeyPath}";
+            }
+        }
+
+
+
         private RegistryKey GetRootKey(string rootKeyName)
         {
             switch (rootKeyName.ToUpper())

@@ -22,6 +22,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="9.0.5" />
+    <PackageReference Include="TaskScheduler" Version="2.12.1" />
     <PackageReference Include="WPF-UI" Version="4.0.2" />
   </ItemGroup>
 

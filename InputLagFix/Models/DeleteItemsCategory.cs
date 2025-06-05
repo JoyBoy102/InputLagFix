@@ -11,13 +11,8 @@ namespace INPUTLAGFIX.Models
 {
     public class DeleteItemsCategory
     {
-        public ObservableCollection<DeleteItem> RecentlyDeletedItems { get; set; }
-        public ObservableCollection<DeleteItem> NotRecentlyDeletedItems { get; set; }
-
         public ObservableCollection<DeleteItem> AllItems { get; set; }
-
         public UserControl Control { get; set; }
         public string CategoryName { get; set; }
-
     }
 }

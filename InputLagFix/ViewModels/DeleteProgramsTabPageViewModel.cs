@@ -16,27 +16,19 @@ namespace INPUTLAGFIX.ViewModels
     public class DeleteProgramsTabPageViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<DeleteItemsCategory> _deleteItemsCategories;
-        private ObservableCollection<DeleteItem> _recentlyDeletedItems;
-        private ObservableCollection<DeleteItem> _notRecentlyDeletedItems;
-        private ObservableCollection<DeleteItem> _uwpDeleteItems;
         private Uninstaller _uninstaller;
-        public IAsyncRelayCommand<DeleteItem> UninstallProgrammInRecentlyDeletedCommand { get; }
-        public IAsyncRelayCommand<DeleteItem> UninstallProgrammInNotRecentlyDeletedCommand { get; }
+        public IAsyncRelayCommand<DeleteItem> UninstallProgrammDeletedCommand { get; }
         public IAsyncRelayCommand<DeleteItem> UninstallUWPProgramCommand { get; }
         private DeleteItemsCategory _selectedDeleteItemCategory;
-        private ObservableCollection<string> _logmessages;
         public DeleteProgramsTabPageViewModel()
         {
             _uninstaller = new Uninstaller();
-            _recentlyDeletedItems = _uninstaller.RecentlyDeletedItems;
-            _notRecentlyDeletedItems = _uninstaller.NotRecentlyDeletedItems;
             _deleteItemsCategories = new ObservableCollection<DeleteItemsCategory>
             {
-                new DeleteItemsCategory { CategoryName = "Все программы", RecentlyDeletedItems = _recentlyDeletedItems, NotRecentlyDeletedItems = _notRecentlyDeletedItems, Control = new NotUWP()},
+                new DeleteItemsCategory { CategoryName = "Все программы", AllItems = _uninstaller.AllDeleteItems, Control = new NotUWP()},
                 new DeleteItemsCategory { CategoryName = "Программы UWP", AllItems = _uninstaller.DeletedItemsUWP, Control = new UWP()}
             };
-            UninstallProgrammInRecentlyDeletedCommand = new AsyncRelayCommand<DeleteItem>(UninstallProgrammInRecentlyDeletedAsync);
-            UninstallProgrammInNotRecentlyDeletedCommand = new AsyncRelayCommand<DeleteItem>(UninstallProgrammInNotRecentlyDeletedAsync);
+            UninstallProgrammDeletedCommand = new AsyncRelayCommand<DeleteItem>(UninstallProgrammDeletedAsync);
             UninstallUWPProgramCommand = new AsyncRelayCommand<DeleteItem>(UninstallUWPProgramm);
         }
 
@@ -70,30 +62,18 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        private async Task UninstallProgrammInRecentlyDeletedAsync(DeleteItem item)
+        private async Task UninstallProgrammDeletedAsync(DeleteItem item)
         {
             bool res;
             if (!item.isUWP)
-                res = await _uninstaller.UninstallProgramm(item.UninstallString, item.DisplayName);
-            else
-                res = false;
-            if (res)
             {
-                SelectedDeleteItemsCategory.RecentlyDeletedItems.Remove(item);
-                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
+                res = await _uninstaller.UninstallProgramm(item);
             }
-        }
-
-        private async Task UninstallProgrammInNotRecentlyDeletedAsync(DeleteItem item)
-        {
-            bool res;
-            if (!item.isUWP)
-                res = await _uninstaller.UninstallProgramm(item.UninstallString, item.DisplayName);
             else
                 res = false;
             if (res)
             {
-                SelectedDeleteItemsCategory.NotRecentlyDeletedItems.Remove(item);
+                SelectedDeleteItemsCategory.AllItems.Remove(item);
                 LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
             }
         }
@@ -103,7 +83,7 @@ namespace INPUTLAGFIX.ViewModels
             bool res;
             if (item.isUWP)
             {
-                res = await _uninstaller.UninstallUWPProgrammAsync(item.UninstallString);
+                res = await _uninstaller.UninstallUWPProgrammAsync(item);
             }
             else res = false;
             if (res)

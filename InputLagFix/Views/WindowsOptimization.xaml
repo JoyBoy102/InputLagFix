@@ -25,7 +25,8 @@
                  ItemsSource="{Binding SettingsCategories}" 
                  SelectedItem="{Binding SelectedCategory}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 Padding="5">
+                 Padding="5"
+                 Style="{StaticResource ListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding CategoryName}" 
@@ -40,7 +41,8 @@
             <ListBox x:Name="CategoryListBox" 
                      ItemsSource="{Binding SelectedCategory.Settings}" 
                      BorderThickness="0"
-                     Padding="10">
+                     Padding="10"
+                     Style="{StaticResource ListBoxStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <CheckBox Content="{Binding ruName}" 
