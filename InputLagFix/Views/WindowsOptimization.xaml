@@ -37,12 +37,14 @@
         </ListBox>
         
         <!-- Правая панель настроек -->
-        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        
             <ListBox x:Name="CategoryListBox" 
+                     Grid.Column="1"
                      ItemsSource="{Binding SelectedCategory.Settings}" 
                      BorderThickness="0"
                      Padding="10"
-                     Style="{StaticResource ListBoxStyle}">
+                     Style="{StaticResource ListBoxStyle}"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <CheckBox Content="{Binding ruName}" 
@@ -51,7 +53,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </ScrollViewer>
+        
         
         <!-- Панель логов -->
         <Border Grid.Row="1" 

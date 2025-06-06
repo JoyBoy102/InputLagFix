@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Win32;
-using Microsoft.Win32.TaskScheduler;
+using System.Windows.Media.Animation;
 using Windows.ApplicationModel.Appointments;
 
 namespace INPUTLAGFIX.Models
@@ -14,6 +15,18 @@ namespace INPUTLAGFIX.Models
     {
         private string _registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
         private string _registryPathServices = @"SYSTEM\CurrentControlSet\Services";
+        private RegeditManager _regeditManager;
+        public ObservableCollection<string> AllLogMessages;
+        private Dictionary<RegistryKey, string> RegKeysInString = new Dictionary<RegistryKey, string>()
+        {
+            { Registry.LocalMachine, "HKEY_LOCAL_MACHINE"},
+            { Registry.CurrentUser, "HKEY_CURRENT_USER"}
+        };
+        public AutoRunsModel()
+        {
+            AllLogMessages = new ObservableCollection<string>();
+            _regeditManager = new RegeditManager();
+        }
         private List<RegistryKey> allRegistryKeys = new List<RegistryKey>()
         {
             Registry.LocalMachine,
@@ -25,7 +38,7 @@ namespace INPUTLAGFIX.Models
             foreach (var key in allRegistryKeys)
             {
                 var registryAutoRunsItems = key.OpenSubKey(_registryPath).GetValueNames().ToList();
-                result.AddRange((registryAutoRunsItems.Select(x => new AutoRunsItem { DisplayName = x }).ToList()));
+                result.AddRange((registryAutoRunsItems.Select(x => new AutoRunsItem { DisplayName = x, SubKey = $"{RegKeysInString[key]}\\{_registryPath}" }).ToList()));
             }
             return new ObservableCollection<AutoRunsItem>(result);
         }
@@ -61,5 +74,19 @@ namespace INPUTLAGFIX.Models
             }
             return new ObservableCollection<AutoRunsItem>(result);
         }
+
+        public void DeleteRegeditItem(AutoRunsItem item)
+        {
+            string res = _regeditManager.DeleteKey(item.DisplayName, item.SubKey);
+            if (res == $"Ключ {item.DisplayName} удален из {item.SubKey}")
+            {
+                AllLogMessages.Add($"{item.DisplayName} удален из автозагрузок");
+            }
+            else
+            {
+                AllLogMessages.Add($"{item.DisplayName} не удалось удалить из автозагрузок");
+            }
+        }
+
     }
 }

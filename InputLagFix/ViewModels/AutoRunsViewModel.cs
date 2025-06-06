@@ -18,12 +18,14 @@ namespace INPUTLAGFIX.ViewModels
         private ObservableCollection<AutoRunsItem> _taskAutoRuns = new ObservableCollection<AutoRunsItem>();
         private ObservableCollection<AutoRunsItem> _servicesAutoRuns = new ObservableCollection<AutoRunsItem>();
         private AutoRunsModel _autoRunsModel;
+        public RelayCommand<AutoRunsItem> DeleteRegeditAutoRunsItemCommand { get; set; }
         public AutoRunsViewModel()
         {
             _autoRunsModel = new AutoRunsModel();
             _regeditAutoRuns = _autoRunsModel.GetAllAutoRunsItemsRegedit();
             _taskAutoRuns = _autoRunsModel.GetAllAutoRunsItemsTasks();
             _servicesAutoRuns = _autoRunsModel.GetAllAutoRunsItemsServices();
+            DeleteRegeditAutoRunsItemCommand = new RelayCommand<AutoRunsItem>(DeleteRegeditAutoRunsItem);
         }
 
         public ObservableCollection<AutoRunsItem> RegeditAutoRuns
@@ -54,6 +56,21 @@ namespace INPUTLAGFIX.ViewModels
                 _servicesAutoRuns = value;
                 OnPropertyChanged();
             }
+        }
+
+        public ObservableCollection<string> AllLogMessage
+        {
+            get => _autoRunsModel.AllLogMessages;
+            set
+            {
+                _autoRunsModel.AllLogMessages = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void DeleteRegeditAutoRunsItem(AutoRunsItem regeditAutoRunsItem)
+        {
+            _autoRunsModel.DeleteRegeditItem(regeditAutoRunsItem);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

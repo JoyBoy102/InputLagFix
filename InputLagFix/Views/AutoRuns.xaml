@@ -20,7 +20,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding DisplayName}" VerticalAlignment="Center"></TextBlock>
-                    <Button Grid.Column="1" Content = "Удалить" HorizontalAlignment="Right"></Button>
+                <Button Grid.Column="1" Content = "Удалить" HorizontalAlignment="Right" Command="{Binding DataContext.DeleteRegeditAutoRunsItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"></Button>
                 </Grid>
            
         </DataTemplate>
@@ -29,18 +29,63 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox Header="Ключи реестра" Grid.Row="0">
-            <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" ItemsSource="{Binding RegeditAutoRuns}" Style="{StaticResource ListBoxStyle}"></ListBox>
-        </GroupBox>
-        <GroupBox Header="Задачи" Grid.Row="1">
-            <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" ItemsSource="{Binding TaskAutoRuns}" Style="{StaticResource ListBoxStyle}"></ListBox>
-        </GroupBox>
-        <GroupBox Header="Службы" Grid.Row="2">
-            <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" ItemsSource="{Binding ServicesAutoRuns}" Style="{StaticResource ListBoxStyle}"></ListBox>
-        </GroupBox>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="300"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Ключи реестра" Grid.Row="0">
+                    <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
+                             ItemsSource="{Binding RegeditAutoRuns}" 
+                             Style="{StaticResource ListBoxStyle}"/>
+                </GroupBox>
+
+                <GroupBox Header="Задачи" Grid.Row="1">
+                    <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
+                             ItemsSource="{Binding TaskAutoRuns}" 
+                             Style="{StaticResource ListBoxStyle}"/>
+                </GroupBox>
+
+                <GroupBox Header="Службы" Grid.Row="2">
+                    <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
+                             ItemsSource="{Binding ServicesAutoRuns}" 
+                             Style="{StaticResource ListBoxStyle}"/>
+                </GroupBox>
+
+            </Grid>
+        </ScrollViewer>
+        <Border Grid.Row="1" 
+        Background="#FF1E1E1E"
+        BorderThickness="0,1,0,0" 
+        BorderBrush="#FF007ACC">
+            <ListBox ItemsSource="{Binding AllLogMessage}" 
+             Background="Transparent" 
+             BorderThickness="0"
+             Foreground="LightGray"
+             FontFamily="Consolas"
+             ScrollViewer.VerticalScrollBarVisibility="Auto"
+             ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <TextBlock Text="{Binding}" 
+                                       Margin="5,2"
+                                       TextWrapping="Wrap"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Border>
     </Grid>
 </UserControl>
