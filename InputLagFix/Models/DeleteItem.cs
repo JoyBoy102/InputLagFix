@@ -18,8 +18,7 @@ namespace INPUTLAGFIX.Models
         public bool isUWP { get; set; }
 
         public string keyname;
+
         public string subkeyname;
-
-
     }
 }

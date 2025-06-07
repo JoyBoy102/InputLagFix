@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAutoRunsItem>
+  <AutoRunsItem>
+    <SubKey>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</SubKey>
+    <Type>Regedit</Type>
+    <DisplayName>SecurityHealth</DisplayName>
+    <State>false</State>
+  </AutoRunsItem>
+  <AutoRunsItem>
+    <SubKey>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</SubKey>
+    <Type>Regedit</Type>
+    <DisplayName>SecurityHealth</DisplayName>
+    <State>false</State>
+  </AutoRunsItem>
+</ArrayOfAutoRunsItem>

@@ -46,5 +46,24 @@ namespace INPUTLAGFIX.Models
             }
             return res;
         }
+
+        public List<AutoRunsItem> GetSavedAutoRunsItemsRegedit()
+        {
+            List<AutoRunsItem> autoRunsItems = new List<AutoRunsItem>();
+            XDocument xdoc = XDocument.Load("AutoRunsItems.xml");
+            XElement root = xdoc.Root;
+            foreach (var autorunitemxml in root.Elements())
+            {
+                AutoRunsItem autoRunsItem = new AutoRunsItem
+                {
+                    SubKey = autorunitemxml.Element("SubKey").Value,
+                    Type = autorunitemxml.Element("Type").Value,
+                    DisplayName = autorunitemxml.Element("DisplayName").Value,
+                    State = autorunitemxml.Element("State").Value == "true"? true:false
+                };
+                autoRunsItems.Add(autoRunsItem);
+            }
+            return autoRunsItems;
+        }
     }
 }

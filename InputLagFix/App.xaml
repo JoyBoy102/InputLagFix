@@ -147,6 +147,29 @@
                 <Setter Property="BorderThickness" Value="0"></Setter>
                 <Setter Property="FontSize" Value="18"></Setter>
             </Style>
+
+            <Style TargetType="ToggleButton">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border CornerRadius="15" Background="LightGray" x:Name="bk">
+                                <Ellipse x:Name="el" Fill="#FF2F8FD1" Margin="2" Width="26" Height="26" HorizontalAlignment="Left"></Ellipse>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="el" Property="HorizontalAlignment" Value="Right"></Setter>
+                                    <Setter TargetName="bk" Property="Background" Value="#FF64F9CA"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
