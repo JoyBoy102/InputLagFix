@@ -1,4 +1,7 @@
-﻿using INPUTLAGFIX.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using INPUTLAGFIX.Models;
+using INPUTLAGFIX.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using Windows.UI.WindowManagement;
 
 namespace INPUTLAGFIX.ViewModels
 {
@@ -67,9 +69,17 @@ namespace INPUTLAGFIX.ViewModels
 
         private void ApplySettings()
         {
+            bool ShowWindow = false;
             foreach (var setting in _selectedSettingsCategory.Settings)
             {
                 setting.ApplyOptimization(ref _regeditManager);
+                if (setting.AddWindow)
+                    ShowWindow = true;
+            }
+            if (ShowWindow)
+            {
+                var defenderWindow = new Information();
+                defenderWindow.ShowDialog();
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;

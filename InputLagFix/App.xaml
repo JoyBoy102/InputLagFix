@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <vm:DeleteProgramsTabPageViewModel x:Key="SharedDelProgramsVM"/>
             <vm:WindowsOptimizationViewModel x:Key="SharedWinOptimizationVM"/>
+            <vm:InformationViewModel x:Key="InfoVM"/>
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>

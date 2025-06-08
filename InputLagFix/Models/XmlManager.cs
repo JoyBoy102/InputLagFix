@@ -27,6 +27,7 @@ namespace INPUTLAGFIX.Models
             {
                 ObservableCollection<Setting> settingsList = new ObservableCollection<Setting>();
                 string? OptimizationRuName = optimization.Attribute("ruName")?.Value;
+                bool AddWindow = optimization.Attribute("AddWindow")?.Value == "true" ? true : false;
                 var settings = optimization.Elements();
                 foreach (var setting in settings)
                 {
@@ -41,7 +42,7 @@ namespace INPUTLAGFIX.Models
                     settingsList.Add(sett);
                 }
                 
-                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName });
+                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName, AddWindow = AddWindow });
                 
             }
             return res;

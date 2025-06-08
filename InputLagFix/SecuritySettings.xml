@@ -160,7 +160,7 @@
 		</SecondSetting>
 	</UACoff>
 
-	<WindowsDefenderOff ruName="Отключить защитник Windows">
+	<WindowsDefenderOff ruName="Отключить защитник Windows" AddWindow="true">
 		<FirstSetting>
 			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
 			<valueName>DisableAntiSpyware</valueName>
