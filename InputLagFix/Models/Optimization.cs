@@ -36,20 +36,7 @@ namespace INPUTLAGFIX.Models
                 }
                 catch
                 {
-                    if (setting.value_if_false.ToString() != "delete")
-                    {
-                        if (CheckedState == true)
-                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
-                        else
-                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_false, setting.valueKind));
-                    }
-                    else
-                    {
-                        if (CheckedState == true)
-                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
-                        else
-                            regeditManager.AllLogMessages.Add(PowerRunManager.DeleteKeyWithPowerRun(setting.valueName, setting.valuePath));
-                    }
+                    regeditManager.AllLogMessages.Add("Ошибка");
                 }
             }
         }

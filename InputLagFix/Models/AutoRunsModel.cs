@@ -137,13 +137,27 @@ namespace INPUTLAGFIX.Models
                     }
                     if (item.Task.Enabled)
                     {
-                        item.Task.Enabled = false;
-                        AllLogMessages.Add($"Задача {item.DisplayName} была остановлена");
+                        try
+                        {
+                            item.Task.Enabled = false;
+                            AllLogMessages.Add($"Задача {item.DisplayName} была остановлена");
+                        }
+                        catch
+                        {
+                            AllLogMessages.Add($"Задачу {item.DisplayName} не удалось остановить");
+                        }
                     }
                     else
                     {
-                        item.Task.Enabled = true;
-                        AllLogMessages.Add($"Задача {item.DisplayName} была запущена");
+                        try
+                        {
+                            item.Task.Enabled = true;
+                            AllLogMessages.Add($"Задача {item.DisplayName} была запущена");
+                        }
+                        catch
+                        {
+                            AllLogMessages.Add($"Задачу {item.DisplayName} не удалось запустить");
+                        }
                     }
                     break;
                 case "Service":
@@ -152,29 +166,26 @@ namespace INPUTLAGFIX.Models
                         try
                         {
                             _regeditManager.ChangeRegistryValue(item.SubKey, "Start", 4, RegistryValueKind.DWord);
+                            AllLogMessages.Add($"Служба {item.DisplayName} была остановлена");
                         }
                         catch
                         {
-                            PowerRunManager.ApplyRegSettingWithPowerRun(item.SubKey, "Start", 4, RegistryValueKind.DWord);
+                            AllLogMessages.Add($"Службу {item.DisplayName} не удалось остановить");
+                            item.State = true;
                         }
-                        finally
-                        {
-                            AllLogMessages.Add($"Служба {item.DisplayName} была остановлена");
-                        }
+
                     }
                     else
                     {
                         try
                         {
                             _regeditManager.ChangeRegistryValue(item.SubKey, "Start", 2, RegistryValueKind.DWord);
+                            AllLogMessages.Add($"Служба {item.DisplayName} была запущена");
                         }
                         catch
                         {
-                            PowerRunManager.ApplyRegSettingWithPowerRun(item.SubKey, "Start", 2, RegistryValueKind.DWord);
-                        }
-                        finally
-                        {
-                            AllLogMessages.Add($"Служба {item.DisplayName} была запущена");
+                            AllLogMessages.Add($"Службу {item.DisplayName} не удалось запустить");
+                            item.State = false;
                         }
                     }
                     break;

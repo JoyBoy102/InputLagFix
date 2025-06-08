@@ -107,10 +107,10 @@ namespace INPUTLAGFIX.Models
                 {
                     string uninsString = subkey.GetValue("UninstallString", "").ToString();
                     string displayName = subkey.GetValue("DisplayName", "").ToString();
- 
+                    string systemcomp = subkey.GetValue("SystemComponent","").ToString();
                     if (!string.IsNullOrEmpty(uninsString) && !string.IsNullOrEmpty(displayName))
                     {
-                        if (uninsString.Contains("C:\\Program Files"))
+                        if (string.IsNullOrEmpty(systemcomp) || systemcomp == "0")
                         {
                             DeleteItem item = new DeleteItem { DisplayName = displayName, UninstallString = uninsString, isUWP = false, keyname = subkeyname, subkeyname = regPath};
                             result.Add(item);
