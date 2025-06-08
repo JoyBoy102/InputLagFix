@@ -69,17 +69,9 @@ namespace INPUTLAGFIX.ViewModels
 
         private void ApplySettings()
         {
-            bool ShowWindow = false;
             foreach (var setting in _selectedSettingsCategory.Settings)
             {
                 setting.ApplyOptimization(ref _regeditManager);
-                if (setting.AddWindow)
-                    ShowWindow = true;
-            }
-            if (ShowWindow)
-            {
-                var defenderWindow = new Information();
-                defenderWindow.ShowDialog();
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;

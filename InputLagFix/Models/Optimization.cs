@@ -41,8 +41,22 @@ namespace INPUTLAGFIX.Models
                 }
                 catch
                 {
-                    regeditManager.AllLogMessages.Add("Ошибка");
+                    if (setting.value_if_false.ToString() != "delete")
+                    {
+                        if (CheckedState == true)
+                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                    }
+                    else
+                    {
+                        if (CheckedState == true)
+                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                    }
                 }
+            }
+            if (AddWindow && CheckedState)
+            {
+                var infoWindow = new Information();
+                infoWindow.Show();
             }
         }
     }

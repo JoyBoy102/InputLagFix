@@ -160,6 +160,23 @@
 		</SecondSetting>
 	</UACoff>
 
+	<SecurityCenterOff ruName="Отключить центр безопасности Windows">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</valuePath>
+			<valueName>SecurityHealth</valueName>
+			<value_if_true>delete</value_if_true>
+			<value_if_false>%windir%\system32\SecurityHealthSystray.exe</value_if_false>
+			<valueKind>REG_EXPAND_SZ</valueKind>
+		</SecondSetting>Add commentMore actions
+	</SecurityCenterOff>
+
 	<WindowsDefenderOff ruName="Отключить защитник Windows" AddWindow="true">
 		<FirstSetting>
 			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</valuePath>
