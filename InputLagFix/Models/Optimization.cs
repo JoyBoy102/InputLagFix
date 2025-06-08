@@ -23,15 +23,11 @@ namespace INPUTLAGFIX.Models
                     {
                         if (CheckedState == true)
                             regeditManager.AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
-                        else
-                            regeditManager.AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_false, setting.valueKind));
                     }
                     else
                     {
                         if (CheckedState == true)
                             regeditManager.AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
-                        else
-                            regeditManager.AllLogMessages.Add(regeditManager.DeleteKey(setting.valueName, setting.valuePath));
                     }
                 }
                 catch
