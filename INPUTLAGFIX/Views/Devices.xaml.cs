@@ -1,5 +1,8 @@
-﻿using INPUTLAGFIX.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,14 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace INPUTLAGFIX
+namespace INPUTLAGFIX.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для Devices.xaml
+    /// </summary>
+    public partial class Devices : UserControl
     {
-        public MainWindow()
+        public Devices()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
         }
     }
 }

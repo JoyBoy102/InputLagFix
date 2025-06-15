@@ -132,6 +132,7 @@ namespace INPUTLAGFIX.Models
             return byteArray;
         }
 
+        /*
         public void MonitorInputLagFix()
         {
             const string MonitorsConfigsFolder = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration";
@@ -175,7 +176,7 @@ namespace INPUTLAGFIX.Models
                 AllLogMessages.Add($"Ошибка при обработке: {ex.Message}");
             }
         }
-
+        */
         private void DeleteAllSimulatedMonitorsAndChangeToCorrectValues(RegistryKey configKey, string MonitorsConfigsFolder, ref int deletedCount)
         {
             if (configKey == null)

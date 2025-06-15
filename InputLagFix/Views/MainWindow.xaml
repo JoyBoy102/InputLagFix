@@ -12,7 +12,7 @@
         FontSize="14"
         FontWeight="DemiBold"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        DataContext="{StaticResource SharedWinOptimizationVM}">
+        Background="#FF252526">
     <Window.Resources>
 
     </Window.Resources>
@@ -22,12 +22,37 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" LastChildFill="False" Margin="5">
-                <TextBlock Text="WindowsTweaker" FontSize="20" Foreground="Crimson" DockPanel.Dock="Left"></TextBlock>
-                <Button Content="Применить настройки" DockPanel.Dock="Right" Command="{Binding ApplySettingsCommand}" Style="{StaticResource ApplyButtonStyle}">
-                    
-                </Button>
+            <TextBlock Text="WindowsTweaker" FontSize="20" Foreground="Crimson" DockPanel.Dock="Left"></TextBlock>
         </DockPanel>
+
+        <ListBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" 
+                               TextWrapping="Wrap" 
+                               Margin="2"/>     
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" BorderThickness="0" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Foreground="White" FontSize="32" Grid.Row="0" Text="{Binding SelectedOptimizationsCategory.DisplayName}"></TextBlock>
+                <ContentControl Grid.Row="1" Content="{Binding SelectedOptimizationsCategory.Control}" Padding="20" Margin="20"></ContentControl>
+            </Grid>
+        </Border>
+
+
+        <!--
         <TabControl Grid.Row="1">
             <TabItem Header="Оптимизация Windows">
                 <ContentControl>
@@ -44,7 +69,13 @@
                     <v:AutoRuns/>
                 </ContentControl>
             </TabItem>
+            <TabItem Header="Устройства">
+                <ContentControl>
+                    <v:Devices/>
+                </ContentControl>
+            </TabItem>
         </TabControl>
+        -->
         <!--
         <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
             <ListBox ItemsSource="{Binding LogMessages}" 

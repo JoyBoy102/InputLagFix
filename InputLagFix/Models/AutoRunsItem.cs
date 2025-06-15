@@ -24,7 +24,7 @@ namespace INPUTLAGFIX.Models
        [XmlIgnore]
        public Microsoft.Win32.TaskScheduler.Task Task;
        public bool State
-        {
+       {
             get
             {
                 return _state;
@@ -34,7 +34,7 @@ namespace INPUTLAGFIX.Models
                 _state = value;
                 OnPropertyChanged();
             }
-        }
+       }
 
        [XmlElement("Name")]
        public string XmlDisplayName => DisplayName;

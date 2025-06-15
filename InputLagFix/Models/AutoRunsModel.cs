@@ -41,16 +41,21 @@ namespace INPUTLAGFIX.Models
         public ObservableCollection<AutoRunsItem> GetAllAutoRunsItemsRegedit()
         {
             var AutoRunsItemsRegedit = _xmlManager.GetSavedAutoRunsItemsRegedit();
-            if (AutoRunsItemsRegedit.Count == 0)
+            HashSet<string> UniqueDisplayNames = AutoRunsItemsRegedit.Select(x => x.DisplayName).ToHashSet();
+            foreach (var key in allRegistryKeys)
             {
-                foreach (var key in allRegistryKeys)
+                var registryAutoRunsItems = key.OpenSubKey(_registryPath).GetValueNames().ToList();
+                AutoRunsItemsRegedit.AddRange((registryAutoRunsItems
+                                                .Select(x => new AutoRunsItem { DisplayName = x, SubKey = $"{RegKeysInString[key]}\\{_registryPath}", Type = "Regedit", State = true })
+                                                .Where(x => !UniqueDisplayNames.Contains(x.DisplayName))).ToList());
+                foreach (var name in AutoRunsItemsRegedit.Select(x => x.DisplayName))
                 {
-                    var registryAutoRunsItems = key.OpenSubKey(_registryPath).GetValueNames().ToList();
-                    AutoRunsItemsRegedit.AddRange((registryAutoRunsItems.Select(x => new AutoRunsItem { DisplayName = x, SubKey = $"{RegKeysInString[key]}\\{_registryPath}", Type = "Regedit", State = true }).ToList()));
+                    UniqueDisplayNames.Add(name);
                 }
             }
+            HashSet<AutoRunsItem>AutoRunsItemsRegeditHashSet = AutoRunsItemsRegedit.ToHashSet();
 
-            return new ObservableCollection<AutoRunsItem>(AutoRunsItemsRegedit);
+            return new ObservableCollection<AutoRunsItem>(AutoRunsItemsRegeditHashSet);
         }
 
         public ObservableCollection<AutoRunsItem> GetAllAutoRunsItemsTasks()

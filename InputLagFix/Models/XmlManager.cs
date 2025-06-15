@@ -53,6 +53,7 @@ namespace INPUTLAGFIX.Models
             List<AutoRunsItem> autoRunsItems = new List<AutoRunsItem>();
             XDocument xdoc = XDocument.Load("AutoRunsItems.xml");
             XElement root = xdoc.Root;
+            HashSet<string> uniqueDisplayNames = new HashSet<string>();
             foreach (var autorunitemxml in root.Elements())
             {
                 AutoRunsItem autoRunsItem = new AutoRunsItem
@@ -62,7 +63,11 @@ namespace INPUTLAGFIX.Models
                     DisplayName = autorunitemxml.Element("DisplayName").Value,
                     State = autorunitemxml.Element("State").Value == "true"? true:false
                 };
-                autoRunsItems.Add(autoRunsItem);
+                if (!uniqueDisplayNames.Contains(autoRunsItem.DisplayName))
+                {
+                    uniqueDisplayNames.Add(autoRunsItem.DisplayName);
+                    autoRunsItems.Add(autoRunsItem);
+                }
             }
             return autoRunsItems;
         }
