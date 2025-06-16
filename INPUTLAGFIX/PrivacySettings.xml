@@ -307,7 +307,7 @@
 		<FourthteenSetting>
 			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting\Consent</valuePath>
 			<valueName>DefaultOverrideBehavior</valueName>
-			<value_if_true>1</value_if_true>
+			<value_if_true>0</value_if_true>
 			<value_if_false>delete</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</FourthteenSetting>

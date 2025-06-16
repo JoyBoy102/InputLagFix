@@ -51,6 +51,6 @@
             </ListBox.ItemTemplate>
             
         </ListBox>
-        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ApplyButtonStyle}" Content="Применить настройки"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ApplyButtonStyle}" Content="Применить настройки" Command="{Binding ApplySettingsCommand}"></Button>
     </Grid>
 </UserControl>
