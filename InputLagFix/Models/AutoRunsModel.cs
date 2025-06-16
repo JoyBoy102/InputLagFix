@@ -21,7 +21,6 @@ namespace INPUTLAGFIX.Models
         private string _registryPathServices = @"SYSTEM\CurrentControlSet\Services";
         private RegeditManager _regeditManager;
         private XmlManager _xmlManager;
-        public ObservableCollection<string> AllLogMessages;
         private Dictionary<RegistryKey, string> RegKeysInString = new Dictionary<RegistryKey, string>()
         {
             { Registry.LocalMachine, "HKEY_LOCAL_MACHINE"},
@@ -29,7 +28,6 @@ namespace INPUTLAGFIX.Models
         };
         public AutoRunsModel()
         {
-            AllLogMessages = new ObservableCollection<string>();
             _regeditManager = new RegeditManager();
             _xmlManager = new XmlManager();
         }
@@ -115,11 +113,11 @@ namespace INPUTLAGFIX.Models
                         string res = _regeditManager.DeleteKey(item.DisplayName, item.SubKey);
                         if (res == $"Ключ {item.DisplayName} удален из {item.SubKey}")
                         {
-                            AllLogMessages.Add($"{item.DisplayName} удален из автозагрузок");
+                            Logger.GetLogger().AllLogMessages.Add($"{item.DisplayName} удален из автозагрузок");
                         }
                         else
                         {
-                            AllLogMessages.Add($"{item.DisplayName} не удалось удалить из автозагрузок");
+                            Logger.GetLogger().AllLogMessages.Add($"{item.DisplayName} не удалось удалить из автозагрузок");
                         }
                     }
                     else
@@ -127,11 +125,11 @@ namespace INPUTLAGFIX.Models
                         string res = _regeditManager.ChangeRegistryValue(item.SubKey, item.DisplayName, "delete", RegistryValueKind.String);
                         if (res == $"Значение {item.DisplayName} в подразделе {item.SubKey} успешно изменено на delete")
                         {
-                            AllLogMessages.Add($"{item.DisplayName} включен в автозагрузки");
+                            Logger.GetLogger().AllLogMessages.Add($"{item.DisplayName} включен в автозагрузки");
                         }
                         else
                         {
-                            AllLogMessages.Add($"{item.DisplayName} не удалось включить в автозагрузки");
+                            Logger.GetLogger().AllLogMessages.Add($"{item.DisplayName} не удалось включить в автозагрузки");
                         }
                     }
                         break;
@@ -145,11 +143,11 @@ namespace INPUTLAGFIX.Models
                         try
                         {
                             item.Task.Enabled = false;
-                            AllLogMessages.Add($"Задача {item.DisplayName} была остановлена");
+                            Logger.GetLogger().AllLogMessages.Add($"Задача {item.DisplayName} была остановлена");
                         }
                         catch
                         {
-                            AllLogMessages.Add($"Задачу {item.DisplayName} не удалось остановить");
+                            Logger.GetLogger().AllLogMessages.Add($"Задачу {item.DisplayName} не удалось остановить");
                         }
                     }
                     else
@@ -157,11 +155,11 @@ namespace INPUTLAGFIX.Models
                         try
                         {
                             item.Task.Enabled = true;
-                            AllLogMessages.Add($"Задача {item.DisplayName} была запущена");
+                            Logger.GetLogger().AllLogMessages.Add($"Задача {item.DisplayName} была запущена");
                         }
                         catch
                         {
-                            AllLogMessages.Add($"Задачу {item.DisplayName} не удалось запустить");
+                            Logger.GetLogger().AllLogMessages.Add($"Задачу {item.DisplayName} не удалось запустить");
                         }
                     }
                     break;
@@ -171,11 +169,11 @@ namespace INPUTLAGFIX.Models
                         try
                         {
                             _regeditManager.ChangeRegistryValue(item.SubKey, "Start", 4, RegistryValueKind.DWord);
-                            AllLogMessages.Add($"Служба {item.DisplayName} была остановлена");
+                            Logger.GetLogger().AllLogMessages.Add($"Служба {item.DisplayName} была остановлена");
                         }
                         catch
                         {
-                            AllLogMessages.Add($"Службу {item.DisplayName} не удалось остановить");
+                            Logger.GetLogger().AllLogMessages.Add($"Службу {item.DisplayName} не удалось остановить");
                             item.State = true;
                         }
 
@@ -185,11 +183,11 @@ namespace INPUTLAGFIX.Models
                         try
                         {
                             _regeditManager.ChangeRegistryValue(item.SubKey, "Start", 2, RegistryValueKind.DWord);
-                            AllLogMessages.Add($"Служба {item.DisplayName} была запущена");
+                            Logger.GetLogger().AllLogMessages.Add($"Служба {item.DisplayName} была запущена");
                         }
                         catch
                         {
-                            AllLogMessages.Add($"Службу {item.DisplayName} не удалось запустить");
+                            Logger.GetLogger().AllLogMessages.Add($"Службу {item.DisplayName} не удалось запустить");
                             item.State = false;
                         }
                     }

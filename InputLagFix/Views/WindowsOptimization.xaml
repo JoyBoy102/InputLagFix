@@ -15,73 +15,42 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <!-- Левая панель категорий -->
-        <ListBox Grid.Column="0" 
-                 Name="CategoriesList" 
-                 ItemsSource="{Binding SettingsCategories}" 
-                 SelectedItem="{Binding SelectedCategory}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 Padding="5"
-                 Style="{StaticResource ListBoxStyle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding CategoryName}" 
-                               TextWrapping="Wrap" 
-                               Margin="2"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-        <!-- Правая панель настроек -->
-        
-            <ListBox x:Name="CategoryListBox" 
-                     Grid.Column="1"
-                     ItemsSource="{Binding SelectedCategory.Settings}" 
-                     BorderThickness="0"
-                     Padding="10"
-                     Style="{StaticResource ListBoxStyle}"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox Name="CategoriesList" 
+                         ItemsSource="{Binding SettingsCategories}" 
+                         SelectedItem="{Binding SelectedCategory}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         Padding="5"
+                         Style="{StaticResource ListBoxStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox Content="{Binding ruName}" 
-                                    IsChecked="{Binding CheckedState}"
-                                    Padding="5"/>
+                        <TextBlock Text="{Binding CategoryName}" 
+                                       TextWrapping="Wrap" 
+                                       Margin="2"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        
-        
-        <!-- Панель логов -->
-        <Border Grid.Row="1" 
-                Grid.ColumnSpan="2" 
-                Background="#FF1E1E1E"
-                BorderThickness="0,1,0,0" 
-                BorderBrush="#FF007ACC">
-            <ListBox ItemsSource="{Binding LogMessages}" 
-                     Background="Transparent" 
-                     BorderThickness="0"
-                     Foreground="LightGray"
-                     FontFamily="Consolas"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <TextBlock Text="{Binding}" 
-                                               Margin="5,2"
-                                               TextWrapping="Wrap"/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </Border>
+            <ListBox x:Name="CategoryListBox" 
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    ItemsSource="{Binding SelectedCategory.Settings}" 
+                    BorderThickness="0"
+                    Padding="10"
+                    Style="{StaticResource ListBoxStyle}"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding ruName}" 
+                                IsChecked="{Binding CheckedState}"
+                                Padding="5"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ApplyButtonStyle}" Content="Применить настройки"></Button>
     </Grid>
 </UserControl>

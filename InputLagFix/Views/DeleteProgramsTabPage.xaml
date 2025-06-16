@@ -15,42 +15,12 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
         <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}" Style="{StaticResource ListBoxStyle}">
             
         </ListBox>
         <ContentControl Grid.Column="1" Content="{Binding SelectedDeleteItemsCategory.Control}" DataContext="{StaticResource SharedDelProgramsVM}">
             
         </ContentControl>
-        <Border Grid.Row="1" 
-        Grid.ColumnSpan="2" 
-        Background="#FF1E1E1E"
-        BorderThickness="0,1,0,0" 
-        BorderBrush="#FF007ACC">
-            <ListBox ItemsSource="{Binding LogMessages}" 
-             Background="Transparent" 
-             BorderThickness="0"
-             Foreground="LightGray"
-             FontFamily="Consolas"
-             ScrollViewer.VerticalScrollBarVisibility="Auto"
-             ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <TextBlock Text="{Binding}" 
-                                       Margin="5,2"
-                                       TextWrapping="Wrap"/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </Border>
+        
     </Grid>
 </UserControl>

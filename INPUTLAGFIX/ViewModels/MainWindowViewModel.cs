@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace INPUTLAGFIX.ViewModels
 {
@@ -19,7 +20,7 @@ namespace INPUTLAGFIX.ViewModels
         {
             _optimizationsCategoryItems = new ObservableCollection<OptimizationsCategoryItem>()
             {
-                new OptimizationsCategoryItem { DisplayName = "Оптимизация Windows", Control = new WindowsOptimization() },
+                new OptimizationsCategoryItem { DisplayName = "Оптимизация Windows", Control = new WindowsOptimization(), Img = new BitmapImage(new Uri("pack://application:,,,/Icons/WindowsOptimization.png"))},
                 new OptimizationsCategoryItem { DisplayName = "Удаление программ", Control = new DeleteProgramsTabPage() },
                 new OptimizationsCategoryItem { DisplayName = "Автозагрузки", Control = new AutoRuns() },
                 new OptimizationsCategoryItem { DisplayName = "Устройства", Control = new Devices() }
@@ -36,12 +37,23 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
+
         public OptimizationsCategoryItem SelectedOptimizationsCategory
         {
             get => _selectedOptimizationsCategory;
             set
             {
                 _selectedOptimizationsCategory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> AllLogMessages
+        {
+            get => Logger.GetLogger().AllLogMessages;
+            set
+            {
+                Logger.GetLogger().AllLogMessages = value;
                 OnPropertyChanged();
             }
         }

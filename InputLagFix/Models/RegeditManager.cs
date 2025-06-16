@@ -17,14 +17,7 @@ namespace INPUTLAGFIX.Models
 {
     public class RegeditManager
     {
-        public ObservableCollection<string>AllLogMessages = new ObservableCollection<string>();
         public ScreenResolution SelectedResolution;
-        private DevConManager _devConManager;
-
-        public RegeditManager()
-        {
-            _devConManager = new DevConManager();
-        }
 
         public string DeleteKey(string keyName, string subKeyPath)
         {
@@ -180,7 +173,7 @@ namespace INPUTLAGFIX.Models
         private void DeleteAllSimulatedMonitorsAndChangeToCorrectValues(RegistryKey configKey, string MonitorsConfigsFolder, ref int deletedCount)
         {
             if (configKey == null)
-                AllLogMessages.Add("Раздел Configuration не найден в реестре");
+                Logger.GetLogger().AllLogMessages.Add("Раздел Configuration не найден в реестре");
 
             // Получаем все подразделы первого уровня
             string[] subKeyNames = configKey.GetSubKeyNames();
@@ -188,16 +181,16 @@ namespace INPUTLAGFIX.Models
             foreach (string subKeyName in subKeyNames)
             {
                 string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", SelectedResolution.Height, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", SelectedResolution.Width, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", SelectedResolution.Height, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", SelectedResolution.Width, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
+                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
             }
         }
 

@@ -18,8 +18,6 @@ namespace INPUTLAGFIX.ViewModels
         private ObservableCollection<DeviceItem> _devices;
         public RelayCommand<DeviceItem> DisableEnableDeviceCommand { get; set; }
 
-        private ObservableCollection<String> _allLogMessages = new ObservableCollection<String>();
-
         public DevicesViewModel()
         {
             _devConManager = new DevConManager();
@@ -78,22 +76,12 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        public ObservableCollection<string> AllLogMessage
-        {
-            get => _allLogMessages;
-            set
-            {
-                _allLogMessages = value;
-                OnPropertyChanged();
-            }
-        }
-
         private void DisableEnableDevice(DeviceItem deviceItem)
         {
             if (!deviceItem.State)
-                _allLogMessages.Add(_devConManager.DisableDevice(deviceItem));
+                Logger.GetLogger().AllLogMessages.Add(_devConManager.DisableDevice(deviceItem));
             else
-               _allLogMessages.Add(_devConManager.EnableDevice(deviceItem));
+                Logger.GetLogger().AllLogMessages.Add(_devConManager.EnableDevice(deviceItem));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

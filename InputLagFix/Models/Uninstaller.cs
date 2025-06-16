@@ -24,7 +24,6 @@ namespace INPUTLAGFIX.Models
         private List<DeleteItem> _allDeleteItems = new List<DeleteItem>();
         public ObservableCollection<DeleteItem> DeletedItemsUWP = new ObservableCollection<DeleteItem>();
         public ObservableCollection<DeleteItem> AllDeleteItems = new ObservableCollection<DeleteItem>();
-        public ObservableCollection<string> AllLogMessages = new ObservableCollection<string>();
         private RegeditManager _regeditManager;
 
         public Uninstaller()
@@ -52,7 +51,7 @@ namespace INPUTLAGFIX.Models
                 process.WaitForExit();
                 if (process.ExitCode != 0)
                 {
-                    AllLogMessages.Add($"Не удалось удалить программу {item.DisplayName}");
+                    Logger.GetLogger().AllLogMessages.Add($"Не удалось удалить программу {item.DisplayName}");
                 }
                 _regeditManager.DeleteSubKey(item.keyname, item.subkeyname);
                 return process.ExitCode == 0 ? true : false;
@@ -60,14 +59,14 @@ namespace INPUTLAGFIX.Models
             catch (Win32Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
-                AllLogMessages.Add($"Ошибка: {ex.Message}");
+                Logger.GetLogger().AllLogMessages.Add($"Ошибка: {ex.Message}");
                 return false;
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show($"Неизвестная ошибка: {ex.Message}");
-                AllLogMessages.Add($"Неизвестная ошибка: {ex.Message}");
+                Logger.GetLogger().AllLogMessages.Add($"Неизвестная ошибка: {ex.Message}");
                 return false;
             }
         }
@@ -81,7 +80,7 @@ namespace INPUTLAGFIX.Models
             else
             {
                 MessageBox.Show($"Ошибка: {removalResult.ErrorText}");
-                AllLogMessages.Add($"Ошибка: {removalResult.ErrorText}");
+                Logger.GetLogger().AllLogMessages.Add($"Ошибка: {removalResult.ErrorText}");
                 return false;
             }
         }

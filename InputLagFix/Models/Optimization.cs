@@ -1,13 +1,6 @@
 ﻿using INPUTLAGFIX.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Win32.TaskScheduler;
 
 namespace INPUTLAGFIX.Models
 {
@@ -18,7 +11,7 @@ namespace INPUTLAGFIX.Models
 
         public bool AddWindow { get; set; }
         public ObservableCollection<Setting> settings { get; set; }
-        public void ApplyOptimization(ref RegeditManager regeditManager)
+        public void ApplyOptimization(ref RegeditManager regeditManager, ref AutoRunsModel autoRunsModel)
         {
             foreach (Setting setting in settings)
             {
@@ -28,14 +21,44 @@ namespace INPUTLAGFIX.Models
                     {
                         if (CheckedState == true)
                         {
-                            regeditManager.AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                            if (!setting.isTask)
+                                Logger.GetLogger().AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                            else
+                            {
+                                using (TaskService taskService = new TaskService())
+                                {
+                                    string taskPath = setting.valuePath.Replace("Microsoft\\Windows", "\\Microsoft\\Windows");
+                                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskPath);
+                                    if (task != null)
+                                    {
+                                        if (task.Enabled)
+                                        {
+                                            try
+                                            {
+                                                task.Enabled = false;
+                                                Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} была остановлена");
+                                            }
+                                            catch
+                                            {
+                                                Logger.GetLogger().AllLogMessages.Add($"Задачу {taskPath} не удалось остановить");
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} не найдена.");
+                                    }
+                                }
+
+                            }
                         }
                     }
                     else
                     {
                         if (CheckedState == true)
                         {
-                            regeditManager.AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                            Logger.GetLogger().AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
                         }
                     }
                 }
@@ -44,12 +67,12 @@ namespace INPUTLAGFIX.Models
                     if (setting.value_if_false.ToString() != "delete")
                     {
                         if (CheckedState == true)
-                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                            Logger.GetLogger().AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
                     }
                     else
                     {
                         if (CheckedState == true)
-                            regeditManager.AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
+                            Logger.GetLogger().AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value_if_true, setting.valueKind));
                     }
                 }
             }

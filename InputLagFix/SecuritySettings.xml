@@ -144,13 +144,13 @@
 	</BitLockerOff>
 
 	<UACoff ruName="Отключить контроль учетных записей (UAC)">
-		<FirstSetting>
-			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</valuePath>
-			<valueName>PromptOnSecureDesktop</valueName>
-			<value_if_true>0</value_if_true>
-			<value_if_false>1</value_if_false>
-			<valueKind>REG_DWORD</valueKind>
-		</FirstSetting>
+			<FirstSetting>
+				<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</valuePath>
+				<valueName>PromptOnSecureDesktop</valueName>
+				<value_if_true>0</value_if_true>
+				<value_if_false>1</value_if_false>
+				<valueKind>REG_DWORD</valueKind>
+			</FirstSetting>
 		<SecondSetting>
 			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</valuePath>
 			<valueName>ConsentPromptBehaviorAdmin</valueName>

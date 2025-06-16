@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -33,9 +34,17 @@
         <ListBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding DisplayName}" 
-                               TextWrapping="Wrap" 
-                               Margin="2"/>     
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="24" Height="24" Source="{Binding Img}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding DisplayName}" 
+                            TextWrapping="Wrap" 
+                            Margin="2"/>
+                    </Grid>
+   
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -51,43 +60,33 @@
             </Grid>
         </Border>
 
-
-        <!--
-        <TabControl Grid.Row="1">
-            <TabItem Header="Оптимизация Windows">
-                <ContentControl>
-                    <v:WindowsOptimization></v:WindowsOptimization>
-                </ContentControl>
-            </TabItem>
-            <TabItem Header="Удаление программ">
-                <ContentControl>
-                    <v:DeleteProgramsTabPage />
-                </ContentControl>
-            </TabItem>
-            <TabItem Header="Автозагрузки">
-                <ContentControl>
-                    <v:AutoRuns/>
-                </ContentControl>
-            </TabItem>
-            <TabItem Header="Устройства">
-                <ContentControl>
-                    <v:Devices/>
-                </ContentControl>
-            </TabItem>
-        </TabControl>
-        -->
-        <!--
-        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
-            <ListBox ItemsSource="{Binding LogMessages}" 
-             Background="Transparent" BorderThickness="0"
-             ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontFamily="Consolas" Margin="2"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+        <Border Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Background="#FF1E1E1E"
+                BorderThickness="0,1,0,0" 
+                BorderBrush="#FF007ACC">
+            <ListBox ItemsSource="{Binding AllLogMessages}" 
+                     Background="Transparent" 
+                     BorderThickness="0"
+                     Foreground="LightGray"
+                     FontFamily="Consolas"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <TextBlock Text="{Binding}" 
+                               Margin="5,2"
+                               TextWrapping="Wrap"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Border>
-        -->
+
     </Grid>
 </Window>

@@ -14,5 +14,6 @@ namespace INPUTLAGFIX.Models
         public object value_if_true;
         public object value_if_false;
         public RegistryValueKind valueKind;
+        public bool isTask;
     }
 }

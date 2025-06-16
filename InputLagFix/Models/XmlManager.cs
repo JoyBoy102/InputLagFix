@@ -31,15 +31,30 @@ namespace INPUTLAGFIX.Models
                 var settings = optimization.Elements();
                 foreach (var setting in settings)
                 {
-                    Setting sett = new Setting
+                    if (!setting.HasAttributes)
                     {
-                        valuePath = setting.Element("valuePath")?.Value,
-                        valueName = setting.Element("valueName")?.Value,
-                        valueKind = stringToObject[setting.Element("valueKind")?.Value],
-                        value_if_false = setting.Element("value_if_false")?.Value,
-                        value_if_true = setting.Element("value_if_true")?.Value,
-                    };
-                    settingsList.Add(sett);
+                        Setting sett = new Setting
+                        {
+                            valuePath = setting.Element("valuePath")?.Value,
+                            valueName = setting.Element("valueName")?.Value,
+                            valueKind = stringToObject[setting.Element("valueKind")?.Value],
+                            value_if_false = setting.Element("value_if_false")?.Value,
+                            value_if_true = setting.Element("value_if_true")?.Value,
+
+                        };
+                        settingsList.Add(sett);
+                    }
+                    else
+                    {
+                        Setting sett = new Setting
+                        {
+                            valuePath = setting.Element("valuePath")?.Value,
+                            value_if_false = setting.Element("value_if_false")?.Value,
+                            value_if_true = setting.Element("value_if_true")?.Value,
+                            isTask = true
+                        };
+                        settingsList.Add(sett);
+                    }
                 }
                 
                 res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName, AddWindow = AddWindow });

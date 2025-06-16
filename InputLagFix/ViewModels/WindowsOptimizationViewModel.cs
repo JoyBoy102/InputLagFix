@@ -18,6 +18,7 @@ namespace INPUTLAGFIX.ViewModels
     public class WindowsOptimizationViewModel : INotifyPropertyChanged
     {
         private RegeditManager _regeditManager;
+        private AutoRunsModel _autoRunsModel;
         private XmlManager _xmlManager;
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
@@ -26,25 +27,17 @@ namespace INPUTLAGFIX.ViewModels
         public WindowsOptimizationViewModel()
         {
             _regeditManager = new RegeditManager();
-            
+            _autoRunsModel = new AutoRunsModel();
             _xmlManager = new XmlManager();
             _settingsCategories = new ObservableCollection<SettingsCategory>
             {
                 new SettingsCategory { CategoryName = "Основная оптимизация", Settings = _xmlManager.GetCollectionOfSettings("BaseOptimization.xml") },
                 new SettingsCategory { CategoryName = "Настройки безопасности и конфиденциальности", Settings = _xmlManager.GetCollectionOfSettings("SecuritySettings.xml") },
                 new SettingsCategory { CategoryName = "Настройки кастомизации Windows", Settings = _xmlManager.GetCollectionOfSettings("WindowsCustomizationSettings.xml") },
-                new SettingsCategory { CategoryName = "Отключение служб", Settings = _xmlManager.GetCollectionOfSettings("ServicesSettings.xml")}
+                new SettingsCategory { CategoryName = "Отключение служб", Settings = _xmlManager.GetCollectionOfSettings("ServicesSettings.xml")},
+                new SettingsCategory { CategoryName = "Отключение телеметрии", Settings = _xmlManager.GetCollectionOfSettings("PrivacySettings.xml")}
             };
             ApplySettingsCommand = new RelayCommand(ApplySettings);
-        }
-        public ObservableCollection<string> LogMessages
-        {
-            get => _regeditManager.AllLogMessages;
-            set
-            {
-                _regeditManager.AllLogMessages = value;
-                OnPropertyChanged();
-            }
         }
 
         public ObservableCollection<SettingsCategory> SettingsCategories
@@ -71,7 +64,7 @@ namespace INPUTLAGFIX.ViewModels
         {
             foreach (var setting in _selectedSettingsCategory.Settings)
             {
-                setting.ApplyOptimization(ref _regeditManager);
+                setting.ApplyOptimization(ref _regeditManager, ref _autoRunsModel);
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PrivacySetting>
+	<DotNetTelemetryOff ruName="Отключить телеметрию .Net">
+		<FirstSetting>
+			<valuePath>HKCU\Environment</valuePath>
+			<valueName>DOTNET_CLI_TELEMETRY_OPTOUT</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+	</DotNetTelemetryOff>
+	<PowerShellTelemetryOff ruName="Отключимть телеметрию PowerShell">
+		<FirstSetting>
+			<valuePath>HKCU\Environment</valuePath>
+			<valueName>POWERSHELL_TELEMETRY_OPTOUT</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</FirstSetting>
+	</PowerShellTelemetryOff>
+	<TelemetryServicesOff ruName="Отключить службы телеметрии">
+		<FirstSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagsvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</TelemetryServicesOff>
+	<WebCameraTelemetryOff ruName="Отключить телеметрию веб-камеры">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Device Information\Device</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\'DeviceCensus.exe'</valuePath>
+			<valueName>Debugger</valueName>
+			<value_if_true>%windir%\System32\taskkill.exe</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+	</WebCameraTelemetryOff>
+	<MicrosoftCompatibilityAppraiserOff ruName="Отключить задачу оценки совместимости Microsoft Compatibility Appraiser">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\'CompatTelRunner.exe'</valuePath>
+			<valueName>Debugger</valueName>
+			<value_if_true>%windir%\System32\taskkill.exe</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\'AggregatorHost.exe'</valuePath>
+			<valueName>Debugger</valueName>
+			<value_if_true>%windir%\System32\taskkill.exe</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_SZ</valueKind>
+		</ThirdSetting>
+	</MicrosoftCompatibilityAppraiserOff>
+	<CEIPDataUpdateOff ruName="Отключить обновление данных CEIP">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Application Experience\ProgramDataUpdater</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+	</CEIPDataUpdateOff>
+	<TelemetryAgentTaskOff ruName="Отключить задачу агента телеметрии влияния приложения">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Application Experience\AitAgent</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+	</TelemetryAgentTaskOff>
+	<PerfomanceNotificationTaskOff ruName="Отключить напоминание о приложениях для улучшения производительности">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Application Experience\StartupAppTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+	</PerfomanceNotificationTaskOff>
+	<CEIPTasksOff ruName="Отключить задачи CEIP">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Autochk\Proxy</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<SecondSetting isTask="true">
+			<valuePath>Microsoft\Windows\Customer Experience Improvement Program\BthSQM</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</SecondSetting>
+		<ThirdSetting isTask="true">
+			<valuePath>Microsoft\Windows\Customer Experience Improvement Program\Consolidator</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</ThirdSetting>
+		<FourthSetting isTask="true">
+			<valuePath>Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FourthSetting>
+		<FiveSetting isTask="true">
+			<valuePath>Microsoft\Windows\Customer Experience Improvement Program\UsbCeip</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FiveSetting>
+	</CEIPTasksOff>
+	<CEIPandSQMTelemetryOff ruName="Отключить телеметрию CEIP\SQM">
+		<FirstSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\SQMClient\Windows</valuePath>
+			<valueName>CEIPEnable</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\AppV\CEIP</valuePath>
+			<valueName>CEIPEnable</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\Internet Explorer\SQM</valuePath>
+			<valueName>DisableCustomerImprovementProgram</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\Messenger\Client</valuePath>
+			<valueName>CEIP</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows NT\CurrentVersion\UnattendSettings\SQMClient</valuePath>
+			<valueName>CEIPEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+	</CEIPandSQMTelemetryOff>
+	<ApplicationImpactTelemetryOff ruName="Отключить телеметрию влияния приложения">
+		<FirstSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\Windows\AppCompat</valuePath>
+			<valueName>AITEnable</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</ApplicationImpactTelemetryOff>
+	<DataColletionPolicyTelemetryOff ruName="Отключить телеметрию в политике сбора данных">
+		<FirstSetting>
+			<valuePath>HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection</valuePath>
+			<valueName>AllowTelemetry</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection</valuePath>
+			<valueName>AllowTelemetry</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection</valuePath>
+			<valueName>AllowTelemetry</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection</valuePath>
+			<valueName>LimitEnhancedDiagnosticDataWindowsAnalytics</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+	</DataColletionPolicyTelemetryOff>
+	<LicenseTelemetryOff ruName="Отключить телеметрию лицензии">
+		<FirstSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform</valuePath>
+			<valueName>NoGenTicket</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+	</LicenseTelemetryOff>
+	<ErrorsReportWindowsOff ruName="Отключить отчет об ошибках Windows(WER)">
+		<FirstSetting>
+			<valuePath>HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform</valuePath>
+			<valueName>Disabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>Disabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>AutoApproveOSDumps</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirdSetting>
+		<FourthSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>AutoApproveOSDumps</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthSetting>
+		<FiveSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows\Windows Error Reporting\Consent</valuePath>
+			<valueName>DefaultConsent</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FiveSetting>
+		<SixSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows\Windows Error Reporting\Consent</valuePath>
+			<valueName>DefaultOverrideBehavior</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SixSetting>
+		<SevenSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>DontSendAdditionalData</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SevenSetting>
+		<EightSetting>
+			<valuePath>HKLM\Software\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>LoggingDisabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</EightSetting>
+		<NineSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting</valuePath>
+			<valueName>LoggingDisabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</NineSetting>
+		<TenSetting isTask="true">
+			<valuePath>Microsoft\Windows\ErrorDetails\EnableErrorDetailsUpdate</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</TenSetting>
+		<ElevenSetting isTask="true">
+			<valuePath>Microsoft\Windows\Windows Error Reporting\QueueReporting</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</ElevenSetting>
+		<TwelveSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wersvc</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</TwelveSetting>
+		<ThirteenSetting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>3</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</ThirteenSetting>
+		<FourthteenSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting\Consent</valuePath>
+			<valueName>DefaultOverrideBehavior</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FourthteenSetting>
+	</ErrorsReportWindowsOff>
+	<CortanaVoiceActivationOff ruName="Отключить активацию голосом для приложений и Cortana">
+		<FirstSetting>
+			<valuePath>HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps</valuePath>
+			<valueName>AgentActivationEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy</valuePath>
+			<valueName>LetAppsActivateWithVoice</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+		<ThirdSetting isTask="true">
+			<valuePath>Microsoft\Windows\Speech\SpeechModelDownloadTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</ThirdSetting>
+	</CortanaVoiceActivationOff>
+	<CortanaVoiceActivationOnDisabledOSOff ruName="Отключить активацию голосом для приложений и Cortana при заблокированной системе">
+		<FirstSetting>
+			<valuePath>HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps</valuePath>
+			<valueName>AgentActivationOnLockScreenEnabled</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</FirstSetting>
+		<SecondSetting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy</valuePath>
+			<valueName>LetAppsActivateWithVoiceAboveLock</valueName>
+			<value_if_true>2</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</SecondSetting>
+	</CortanaVoiceActivationOnDisabledOSOff>
+	
+</PrivacySetting>

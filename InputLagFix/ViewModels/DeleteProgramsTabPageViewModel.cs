@@ -52,16 +52,6 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        public ObservableCollection<string> LogMessages
-        {
-            get => _uninstaller.AllLogMessages;
-            set
-            {
-                _uninstaller.AllLogMessages = value;
-                OnPropertyChanged();
-            }
-        }
-
         private async Task UninstallProgrammDeletedAsync(DeleteItem item)
         {
             bool res;
@@ -74,7 +64,7 @@ namespace INPUTLAGFIX.ViewModels
             if (res)
             {
                 SelectedDeleteItemsCategory.AllItems.Remove(item);
-                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
+                Logger.GetLogger().AllLogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
             }
         }
 
@@ -89,7 +79,7 @@ namespace INPUTLAGFIX.ViewModels
             if (res)
             {
                 SelectedDeleteItemsCategory.AllItems.Remove(item);
-                LogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
+                Logger.GetLogger().AllLogMessages.Add($"Программа {item.DisplayName} успешно удалена с компьютера.");
             }
         }
 

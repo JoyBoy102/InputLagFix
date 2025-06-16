@@ -65,16 +65,6 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        public ObservableCollection<string> AllLogMessage
-        {
-            get => _autoRunsModel.AllLogMessages;
-            set
-            {
-                _autoRunsModel.AllLogMessages = value;
-                OnPropertyChanged();
-            }
-        }
-
         private void DeleteAutoRunsItem(AutoRunsItem regeditAutoRunsItem)
         {
             _autoRunsModel.DeleteRegeditItem(regeditAutoRunsItem);
