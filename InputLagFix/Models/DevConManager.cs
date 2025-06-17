@@ -293,6 +293,40 @@ namespace INPUTLAGFIX.Models
             }
         }
 
+        public string GetDisplayNameFromHardwareID(string hardwareId)
+        {
+            try
+            {
+                var processInfo = new ProcessStartInfo
+                {
+                    FileName = "devcon.exe",
+                    Arguments = $"find \"{hardwareId}\"",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    Verb = "runas"
+                };
+
+                using (var process = Process.Start(processInfo))
+                {
+                    process.WaitForExit();
+                    string output = process.StandardOutput.ReadToEnd();
+                    string pattern = $@":\s+(.*?)\s*\n";
+                    Match match = Regex.Match(output, pattern);
+                    if (match.Success)
+                    {
+                        string deviceName = match.Groups[1].Value;
+                        return deviceName;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+            return null;
+        }
+
     }
     
 }

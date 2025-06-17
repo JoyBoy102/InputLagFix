@@ -7,8 +7,8 @@
              xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1600"
-             DataContext="{StaticResource SharedWinOptimizationVM}"
-             Background="#FF252526">
+             Background="Transparent"
+             DataContext="{StaticResource SharedWinOptimizationVM}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>

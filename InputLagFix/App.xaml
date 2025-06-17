@@ -12,6 +12,7 @@
             <vm:WindowsOptimizationViewModel x:Key="SharedWinOptimizationVM"/>
             <vm:InformationViewModel x:Key="InfoVM"/>
             <vm:DevicesViewModel x:Key="DevicesVM"/>
+            <vm:MsiModeViewModel x:Key="MsiModeVM"/>
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -19,8 +20,8 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBox">
                             <Border CornerRadius="4"
-                                    Background="#FF3E3E40"
                                     Padding="5"
+                                    Background="#FF252526"
                                     Margin="20">
                                 <ScrollViewer>
                                     <ItemsPresenter/>

@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
@@ -125,6 +127,36 @@ namespace INPUTLAGFIX.Models
             return byteArray;
         }
 
+        public (RegistryKey, string) FindRegistryKeyRecursiveByName(string name, RegistryKey parentKey, string parentPath)
+        {
+            if (parentKey.Name.EndsWith(name, StringComparison.OrdinalIgnoreCase))
+            {
+                return (parentKey, parentPath);
+            }
+            else
+            {
+                foreach (var subkeyname in parentKey.GetSubKeyNames())
+                {
+                    try
+                    {
+                        RegistryKey subkey = parentKey.OpenSubKey(subkeyname);
+                        if (subkey != null)
+                        {
+                            var result = FindRegistryKeyRecursiveByName(name, subkey, $"{parentPath}\\{subkeyname}");
+                            if (result.Item1 != null)
+                            {
+                                return result;
+                            }
+                        }
+                    }
+                    catch (SecurityException)
+                    {
+                        continue;
+                    }
+                }
+            }
+            return (null,null);
+        }
         /*
         public void MonitorInputLagFix()
         {

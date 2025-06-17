@@ -11,12 +11,17 @@
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         FontWeight="DemiBold"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        Background="#FF252526">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <Window.Resources>
 
     </Window.Resources>
-
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FF252526" Offset="0"/>
+            <GradientStop Color="#FF505050" Offset="0.5"/>
+            <GradientStop Color="#FF808080" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
