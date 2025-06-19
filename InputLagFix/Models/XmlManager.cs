@@ -86,5 +86,24 @@ namespace INPUTLAGFIX.Models
             }
             return autoRunsItems;
         }
+
+        public List<CleaningCategoryItem> GetAllCleaningCategoryItems()
+        {
+            List<CleaningCategoryItem> cleaningCategoryItems = new List<CleaningCategoryItem>();
+            XDocument xdoc = XDocument.Load("CleanFolders.xml");
+            XElement root = xdoc.Root;
+            foreach (var cleaningCategory in root.Elements())
+            {
+                string cleaningCategoryDisplayName = cleaningCategory.Attribute("ruName")?.Value;
+
+                CleaningCategoryItem cleaningCategoryItem = new CleaningCategoryItem
+                {
+                    DisplayName = cleaningCategoryDisplayName,
+                    Folders = cleaningCategory.Elements().Select(folder => folder.Value.ToString()).ToList()
+                };
+                cleaningCategoryItems.Add(cleaningCategoryItem);
+            }
+            return cleaningCategoryItems;
+        }
     }
 }

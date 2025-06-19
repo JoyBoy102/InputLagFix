@@ -16,10 +16,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding DisplayName}" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Right" Text="{Binding AdditionalInfo}" VerticalAlignment="Center" Foreground="Green"></TextBlock>
                 <ToggleButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding DataContext.DisableEnableDeviceCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" IsChecked="{Binding State}" CommandParameter="{Binding}" Visibility="{Binding Visibility}"></ToggleButton>
             </Grid>
         </DataTemplate>

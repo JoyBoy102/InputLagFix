@@ -12,12 +12,14 @@
   <ItemGroup>
     <None Remove="AutoRunsItems.xml" />
     <None Remove="BaseOptimization.xml" />
+    <None Remove="CleanFolders.xml" />
     <None Remove="devcon.exe" />
     <None Remove="Icons\WindowsOptimization.png" />
     <None Remove="PowerRun.exe" />
     <None Remove="PrivacySettings.xml" />
     <None Remove="SecuritySettings.xml" />
     <None Remove="ServicesSettings.xml" />
+    <None Remove="TasksSettings.xml" />
     <None Remove="ToggleDefender.bat" />
     <None Remove="WindowsCustomizationSettings.xml" />
   </ItemGroup>
@@ -35,6 +37,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="BaseOptimization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CleanFolders.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="devcon.exe">
@@ -62,6 +67,9 @@
 
   <ItemGroup>
     <Resource Include="Icons\WindowsOptimization.png" />
+    <Content Include="TasksSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

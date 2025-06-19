@@ -9,14 +9,9 @@
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-
         <ListBox ItemsSource="{Binding SelectedDeleteItemsCategory.AllItems}"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     MaxHeight="768" HorizontalContentAlignment="Stretch"
+                     HorizontalContentAlignment="Stretch"
                      Style="{StaticResource ListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

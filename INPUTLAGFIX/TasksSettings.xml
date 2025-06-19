@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TasksSettings>
+	<WindowsInsiderTasksOff ruName="Отключить задачи Windows Insider">
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\OneSettings\RefreshCache</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\FeatureConfig\BootstrapUsageDataReporting</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</WindowsInsiderTasksOff>
+
+	<AnalyzeTasksOff ruName="Отключить задачи для анализа">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\RAC\RacTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\AppListBackup\Backup</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</AnalyzeTasksOff>
+
+	<DiagnosticTasksOff ruName="Отключить задачи диагностики">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Chkdsk\ProactiveScan</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Diagnosis\Scheduled</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\DiskFootprint\Diagnostics</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\DiskFootprint\StorageSense</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\BrokerInfrastructure\BgTaskRegistrationMaintenanceTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Server Manager\ServerManager</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\ApplicationData\appuriverifierdaily</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\ApplicationData\appuriverifierinstall</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\WindowsColorSystem\Calibration Loader</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</DiagnosticTasksOff>
+
+	<AutoProxyTaskOff ruName="Отключить авто-определение прокси">
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Autochk\Proxy</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</AutoProxyTaskOff>
+
+	<LanguageTasksOff ruName="Отключить задачу установки и удаления языков">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\International\Synchronize Language Settings</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\LanguageComponentsInstaller\Installation</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\LanguageComponentsInstaller\ReconcileLanguageResources</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\LanguageComponentsInstaller\Uninstallation</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\MUI\LPRemove</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</LanguageTasksOff>
+
+	<PerfomanceAutoCheckTaskOff ruName="Отключить задачу авто-проверки производительности">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Maintenance\WinSAT</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+	</PerfomanceAutoCheckTaskOff>
+
+	<MapsAndLocationsTasksOff ruName="Отключить задачи обновления карт, уведомлений местоположения">
+		<!-- Maps-related tasks -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Maps\MapsToastTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Maps\MapsUpdateTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- Location services and notifications -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Location\Notifications</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Location\WindowsActionDialog</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</MapsAndLocationsTasksOff>
+
+	<RemoteControlTasksOff ruName="Отключить задачу дистанционного управления">
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Maintenance\WinSAT</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+	</RemoteControlTasksOff>
+
+	<MicrosoftSynchronization ruName="Отключить задачу синхронизации Майкрософт">
+		<!-- Settings synchronization tasks -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\SettingSync\BackgroundUploadTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\SettingSync\BackupTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\SettingSync\NetworkStateChangeTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</MicrosoftSynchronization>
+
+	<AutoClearTasksOff ruName="Отключить задачи авто-очистки">
+		<!-- Application data cleanup tasks -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\ApplicationData\CleanupTemporaryState</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\ApplicationData\DsSvcCleanup</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- System cleanup tasks -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\DiskCleanup\SilentCleanup</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\RetailDemo\CleanupOfflineContent</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Setup\SetupCleanupTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Server Manager\CleanupOldPerfLogs</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- Component and cache cleanup -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Servicing\StartComponentCleanup</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Wininet\CacheTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</AutoClearTasksOff>
+
+	<MicrosoftStoreTasksOff ruName="Отключить задачи Microsoft Store">
+		<!-- Windows Store license validation -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\WS\License Validation</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\WS\WSRefreshBannedAppsListTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- PushToInstall service tasks -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\PushToInstall\Registration</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\PushToInstall\LoginCheck</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</MicrosoftStoreTasksOff>
+
+	<XboxTasksOff ruName="Отключить задачи Xbox">
+		<!-- Xbox Game Save synchronization tasks -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\XblGameSave\XblGameSaveTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\XblGameSave\XblGameSaveTaskLogon</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</XboxTasksOff>
+
+	<PolicyUpdateTasksOff ruName="Отключить задачи обновления политики">
+		<!-- Active Directory Rights Management Services -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Automated)</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Manual)</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- User Profile and Work Folders -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\User Profile Service\HiveUploadTask</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Work Folders\Work Folders Logon Synchronization</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</PolicyUpdateTasksOff>
+
+	<HDDTasksOff ruName="Отключить задачи связанные с жестким диском">
+		<!-- Data Integrity Scans -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Data Integrity Scan\Data Integrity Scan</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Data Integrity Scan\Data Integrity Scan for Crash Recovery</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Data Integrity Scan\Data Integrity Check And Scan</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- Disk Defragmentation -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Defrag\ScheduledDefrag</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</HDDTasksOff>
+
+	<NotificationsTasksOff ruName="Отключить задачи уведомлений">
+		<!-- End Of Support notifications -->
+		<FirstSetting isTask="true">
+			<valuePath>Microsoft\Windows\Setup\EOSNotify</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</FirstSetting>
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\Setup\EOSNotify2</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+
+		<!-- Backup configuration notifications -->
+		<Setting isTask="true">
+			<valuePath>Microsoft\Windows\WindowsBackup\ConfigNotification</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+	</NotificationsTasksOff>
+</TasksSettings>

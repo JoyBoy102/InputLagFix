@@ -13,13 +13,14 @@
             <vm:InformationViewModel x:Key="InfoVM"/>
             <vm:DevicesViewModel x:Key="DevicesVM"/>
             <vm:MsiModeViewModel x:Key="MsiModeVM"/>
+            <vm:CleanFilesViewModel x:Key="CleanFilesVM"/>
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBox">
-                            <Border CornerRadius="4"
+                            <Border CornerRadius="20"
                                     Padding="5"
                                     Background="#FF252526"
                                     Margin="20">
@@ -195,6 +196,88 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <SolidColorBrush x:Key="ScrollViewerBackground" Color="#F0F0F0"/>
+            <SolidColorBrush x:Key="ScrollBarThumb" Color="#C0C0C0"/>
+            <SolidColorBrush x:Key="ScrollBarThumbHover" Color="#A0A0A0"/>
+
+            <Style x:Key="CustomScrollBarStyle" TargetType="{x:Type ScrollBar}">
+                <Setter Property="Background" Value="{StaticResource ScrollBarThumb}"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Style>
+                                            <Style TargetType="{x:Type Thumb}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Thumb}">
+                                                            <Border Width="8" CornerRadius="10" Background="{StaticResource ScrollBarThumb}">
+                                                                
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>    
+                                            </Style>
+                                        </Thumb.Style>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!-- Стиль для ScrollViewer -->
+            <Style TargetType="{x:Type ScrollViewer}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Основное содержимое с закругленными углами -->
+                                <Border x:Name="ContentBorder"
+                                        CornerRadius="8"
+                                        BorderThickness="0">
+                                    <ScrollContentPresenter />
+                                </Border>
+
+                                <!-- Вертикальный скроллбар -->
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Grid.Column="1"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Style="{StaticResource CustomScrollBarStyle}"/>
+
+                                <!-- Горизонтальный скроллбар -->
+                                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Grid.Row="1"
+                                   Orientation="Horizontal"
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Style="{StaticResource CustomScrollBarStyle}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
