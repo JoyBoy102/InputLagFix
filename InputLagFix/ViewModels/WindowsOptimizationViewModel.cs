@@ -36,7 +36,8 @@ namespace INPUTLAGFIX.ViewModels
                 new SettingsCategory { CategoryName = "Настройки кастомизации Windows", Settings = _xmlManager.GetCollectionOfSettings("WindowsCustomizationSettings.xml") },
                 new SettingsCategory { CategoryName = "Отключение служб", Settings = _xmlManager.GetCollectionOfSettings("ServicesSettings.xml")},
                 new SettingsCategory { CategoryName = "Отключение телеметрии", Settings = _xmlManager.GetCollectionOfSettings("PrivacySettings.xml")},
-                new SettingsCategory { CategoryName = "Отключение ненужных задач", Settings = _xmlManager.GetCollectionOfSettings("TasksSettings.xml")}
+                new SettingsCategory { CategoryName = "Отключение ненужных задач", Settings = _xmlManager.GetCollectionOfSettings("TasksSettings.xml")},
+                new SettingsCategory { CategoryName = "Твики", Settings = _xmlManager.GetCollectionOfSettings("Tweaks.xml")}
             };
             ApplySettingsCommand = new RelayCommand(ApplySettings);
         }

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tweaks>
+	<SystemResponsiveness ruName="Улучшить отзывчивость системы">
+		<Setting>
+			<valuePath>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</valuePath>
+			<valueName>SystemResponsiveness</valueName>
+			<value_if_true>a</value_if_true>
+			<value_if_false>14</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</SystemResponsiveness>
+	<NTFSLastUpdate ruName="Отключить обновление последнего доступа NTFS">
+		<Setting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</valuePath>
+			<valueName>NtfsDisableLastAccessUpdate</valueName>
+			<value_if_true>80000001</value_if_true>
+			<value_if_false>80000000</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</NTFSLastUpdate>
+	<FileNameConversion ruName="Отключить конверцию имен файлов 8.3">
+		<Setting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</valuePath>
+			<valueName>NtfsDisable8dot3NameCreation</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>0</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</FileNameConversion>
+	<AppsCompability ruName="Отключить совместимость приложений">
+		<Setting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat</valuePath>
+			<valueName>DisableEngine</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+		<Setting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat</valuePath>
+			<valueName>SbEnable</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+		<Setting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat</valuePath>
+			<valueName>DisablePCA</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</AppsCompability>
+
+	<AutoService ruName="Отключить автоматическое обслуживание">
+		<Setting>
+			<valuePath>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</valuePath>
+			<valueName>MaintenanceDisabled</valueName>
+			<value_if_true>1</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</AutoService>
+
+	<PlannedDiagnostic ruName="Отключить запланированую диагностику">
+		<Setting>
+			<valuePath>HKLM\SOFTWARE\Policies\Microsoft\Windows\ScheduledDiagnostics</valuePath>
+			<valueName>EnabledExecution</valueName>
+			<value_if_true>0</value_if_true>
+			<value_if_false>delete</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</PlannedDiagnostic>
+
+	<UCPD ruName="Отключить UCPD">
+		<Setting isTask="True">
+			<valuePath>Microsoft\Windows\AppxDeploymentClient\UCPD velocity</valuePath>
+			<value_if_true>Disable</value_if_true>
+			<value_if_false>Enable</value_if_false>
+		</Setting>
+		<Setting>
+			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD</valuePath>
+			<valueName>Start</valueName>
+			<value_if_true>4</value_if_true>
+			<value_if_false>1</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</UCPD>
+
+	<Win32PrioritySeparation ruName = "Изменить Win32PrioritySeparation(улучшить отзывчивость системы)">
+		<Setting>
+			<valuePath>HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl</valuePath>
+			<valueName>Win32PrioritySeparation</valueName>
+			<value_if_true>1a</value_if_true>
+			<value_if_false>2</value_if_false>
+			<valueKind>REG_DWORD</valueKind>
+		</Setting>
+	</Win32PrioritySeparation>
+</Tweaks>

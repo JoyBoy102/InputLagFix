@@ -3,8 +3,7 @@
 	<!-- Основные временные файлы -->
 	<TemporaryFiles ruName="Временные файлы">
 		<Folder>%USERPROFILE%\AppData\Local\Temp</Folder>
-		<Folder>%SystemRoot%\Temp</Folder>
-		<Folder>%SystemDrive%\Temp</Folder>
+		<!-- Удаляем %SystemRoot%\Temp и %SystemDrive%\Temp (малоактуальны) -->
 	</TemporaryFiles>
 
 	<!-- Кэш миниатюр -->
@@ -47,15 +46,6 @@
 		<Folder>%USERPROFILE%\AppData\Local\Intel\ShaderCache</Folder>
 	</DriverCache>
 
-	<!-- Временные установочные файлы -->
-	<InstallationFiles ruName="Установочные файлы">
-		<Folder>%USERPROFILE%\Downloads\*.tmp</Folder>
-		<Folder>%USERPROFILE%\Downloads\*.temp</Folder>
-		<Folder>%SystemDrive%\$Windows.~BT</Folder>
-		<Folder>%SystemDrive%\$Windows.~WS</Folder>
-		<Folder>%SystemDrive%\Windows.old</Folder>
-	</InstallationFiles>
-
 	<!-- Корзина и временные файлы пользователя -->
 	<UserJunk ruName="Пользовательский мусор">
 		<Folder>%SystemDrive%\$Recycle.Bin</Folder>
@@ -64,10 +54,15 @@
 		<Folder>%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent</Folder>
 	</UserJunk>
 
-	<!-- Кэш Microsoft Store -->
-	<StoreCache ruName="Microsoft Store">
-		<Folder>%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsStore_*\LocalState\Cache</Folder>
-		<Folder>%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.Photos_*\LocalState</Folder>
-		<Folder>%USERPROFILE%\AppData\Local\Microsoft\Windows\DeliveryOptimization</Folder>
-	</StoreCache>
+	<WindowsOldUpdates ruName="Старые файлы обновлений Windows">
+		<Folder>%SystemRoot%\SoftwareDistribution\Download</Folder>
+	</WindowsOldUpdates>
+
+	<WindowsReports ruName="Отчеты Windows">
+		<Folder>C:\ProgramData\Microsoft\Windows\WER\ReportArchive</Folder>
+		<Folder>C:\ProgramData\Microsoft\Windows\WER\ReportQueue</Folder>
+		<Folder>C:\ProgramData\Microsoft\Windows\WER\Temp</Folder>
+		<Folder>C:\WINDOWS\LiveKernelReports\WATCHDOG</Folder>
+	</WindowsReports>
+
 </CleanFolders>

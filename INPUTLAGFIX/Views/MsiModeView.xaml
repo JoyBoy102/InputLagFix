@@ -18,7 +18,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding DisplayName}" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
-                <ToggleButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding DataContext.DisableEnableDeviceCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" IsChecked="{Binding State}" CommandParameter="{Binding}" Visibility="{Binding Visibility}"></ToggleButton>
+                <ToggleButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding DataContext.TurnOnOffMsiModeCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" IsChecked="{Binding State}" CommandParameter="{Binding}" Visibility="{Binding Visibility}"></ToggleButton>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

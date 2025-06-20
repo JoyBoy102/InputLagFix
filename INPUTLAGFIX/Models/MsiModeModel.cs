@@ -46,5 +46,17 @@ namespace INPUTLAGFIX.Models
             return result;
         }
 
+        public void TurnOffOnMsiMode(MsiModeDeviceItem item)
+        {
+            if (item.State)
+            {
+                _regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 1, RegistryValueKind.DWord);
+            }
+            else
+            {
+                _regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 0, RegistryValueKind.DWord);
+            }
+        }
+
     }
 }

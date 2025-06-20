@@ -7,19 +7,26 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management;
+using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using Windows.Management.Deployment;
 
 namespace INPUTLAGFIX.Models
 {
     public class Uninstaller
     {
-        private List<string> registryPaths = new List<string>()
+        private List<string> registryPathsHKLM = new List<string>()
         {
              @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-             @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+             @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
+        };
+        private List<string> registryPathsHKCU = new List<string>()
+        {
+            @"Software\Microsoft\Windows\CurrentVersion\Uninstall"
         };
         private List<DeleteItem> _allDeleteItems = new List<DeleteItem>();
         public ObservableCollection<DeleteItem> DeletedItemsUWP = new ObservableCollection<DeleteItem>();
@@ -40,7 +47,7 @@ namespace INPUTLAGFIX.Models
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = "cmd.exe";
-                psi.Arguments = $"/c \"{item.UninstallString}\" /S";
+                psi.Arguments = $"/c \"{item.UninstallString}\" /SILENT";
                 psi.UseShellExecute = false;
                 psi.CreateNoWindow = true;
                 psi.RedirectStandardError = true;
@@ -53,7 +60,7 @@ namespace INPUTLAGFIX.Models
                 {
                     Logger.GetLogger().AllLogMessages.Add($"Не удалось удалить программу {item.DisplayName}");
                 }
-                _regeditManager.DeleteSubKey(item.keyname, item.subkeyname);
+                Logger.GetLogger().AllLogMessages.Add(_regeditManager.DeleteSubKey(item.keyname, item.subkeyname));
                 return process.ExitCode == 0 ? true : false;
             }
             catch (Win32Exception ex)
@@ -85,17 +92,31 @@ namespace INPUTLAGFIX.Models
             }
         }
 
-        public void GetAllItemsForUninstall()
+
+        private List<DeleteItem> GetDeleteItemsFromRegedit()
         {
-            foreach (var registryPath in registryPaths)
+            var res = new List<DeleteItem>();
+            foreach (var registryPath in registryPathsHKLM)
             {
                 RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath);
                 if (key != null)
-                    _allDeleteItems.AddRange(GetDeleteItemsFromKey(key, $"HKEY_LOCAL_MACHINE\\{registryPath}"));
-
-
+                   res.AddRange(GetDeleteItemsFromKey(key, $"HKEY_LOCAL_MACHINE\\{registryPath}"));
             }
+            foreach (var registryPath in registryPathsHKCU)
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(registryPath);
+                if (key != null)
+                    res.AddRange(GetDeleteItemsFromKey(key, $"HKEY_CURRENT_USER\\{registryPath}"));
+            }
+            return res;
         }
+
+        private void GetAllItemsForUninstall()
+        {
+            var regeditItems = GetDeleteItemsFromRegedit();
+            _allDeleteItems = regeditItems.ToList();
+        }
+
 
         public List<DeleteItem> GetDeleteItemsFromKey(RegistryKey key, string regPath)
         {

@@ -60,8 +60,17 @@ namespace INPUTLAGFIX.Models
             {
                 if (targetKey == null)
                     return $"Ключ {subKeyPath} не найден";
-                targetKey.DeleteSubKey(keyName);
-                return $"Ключ {keyName} удален из {subKeyPath}";
+                var allsubkeynames = targetKey.GetSubKeyNames();
+                if (allsubkeynames.Contains(keyName))
+                {
+                    targetKey.DeleteSubKey(keyName);
+                    return $"Ключ {keyName} удален из {subKeyPath}";
+                }
+                else
+                {
+                    return $"Ключа {keyName} не существует в {subKeyPath}"; 
+                }
+                    
             }
         }
 

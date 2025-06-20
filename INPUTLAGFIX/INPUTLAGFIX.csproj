@@ -21,10 +21,12 @@
     <None Remove="ServicesSettings.xml" />
     <None Remove="TasksSettings.xml" />
     <None Remove="ToggleDefender.bat" />
+    <None Remove="Tweaks.xml" />
     <None Remove="WindowsCustomizationSettings.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cake.Powershell" Version="4.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="9.0.5" />
@@ -58,6 +60,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ServicesSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tweaks.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WindowsCustomizationSettings.xml">
