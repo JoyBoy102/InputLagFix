@@ -13,8 +13,8 @@
 		<Setting>
 			<valuePath>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</valuePath>
 			<valueName>NtfsDisableLastAccessUpdate</valueName>
-			<value_if_true>80000001</value_if_true>
-			<value_if_false>80000000</value_if_false>
+			<value_if_true>2147483649</value_if_true>
+			<value_if_false>2147483648</value_if_false>
 			<valueKind>REG_DWORD</valueKind>
 		</Setting>
 	</NTFSLastUpdate>

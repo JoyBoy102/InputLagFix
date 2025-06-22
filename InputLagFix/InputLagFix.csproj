@@ -12,17 +12,21 @@
   <ItemGroup>
     <None Remove="AutoRunsItems.xml" />
     <None Remove="BaseOptimization.xml" />
+    <None Remove="CleanFolders.xml" />
     <None Remove="devcon.exe" />
     <None Remove="Icons\WindowsOptimization.png" />
     <None Remove="PowerRun.exe" />
     <None Remove="PrivacySettings.xml" />
     <None Remove="SecuritySettings.xml" />
     <None Remove="ServicesSettings.xml" />
+    <None Remove="TasksSettings.xml" />
     <None Remove="ToggleDefender.bat" />
+    <None Remove="Tweaks.xml" />
     <None Remove="WindowsCustomizationSettings.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cake.Powershell" Version="4.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="9.0.5" />
@@ -35,6 +39,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="BaseOptimization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CleanFolders.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="devcon.exe">
@@ -55,6 +62,9 @@
     <Content Include="ServicesSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Tweaks.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="WindowsCustomizationSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -62,6 +72,9 @@
 
   <ItemGroup>
     <Resource Include="Icons\WindowsOptimization.png" />
+    <Content Include="TasksSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
