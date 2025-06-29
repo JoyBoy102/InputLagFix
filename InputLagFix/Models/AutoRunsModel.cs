@@ -10,11 +10,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
-
+using System.Xml.Serialization;
 using Windows.ApplicationModel.Appointments;
 
 namespace INPUTLAGFIX.Models
 {
+    [XmlRoot("AutoRuns")]
     public class AutoRunsModel
     {
         private string _registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
@@ -26,10 +27,25 @@ namespace INPUTLAGFIX.Models
             { Registry.LocalMachine, "HKEY_LOCAL_MACHINE"},
             { Registry.CurrentUser, "HKEY_CURRENT_USER"}
         };
+
+        [XmlArray("RegeditItems")]
+        [XmlArrayItem("RegeditItem")]
+        public ObservableCollection<AutoRunsItem> AutoRunsItemsRegedit;
+
+        [XmlArray("TasksItems")]
+        [XmlArrayItem("TaskItem")]
+        public ObservableCollection<AutoRunsItem> AutoRunsItemsTasks;
+
+        [XmlArray("ServicesItems")]
+        [XmlArrayItem("ServiceItem")]
+        public ObservableCollection<AutoRunsItem> AutoRunsItemsServices;
         public AutoRunsModel()
         {
             _regeditManager = new RegeditManager();
             _xmlManager = new XmlManager();
+            AutoRunsItemsRegedit = GetAllAutoRunsItemsRegedit();
+            AutoRunsItemsTasks = GetAllAutoRunsItemsTasks();
+            AutoRunsItemsServices = GetAllAutoRunsItemsServices();
         }
         private List<RegistryKey> allRegistryKeys = new List<RegistryKey>()
         {

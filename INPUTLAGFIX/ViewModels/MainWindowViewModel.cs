@@ -25,7 +25,8 @@ namespace INPUTLAGFIX.ViewModels
                 new OptimizationsCategoryItem { DisplayName = "Автозагрузки", Control = new AutoRuns() },
                 new OptimizationsCategoryItem { DisplayName = "Устройства", Control = new Devices() },
                 new OptimizationsCategoryItem { DisplayName = "MsiMode", Control = new MsiModeView() },
-                new OptimizationsCategoryItem { DisplayName = "Очистка", Control = new CleanFilesView()}
+                new OptimizationsCategoryItem { DisplayName = "Очистка", Control = new CleanFilesView()},
+                new OptimizationsCategoryItem { DisplayName = "Бэкапы", Control = new BackupsView() }
             };
         }
 

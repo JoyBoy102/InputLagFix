@@ -20,14 +20,14 @@ namespace INPUTLAGFIX.ViewModels
         private ObservableCollection<AutoRunsItem> _taskAutoRuns = new ObservableCollection<AutoRunsItem>();
         private ObservableCollection<AutoRunsItem> _servicesAutoRuns = new ObservableCollection<AutoRunsItem>();
         private XmlSerializer serializer = new XmlSerializer(typeof(List<AutoRunsItem>));
-        private AutoRunsModel _autoRunsModel;
+        public AutoRunsModel AutoRunsModel;
         public RelayCommand<AutoRunsItem> DeleteAutoRunsItemCommand { get; set; }
         public AutoRunsViewModel()
         {
-            _autoRunsModel = new AutoRunsModel();
-            _regeditAutoRuns = _autoRunsModel.GetAllAutoRunsItemsRegedit();
-            _taskAutoRuns = _autoRunsModel.GetAllAutoRunsItemsTasks();
-            _servicesAutoRuns = _autoRunsModel.GetAllAutoRunsItemsServices();
+            AutoRunsModel = new AutoRunsModel();
+            _regeditAutoRuns = AutoRunsModel.AutoRunsItemsRegedit;
+            _taskAutoRuns = AutoRunsModel.AutoRunsItemsTasks;
+            _servicesAutoRuns = AutoRunsModel.AutoRunsItemsServices;
             DeleteAutoRunsItemCommand = new RelayCommand<AutoRunsItem>(DeleteAutoRunsItem);
             if (System.Windows.Application.Current.MainWindow != null)
             {
@@ -67,7 +67,7 @@ namespace INPUTLAGFIX.ViewModels
 
         private void DeleteAutoRunsItem(AutoRunsItem regeditAutoRunsItem)
         {
-            _autoRunsModel.DeleteRegeditItem(regeditAutoRunsItem);
+            AutoRunsModel.DeleteRegeditItem(regeditAutoRunsItem);
         }
         private void SaveAutoRuns()
         {
