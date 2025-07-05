@@ -13,27 +13,35 @@ namespace INPUTLAGFIX.ViewModels
 {
     public class BackupsViewModel:INotifyPropertyChanged
     {
-        private ObservableCollection<BackupItem> _backupItems;
+        private BackupsModel _backupsModel;
+        public IRelayCommand<BackupItem> ApplyBackupCommand { get; set; }
+
         public RelayCommand CreateBackupItemCommand { get; set; }
 
         public BackupsViewModel()
         {
-            _backupItems = new ObservableCollection<BackupItem>();
+            _backupsModel = new BackupsModel();
             CreateBackupItemCommand = new RelayCommand(CreateBackupItem);
+            ApplyBackupCommand = new RelayCommand<BackupItem>(ApplyBackup);
         }
         public ObservableCollection<BackupItem> BackupItems
         {
-            get => _backupItems;
+            get => _backupsModel.BackupItems;
             set
             {
-                _backupItems = value;
+                _backupsModel.BackupItems = value;
                 OnPropertyChanged();
             }
         }
 
         private void CreateBackupItem()
         {
-            _backupItems.Add(new BackupItem());
+            _backupsModel.BackupItems.Add(new BackupItem());
+        }
+
+        private void ApplyBackup(BackupItem backupItem)
+        {
+            backupItem.ApplyBackup();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")

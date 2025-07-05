@@ -4,12 +4,15 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using System.Xml;
 using System.Xml.Serialization;
 using Windows.ApplicationModel.Appointments;
 
@@ -67,7 +70,7 @@ namespace INPUTLAGFIX.Models
                     UniqueDisplayNames.Add(name);
                 }
             }
-            HashSet<AutoRunsItem>AutoRunsItemsRegeditHashSet = AutoRunsItemsRegedit.ToHashSet();
+            HashSet<AutoRunsItem> AutoRunsItemsRegeditHashSet = AutoRunsItemsRegedit.ToHashSet();
 
             return new ObservableCollection<AutoRunsItem>(AutoRunsItemsRegeditHashSet);
         }
@@ -80,9 +83,9 @@ namespace INPUTLAGFIX.Models
 
                 foreach (Microsoft.Win32.TaskScheduler.Task task in ts.RootFolder.AllTasks)
                 {
-                    
+
                     if (!task.Path.Contains("Windows"))
-                       AutoRunsItemsTasks.Add(new AutoRunsItem { DisplayName = task.Name, Type = "Task", Task = task, State = (task.Enabled || task.State == Microsoft.Win32.TaskScheduler.TaskState.Running)});
+                        AutoRunsItemsTasks.Add(new AutoRunsItem { DisplayName = task.Name, Type = "Task", TaskPath = task.Path, State = (task.Enabled || task.State == Microsoft.Win32.TaskScheduler.TaskState.Running) });
                 }
             }
             return new ObservableCollection<AutoRunsItem>(AutoRunsItemsTasks);
@@ -148,17 +151,18 @@ namespace INPUTLAGFIX.Models
                             Logger.GetLogger().AllLogMessages.Add($"{item.DisplayName} не удалось включить в автозагрузки");
                         }
                     }
-                        break;
+                    break;
                 case "Task":
-                    if (item.Task.State == TaskState.Running)
+                    Microsoft.Win32.TaskScheduler.Task itemTask = TaskService.Instance.GetTask(item.TaskPath);
+                    if (itemTask.State == TaskState.Running)
                     {
-                        item.Task.Stop();
+                        itemTask.Stop();
                     }
-                    if (item.Task.Enabled)
+                    if (itemTask.Enabled)
                     {
                         try
                         {
-                            item.Task.Enabled = false;
+                            itemTask.Enabled = false;
                             Logger.GetLogger().AllLogMessages.Add($"Задача {item.DisplayName} была остановлена");
                         }
                         catch
@@ -170,7 +174,7 @@ namespace INPUTLAGFIX.Models
                     {
                         try
                         {
-                            item.Task.Enabled = true;
+                            itemTask.Enabled = true;
                             Logger.GetLogger().AllLogMessages.Add($"Задача {item.DisplayName} была запущена");
                         }
                         catch
@@ -210,8 +214,52 @@ namespace INPUTLAGFIX.Models
                     break;
             }
 
-
         }
-        
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            var serializer = new XmlSerializer(typeof(AutoRunsModel));
+            string solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            string backupsPath = Path.Combine(solutionPath, "Backups", backupItem.BackupName);
+            AutoRunsItemsRegedit.Clear();
+            AutoRunsItemsTasks.Clear();
+            AutoRunsItemsServices.Clear();
+
+            using (var reader = XmlReader.Create(backupsPath))
+            {
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (reader.Name == "RegeditItem")
+                        {
+                            var item = DeserializeAutoRunsItem(reader);
+                            AutoRunsItemsRegedit.Add(item);
+                        }
+                        else if (reader.Name == "TaskItem")
+                        {
+                            var item = DeserializeAutoRunsItem(reader);
+                            AutoRunsItemsTasks.Add(item);
+                        }
+                        else if (reader.Name == "ServiceItem")
+                        {
+                            var item = DeserializeAutoRunsItem(reader);
+                            AutoRunsItemsServices.Add(item);
+                        }
+                    }
+                }
+            }
+            foreach (var item in AutoRunsItemsRegedit.Concat(AutoRunsItemsServices).Concat(AutoRunsItemsTasks))
+            {
+                DeleteRegeditItem(item);
+            }
+        }
+
+        private AutoRunsItem DeserializeAutoRunsItem(XmlReader reader)
+        {
+            var serializer = new XmlSerializer(typeof(AutoRunsItem), new XmlRootAttribute(reader.Name));
+            return (AutoRunsItem)serializer.Deserialize(reader);
+        }
+
     }
 }

@@ -36,5 +36,15 @@ namespace INPUTLAGFIX.Models
                 }
             }
         }
+
+        public void ApplyBackup()
+        {
+            AutoRunsViewModel autoRunsViewModel = Application.Current.Resources["AutoRunsVM"] as AutoRunsViewModel;
+            MsiModeViewModel msiModeModel = Application.Current.Resources["MsiModeVM"] as MsiModeViewModel;
+            WindowsOptimizationViewModel windowsOptimizationViewModel = Application.Current.Resources["SharedWinOptimizationVM"] as WindowsOptimizationViewModel;
+            DevicesViewModel devicesViewModel = Application.Current.Resources["DevicesVM"] as DevicesViewModel;
+            autoRunsViewModel.SetCollectionsFromBackup(this);
+        }
+
     }
 }

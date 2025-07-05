@@ -21,8 +21,7 @@ namespace INPUTLAGFIX.Models
 
        public string SubKey;
        public string Type;
-       [XmlIgnore]
-       public Microsoft.Win32.TaskScheduler.Task Task;
+       public string TaskPath;
        public bool State
        {
             get

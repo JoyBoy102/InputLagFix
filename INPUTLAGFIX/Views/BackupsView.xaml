@@ -20,7 +20,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Text="{Binding BackupName}" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Text="{Binding BackupDateTime}" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
-                <Button Content="Применить" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right"></Button>
+                <Button Content="Применить" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" Command="{Binding DataContext.ApplyBackupCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"></Button>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

@@ -82,6 +82,12 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            AutoRunsModel.SetCollectionsFromBackup(backupItem);
+        }
+
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
