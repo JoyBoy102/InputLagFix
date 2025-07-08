@@ -14,13 +14,13 @@ namespace INPUTLAGFIX.ViewModels
 {
     public class MsiModeViewModel:INotifyPropertyChanged
     {
-        private ObservableCollection<MsiModeDeviceItem> _msiModeDeviceItems;
-        private MsiModeModel _msiModeModel;
+        public MsiModeModel MsiModeModel;
+        private ObservableCollection<MsiModeDeviceItem> _msiModeDeviceItems = new ObservableCollection<MsiModeDeviceItem>();
         public RelayCommand<MsiModeDeviceItem> TurnOnOffMsiModeCommand { get; set; }
         public MsiModeViewModel()
         {
-            _msiModeModel = new MsiModeModel();
-            _msiModeDeviceItems = _msiModeModel.GetAllMsiModeDeviceItems();
+            MsiModeModel = new MsiModeModel();
+            _msiModeDeviceItems = MsiModeModel.MsiModeDeviceItems;
             TurnOnOffMsiModeCommand = new RelayCommand<MsiModeDeviceItem>(TurnOnOffMsiMode);
         }
 
@@ -36,7 +36,12 @@ namespace INPUTLAGFIX.ViewModels
 
         private void TurnOnOffMsiMode(MsiModeDeviceItem msiModeDeviceItem)
         {
-            _msiModeModel.TurnOffOnMsiMode(msiModeDeviceItem);
+            MsiModeModel.TurnOffOnMsiMode(msiModeDeviceItem);
+        }
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            MsiModeModel.SetCollectionsFromBackup(backupItem);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

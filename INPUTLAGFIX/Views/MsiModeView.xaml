@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:INPUTLAGFIX.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels">
-    <UserControl.DataContext>
-        <vm:MsiModeViewModel></vm:MsiModeViewModel>
-    </UserControl.DataContext>
+             xmlns:vm="clr-namespace:INPUTLAGFIX.ViewModels"
+             DataContext="{StaticResource MsiModeVM}">
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxDataTemplate">
             <Grid>

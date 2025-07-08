@@ -31,12 +31,9 @@ namespace INPUTLAGFIX.Models
 
                 foreach (var filePath in backupFiles)
                 {
-                    var backupItem = new BackupItem
-                    {
-                        BackupName = Path.GetFileName(filePath),
-                        BackupDateTime = File.GetCreationTime(filePath)
-                    };
-
+                    string backupName = Path.GetFileName(filePath);
+                    DateTime backupDateTime = File.GetCreationTime(filePath);
+                    var backupItem = new BackupItem(backupName, backupDateTime);
                     res.Add(backupItem);
                 }
             }

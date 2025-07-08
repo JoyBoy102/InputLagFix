@@ -19,7 +19,7 @@ using Windows.ApplicationModel.Appointments;
 namespace INPUTLAGFIX.Models
 {
     [XmlRoot("AutoRuns")]
-    public class AutoRunsModel
+    public class AutoRunsModel:BackuperFromXml
     {
         private string _registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
         private string _registryPathServices = @"SYSTEM\CurrentControlSet\Services";
@@ -233,17 +233,17 @@ namespace INPUTLAGFIX.Models
                     {
                         if (reader.Name == "RegeditItem")
                         {
-                            var item = DeserializeAutoRunsItem(reader);
+                            var item = DeserializeAutoRunsItem<AutoRunsItem>(reader);
                             AutoRunsItemsRegedit.Add(item);
                         }
                         else if (reader.Name == "TaskItem")
                         {
-                            var item = DeserializeAutoRunsItem(reader);
+                            var item = DeserializeAutoRunsItem<AutoRunsItem>(reader);
                             AutoRunsItemsTasks.Add(item);
                         }
                         else if (reader.Name == "ServiceItem")
                         {
-                            var item = DeserializeAutoRunsItem(reader);
+                            var item = DeserializeAutoRunsItem<AutoRunsItem>(reader);
                             AutoRunsItemsServices.Add(item);
                         }
                     }
@@ -254,12 +254,5 @@ namespace INPUTLAGFIX.Models
                 DeleteRegeditItem(item);
             }
         }
-
-        private AutoRunsItem DeserializeAutoRunsItem(XmlReader reader)
-        {
-            var serializer = new XmlSerializer(typeof(AutoRunsItem), new XmlRootAttribute(reader.Name));
-            return (AutoRunsItem)serializer.Deserialize(reader);
-        }
-
     }
 }

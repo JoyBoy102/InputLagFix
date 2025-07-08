@@ -1,23 +1,30 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
-using System.Management;
-using Microsoft.Win32;
+using System.Xml;
+using System.Xml.Serialization;
 namespace INPUTLAGFIX.Models
 {
-    public class MsiModeModel
+    public class MsiModeModel:BackuperFromXml
     {
         private string _subKey = "SYSTEM\\CurrentControlSet\\Enum\\PCI";
         private RegeditManager _regeditManager;
         private DevConManager _devConManager;
+        [XmlArray("MsiModeItems")]
+        [XmlArrayItem("MsiModeItem")]
+        public ObservableCollection<MsiModeDeviceItem> MsiModeDeviceItems;
 
         public MsiModeModel()
         {
             _regeditManager = new RegeditManager();
             _devConManager = new DevConManager();
+            MsiModeDeviceItems = GetAllMsiModeDeviceItems();
         }
         public ObservableCollection<MsiModeDeviceItem> GetAllMsiModeDeviceItems()
         {
@@ -50,11 +57,39 @@ namespace INPUTLAGFIX.Models
         {
             if (item.State)
             {
-                _regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 1, RegistryValueKind.DWord);
+                Logger.GetLogger().AllLogMessages.Add(_regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 1, RegistryValueKind.DWord));
             }
             else
             {
-                _regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 0, RegistryValueKind.DWord);
+                Logger.GetLogger().AllLogMessages.Add(_regeditManager.ChangeRegistryValue(item.FullRegPath, "MSISupported", 0, RegistryValueKind.DWord));
+            }
+        }
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            var serializer = new XmlSerializer(typeof(AutoRunsModel));
+            string solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            string backupsPath = Path.Combine(solutionPath, "Backups", backupItem.BackupName);
+            MsiModeDeviceItems.Clear();
+
+            using (var reader = XmlReader.Create(backupsPath))
+            {
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (reader.Name == "MsiModeItem")
+                        {
+                            var item = DeserializeAutoRunsItem<MsiModeDeviceItem>(reader);
+                            MsiModeDeviceItems.Add(item);
+                        }
+
+                    }
+                }
+            }
+            foreach (var item in MsiModeDeviceItems)
+            {
+                TurnOffOnMsiMode(item);
             }
         }
 
