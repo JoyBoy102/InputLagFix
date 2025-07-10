@@ -17,9 +17,9 @@ namespace INPUTLAGFIX.ViewModels
 {
     public class WindowsOptimizationViewModel : INotifyPropertyChanged
     {
+        public WindowsOptimizationModel WindowsOptimizationModel;
         private RegeditManager _regeditManager;
         private AutoRunsModel _autoRunsModel;
-        private XmlManager _xmlManager;
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
         public IRelayCommand ApplySettingsCommand { get; }
@@ -27,17 +27,17 @@ namespace INPUTLAGFIX.ViewModels
         public WindowsOptimizationViewModel()
         {
             _regeditManager = new RegeditManager();
+            WindowsOptimizationModel = new WindowsOptimizationModel();
             _autoRunsModel = new AutoRunsModel();
-            _xmlManager = new XmlManager();
             _settingsCategories = new ObservableCollection<SettingsCategory>
             {
-                new SettingsCategory { CategoryName = "Основная оптимизация", Settings = _xmlManager.GetCollectionOfSettings("BaseOptimization.xml") },
-                new SettingsCategory { CategoryName = "Настройки безопасности и конфиденциальности", Settings = _xmlManager.GetCollectionOfSettings("SecuritySettings.xml") },
-                new SettingsCategory { CategoryName = "Настройки кастомизации Windows", Settings = _xmlManager.GetCollectionOfSettings("WindowsCustomizationSettings.xml") },
-                new SettingsCategory { CategoryName = "Отключение служб", Settings = _xmlManager.GetCollectionOfSettings("ServicesSettings.xml")},
-                new SettingsCategory { CategoryName = "Отключение телеметрии", Settings = _xmlManager.GetCollectionOfSettings("PrivacySettings.xml")},
-                new SettingsCategory { CategoryName = "Отключение ненужных задач", Settings = _xmlManager.GetCollectionOfSettings("TasksSettings.xml")},
-                new SettingsCategory { CategoryName = "Твики", Settings = _xmlManager.GetCollectionOfSettings("Tweaks.xml")}
+                new SettingsCategory { CategoryName = "Основная оптимизация", Settings = WindowsOptimizationModel.BaseOptimizationSettings },
+                new SettingsCategory { CategoryName = "Настройки безопасности и конфиденциальности", Settings = WindowsOptimizationModel.SecuritySettings },
+                new SettingsCategory { CategoryName = "Настройки кастомизации Windows", Settings = WindowsOptimizationModel.WindowsCustomizationSettings },
+                new SettingsCategory { CategoryName = "Отключение служб", Settings = WindowsOptimizationModel.ServicesSettings},
+                new SettingsCategory { CategoryName = "Отключение телеметрии", Settings = WindowsOptimizationModel.PrivacySettings},
+                new SettingsCategory { CategoryName = "Отключение ненужных задач", Settings = WindowsOptimizationModel.TasksSettings},
+                new SettingsCategory { CategoryName = "Твики", Settings = WindowsOptimizationModel.TweaksSettings}
             };
             ApplySettingsCommand = new RelayCommand(ApplySettings);
         }
@@ -66,9 +66,15 @@ namespace INPUTLAGFIX.ViewModels
         {
             foreach (var setting in _selectedSettingsCategory.Settings)
             {
-                setting.ApplyOptimization(ref _regeditManager, ref _autoRunsModel);
+                setting.ApplyOptimization(ref _regeditManager);
             }
         }
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            WindowsOptimizationModel.SetCollectionsFromBackup(backupItem);
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

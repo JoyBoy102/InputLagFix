@@ -2,16 +2,60 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace INPUTLAGFIX.Models
 {
-    public class DevConManager
+    public class DevicesModel:BackuperFromXml
     {
+        [XmlArray("DeviceItems")]
+        [XmlArrayItem("DeviceItem")]
+        public ObservableCollection<DeviceItem> DeviceItems;
+        [XmlArray("UnnecessaryDeviceItems")]
+        [XmlArrayItem("UnnecessaryDeviceItem")]
+        public ObservableCollection<DeviceItem> UnnecessaryDevices;
+
+        public DevicesModel()
+        {
+            DeviceItems = GetDevices();
+            UnnecessaryDevices = GetUnnecessaryDevices();
+        }
+
+        private ObservableCollection<DeviceItem> GetUnnecessaryDevices()
+        {
+            Dictionary<string, string> AllDevicesIds = new Dictionary<string, string>()
+            {
+                { "ROOT\\CompositeBus", "Перечислитель композитной шины" },
+                { "ROOT\\vdrvroot", "Перечислитель виртуальных дисков" },
+                { "root\\umbus", "UMBus перечислитель корневой шины" },
+                { "ROOT\\NdisVirtualBus", "Перечислитель виртуальных сетевых адаптеров" }
+            };
+            return GetDevices(AllDevicesIds);
+        }
+
+        private ObservableCollection<DeviceItem> GetDevices()
+        {
+            Dictionary<string, string> AllDevicesIds = new Dictionary<string, string>()
+            {
+                { "SWD\\PRINTENUM\\PrintQueues", "Корневая очередь печати" },
+                { "SWD\\MSRRAS\\MS_PPPOEMINIPORT", "WAN Miniport (PPPOE)" },
+                { "SWD\\MSRRAS\\MS_PPTPMINIPORT", "WAN Miniport (PPTP)" },
+                { "SWD\\MSRRAS\\MS_AGILEVPNMINIPORT", "WAN Miniport (IKEv2)" },
+                { "SWD\\MSRRAS\\MS_NDISWANBH", "WAN Miniport (Network Monitor)" },
+                {"SWD\\MSRRAS\\MS_NDISWANIP", "WAN Miniport (IP)"},
+                {"SWD\\MSRRAS\\MS_SSTPMINIPORT", "WAN Miniport (SSTP)"},
+                {"SWD\\MSRRAS\\MS_NDISWANIPV6", "WAN Miniport (IPv6)"},
+                {"SWD\\MSRRAS\\MS_L2TPMINIPORT", "WAN Miniport (L2TP)"}
+            };
+            return GetDevices(AllDevicesIds);
+        }
         public string RestartDeviceDriver(DeviceItem deviceItem)
         {
             try
@@ -25,122 +69,6 @@ namespace INPUTLAGFIX.Models
             {
                 return $"Ошибка: {ex.Message}";
             }
-        }
-
-        public string ReinstallDeviceDriver(string hardwareId)
-        {
-            try
-            {
-                var processInfo = new ProcessStartInfo
-                {
-                    FileName = "devcon.exe",
-                    UseShellExecute = true,
-                    Verb = "runas", // Запуск с правами администратора
-                    CreateNoWindow = true,
-                    Arguments = $"remove \"{hardwareId}\""
-
-                };
-                using (var process = Process.Start(processInfo))
-                {
-                    process.WaitForExit();
-                    if (process.ExitCode != 0)
-                        return $"Не удалось удалить устройство - {hardwareId}.";
-                }
-
-                // Небольшая задержка для завершения операции
-                Thread.Sleep(2000);
-
-                // Шаг 2: Сканирование для повторного обнаружения монитора
-                processInfo.Arguments = "rescan"; // Автоматическая переустановка драйвера
-                using (var process = Process.Start(processInfo))
-                {
-                    process.WaitForExit();
-                    if (process.ExitCode != 0)
-                        return "Ошибка при повторном сканировании устройств.";
-                }
-
-                return $"Устройство {hardwareId} успешно перезагружено";
-            }
-            catch (Exception ex)
-            {
-                return $"Ошибка: {ex.Message}";
-            }
-        }
-
-        public List<string> GetMonitorId()
-        {
-            List<string> res = new List<string>();
-            try
-            {
-                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Service = 'monitor'"))
-                {
-                    foreach (ManagementObject device in searcher.Get())
-                    {
-                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
-                        if (!string.IsNullOrEmpty(pnpDeviceId) && pnpDeviceId.Contains("DISPLAY"))
-                        {
-                            pnpDeviceId = pnpDeviceId.Replace("DISPLAY", "MONITOR");
-                            string[] deviceIdParts = pnpDeviceId.Split("\\");
-                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                res.Add($"Ошибка при поиске монитора: {ex.Message}");
-            }
-            return res;
-        }
-
-        public List<string> GetGpuId()
-        {
-            List<string> res = new List<string>();
-            try
-            {
-                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController"))
-                {
-                    foreach (ManagementObject device in searcher.Get())
-                    {
-                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
-                        if (!string.IsNullOrEmpty(pnpDeviceId))
-                        {
-                            string[] deviceIdParts = pnpDeviceId.Split("\\");
-                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                res.Add($"Ошибка при поиске видеокарты: {ex.Message}");
-            }
-            return res;
-        }
-
-        public List<string> GetMouseIds()
-        {
-            List<string> res = new List<string>();
-            try
-            {
-                using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PointingDevice"))
-                {
-                    foreach (ManagementObject device in searcher.Get())
-                    {
-                        string pnpDeviceId = device["PNPDeviceID"]?.ToString();
-                        if (!string.IsNullOrEmpty(pnpDeviceId))
-                        {
-                            string[] deviceIdParts = pnpDeviceId.Split("\\");
-                            res.Add($"{deviceIdParts[0]}\\{deviceIdParts[1]}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                res.Add($"Ошибка при поиске мыши: {ex.Message}");
-            }
-            return res;
         }
 
         public bool CheckDeviceStatus(string deviceID)
@@ -327,6 +255,47 @@ namespace INPUTLAGFIX.Models
             return null;
         }
 
+        public void DisableEnableDevice(DeviceItem deviceItem)
+        {
+            if (!deviceItem.State)
+                Logger.GetLogger().AllLogMessages.Add(DisableDevice(deviceItem));
+            else
+                Logger.GetLogger().AllLogMessages.Add(EnableDevice(deviceItem));
+        }
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            var serializer = new XmlSerializer(typeof(DevicesModel));
+            string solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            string backupsPath = Path.Combine(solutionPath, "Backups", backupItem.BackupName);
+            DeviceItems.Clear();
+            UnnecessaryDevices.Clear();
+            using (var reader = XmlReader.Create(backupsPath))
+            {
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (reader.Name == "DeviceItem")
+                        {
+                            var item = DeserializeAutoRunsItem<DeviceItem>(reader);
+                            DeviceItems.Add(item);
+                        }
+                        else if (reader.Name == "UnnecessaryDeviceItem")
+                        {
+                            var item = DeserializeAutoRunsItem<DeviceItem>(reader);
+                            UnnecessaryDevices.Add(item);
+                        }
+
+
+                    }
+                }
+            }
+            foreach (var item in DeviceItems.Concat(UnnecessaryDevices))
+            {
+                DisableEnableDevice(item);
+            }
+        }
     }
     
 }

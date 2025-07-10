@@ -17,9 +17,9 @@ namespace INPUTLAGFIX
         public AutoRunsModel autoRunsModel = (Application.Current.Resources["AutoRunsVM"] as AutoRunsViewModel).AutoRunsModel;
         [XmlElement("MsiMode")]
         public MsiModeModel msiModeModel = (Application.Current.Resources["MsiModeVM"] as MsiModeViewModel).MsiModeModel;
-        [XmlIgnore]
-        public WindowsOptimizationViewModel windowsOptimizationViewModel = Application.Current.Resources["SharedWinOptimizationVM"] as WindowsOptimizationViewModel;
-        [XmlIgnore]
-        public DevicesViewModel devicesViewModel = Application.Current.Resources["DevicesVM"] as DevicesViewModel;
+        [XmlElement("WindowsOptimization")]
+        public WindowsOptimizationModel windowsOptimizationModel = (Application.Current.Resources["SharedWinOptimizationVM"] as WindowsOptimizationViewModel).WindowsOptimizationModel;
+        [XmlElement("Devices")]
+        public DevicesModel devicesModel = (Application.Current.Resources["DevicesVM"] as DevicesViewModel).DevicesModel;
     }
 }

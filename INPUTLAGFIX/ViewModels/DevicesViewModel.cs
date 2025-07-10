@@ -13,48 +13,18 @@ namespace INPUTLAGFIX.ViewModels
 {
     public class DevicesViewModel: INotifyPropertyChanged
     {
-        private DevConManager _devConManager;
+        public DevicesModel DevicesModel;
         private ObservableCollection<DeviceItem> _unnecessaryDevices;
         private ObservableCollection<DeviceItem> _devices;
         public RelayCommand<DeviceItem> DisableEnableDeviceCommand { get; set; }
 
         public DevicesViewModel()
         {
-            _devConManager = new DevConManager();
-            _unnecessaryDevices = GetUnnecessaryDevices();
-            _devices = GetDevices();
+            DevicesModel = new DevicesModel();
             DisableEnableDeviceCommand = new RelayCommand<DeviceItem>(DisableEnableDevice);
+            _unnecessaryDevices = DevicesModel.UnnecessaryDevices;
+            _devices = DevicesModel.DeviceItems;
         }
-
-        private ObservableCollection<DeviceItem> GetUnnecessaryDevices()
-        {
-            Dictionary<string, string> AllDevicesIds = new Dictionary<string, string>()
-            {
-                { "ROOT\\CompositeBus", "Перечислитель композитной шины" },
-                { "ROOT\\vdrvroot", "Перечислитель виртуальных дисков" },
-                { "root\\umbus", "UMBus перечислитель корневой шины" },
-                { "ROOT\\NdisVirtualBus", "Перечислитель виртуальных сетевых адаптеров" }
-            };
-            return _devConManager.GetDevices(AllDevicesIds);
-        }
-
-        private ObservableCollection<DeviceItem> GetDevices()
-        {
-            Dictionary<string, string> AllDevicesIds = new Dictionary<string, string>()
-            {
-                { "SWD\\PRINTENUM\\PrintQueues", "Корневая очередь печати" },
-                { "SWD\\MSRRAS\\MS_PPPOEMINIPORT", "WAN Miniport (PPPOE)" },
-                { "SWD\\MSRRAS\\MS_PPTPMINIPORT", "WAN Miniport (PPTP)" },
-                { "SWD\\MSRRAS\\MS_AGILEVPNMINIPORT", "WAN Miniport (IKEv2)" },
-                { "SWD\\MSRRAS\\MS_NDISWANBH", "WAN Miniport (Network Monitor)" },
-                {"SWD\\MSRRAS\\MS_NDISWANIP", "WAN Miniport (IP)"},
-                {"SWD\\MSRRAS\\MS_SSTPMINIPORT", "WAN Miniport (SSTP)"},
-                {"SWD\\MSRRAS\\MS_NDISWANIPV6", "WAN Miniport (IPv6)"},
-                {"SWD\\MSRRAS\\MS_L2TPMINIPORT", "WAN Miniport (L2TP)"}
-            };
-            return _devConManager.GetDevices(AllDevicesIds);
-        }
-        
 
         public ObservableCollection<DeviceItem> UnnecessaryDevices
         {
@@ -78,10 +48,12 @@ namespace INPUTLAGFIX.ViewModels
 
         private void DisableEnableDevice(DeviceItem deviceItem)
         {
-            if (!deviceItem.State)
-                Logger.GetLogger().AllLogMessages.Add(_devConManager.DisableDevice(deviceItem));
-            else
-                Logger.GetLogger().AllLogMessages.Add(_devConManager.EnableDevice(deviceItem));
+            DevicesModel.DisableEnableDevice(deviceItem);
+        }
+
+        public void SetCollectionsFromBackup(BackupItem backupItem)
+        {
+            DevicesModel.SetCollectionsFromBackup(backupItem);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

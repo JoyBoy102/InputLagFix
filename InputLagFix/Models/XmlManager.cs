@@ -18,14 +18,21 @@ namespace INPUTLAGFIX.Models
             { "REG_BINARY", RegistryValueKind.Binary},
             { "REG_EXPAND_SZ", RegistryValueKind.ExpandString }
         };
-        public ObservableCollection<Optimization> GetCollectionOfSettings(string xml)
+        private RegeditManager _regeditManager;
+        public XmlManager()
+        {
+            _regeditManager = new RegeditManager();
+        }
+        public (ObservableCollection<Optimization>, ObservableCollection<Optimization>) GetCollectionOfSettings(string xml)
         {
             ObservableCollection<Optimization> res = new ObservableCollection<Optimization>();
+            ObservableCollection<Optimization> resForBackup = new ObservableCollection<Optimization>();
             XDocument xdoc = XDocument.Load(xml);
             XElement root = xdoc.Root;
             foreach (var optimization in root.Elements())
             {
                 ObservableCollection<Setting> settingsList = new ObservableCollection<Setting>();
+                ObservableCollection<Setting> settingsListBackup = new ObservableCollection<Setting>();
                 string? OptimizationRuName = optimization.Attribute("ruName")?.Value;
                 bool AddWindow = optimization.Attribute("AddWindow")?.Value == "true" ? true : false;
                 var settings = optimization.Elements();
@@ -38,19 +45,24 @@ namespace INPUTLAGFIX.Models
                             valuePath = setting.Element("valuePath")?.Value,
                             valueName = setting.Element("valueName")?.Value,
                             valueKind = stringToObject[setting.Element("valueKind")?.Value],
-                            value_if_false = setting.Element("value_if_false")?.Value,
-                            value_if_true = setting.Element("value_if_true")?.Value,
-
+                            value = setting.Element("value_if_true")?.Value,
+                        };
+                        Setting settForBackup = new Setting
+                        {
+                            valuePath = setting.Element("valuePath")?.Value,
+                            valueName = setting.Element("valueName")?.Value,
+                            valueKind = stringToObject[setting.Element("valueKind")?.Value],
+                            value = _regeditManager.GetValueFromRegedit(setting.Element("valuePath")?.Value, setting.Element("valueName")?.Value)
                         };
                         settingsList.Add(sett);
+                        settingsListBackup.Add(settForBackup);
                     }
                     else
                     {
                         Setting sett = new Setting
                         {
                             valuePath = setting.Element("valuePath")?.Value,
-                            value_if_false = setting.Element("value_if_false")?.Value,
-                            value_if_true = setting.Element("value_if_true")?.Value,
+                            value = setting.Element("value_if_true")?.Value,
                             isTask = true
                         };
                         settingsList.Add(sett);
@@ -58,10 +70,12 @@ namespace INPUTLAGFIX.Models
                 }
                 
                 res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName, AddWindow = AddWindow });
-                
+                resForBackup.Add(new Optimization { settings = settingsListBackup, ruName = OptimizationRuName, AddWindow = false });
             }
-            return res;
+            return (res, resForBackup);
         }
+
+        
 
         public List<AutoRunsItem> GetSavedAutoRunsItemsRegedit()
         {

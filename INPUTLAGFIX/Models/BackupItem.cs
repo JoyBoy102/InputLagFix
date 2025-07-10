@@ -27,10 +27,6 @@ namespace INPUTLAGFIX.Models
             serializeModels = new SerializeModels();
             solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             backupsPath = Path.Combine(solutionPath, "Backups", BackupName);
-            //StreamWriter streamWriter = new StreamWriter(backupsPath);
-            //SaveAutoRunsToXml(streamWriter);
-            // SaveMsiModeToXml(streamWriter);
-            // streamWriter.Dispose();
             SaveBackupToXml();
         }
 
@@ -38,26 +34,6 @@ namespace INPUTLAGFIX.Models
         {
             BackupName = backupName;
             BackupDateTime = backupDateTime;
-        }
-
-        private void SaveAutoRunsToXml(StreamWriter writer)
-        {
-            var autoRunsViewModel = Application.Current.Resources["AutoRunsVM"];
-            var serializer = new XmlSerializer(typeof(AutoRunsModel)); 
-            if (autoRunsViewModel is AutoRunsViewModel viewModel)
-            {
-                serializer.Serialize(writer, viewModel.AutoRunsModel);
-            }
-        }
-
-        private void SaveMsiModeToXml(StreamWriter writer)
-        {
-            var msiModeViewModel = Application.Current.Resources["MsiModeVM"];
-            var serializer = new XmlSerializer(typeof(MsiModeModel));
-            if (msiModeViewModel is MsiModeViewModel viewModel)
-            {
-               serializer.Serialize(writer, viewModel.MsiModeModel);
-            }
         }
 
         private void SaveBackupToXml()
@@ -77,6 +53,8 @@ namespace INPUTLAGFIX.Models
             DevicesViewModel devicesViewModel = Application.Current.Resources["DevicesVM"] as DevicesViewModel;
             autoRunsViewModel.SetCollectionsFromBackup(this);
             msiModeViewModel.SetCollectionsFromBackup(this);
+            devicesViewModel.SetCollectionsFromBackup(this);
+            windowsOptimizationViewModel.SetCollectionsFromBackup(this);
         }
 
     }

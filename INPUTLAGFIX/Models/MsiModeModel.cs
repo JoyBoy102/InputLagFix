@@ -15,7 +15,7 @@ namespace INPUTLAGFIX.Models
     {
         private string _subKey = "SYSTEM\\CurrentControlSet\\Enum\\PCI";
         private RegeditManager _regeditManager;
-        private DevConManager _devConManager;
+        private DevicesModel _devConManager;
         [XmlArray("MsiModeItems")]
         [XmlArrayItem("MsiModeItem")]
         public ObservableCollection<MsiModeDeviceItem> MsiModeDeviceItems;
@@ -23,7 +23,7 @@ namespace INPUTLAGFIX.Models
         public MsiModeModel()
         {
             _regeditManager = new RegeditManager();
-            _devConManager = new DevConManager();
+            _devConManager = new DevicesModel();
             MsiModeDeviceItems = GetAllMsiModeDeviceItems();
         }
         public ObservableCollection<MsiModeDeviceItem> GetAllMsiModeDeviceItems()

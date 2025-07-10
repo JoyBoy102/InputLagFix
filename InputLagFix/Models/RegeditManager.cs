@@ -1,26 +1,16 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
 
 namespace INPUTLAGFIX.Models
 {
     public class RegeditManager
     {
-        public ScreenResolution SelectedResolution;
-
         public string DeleteKey(string keyName, string subKeyPath)
         {
             string[] subKeyPathPathParts = subKeyPath.Split('\\');
@@ -68,13 +58,11 @@ namespace INPUTLAGFIX.Models
                 }
                 else
                 {
-                    return $"Ключа {keyName} не существует в {subKeyPath}"; 
+                    return $"Ключа {keyName} не существует в {subKeyPath}";
                 }
-                    
+
             }
         }
-
-
 
         private RegistryKey GetRootKey(string rootKeyName)
         {
@@ -112,17 +100,17 @@ namespace INPUTLAGFIX.Models
                 return $"Неизвестный корневой раздел реестра {valuePathParts[0]}";
             }
             string subKeyPath = string.Join("\\", valuePathParts, 1, valuePathParts.Length - 1);
-            
+
             using (RegistryKey key = rootKey.CreateSubKey(subKeyPath, true))
             {
-                if (valueKind!=RegistryValueKind.Binary)
+                if (valueKind != RegistryValueKind.Binary)
                     key.SetValue(valueName, value, valueKind);
                 else
                 {
                     byte[] byteArrVal = ConvertStringSettingToBytes(value);
                     key.SetValue(valueName, byteArrVal, valueKind);
                 }
-                    key.Flush();
+                key.Flush();
                 return $"Значение {valueName} в подразделе {valuePath} успешно изменено на {value}";
             }
         }
@@ -164,79 +152,36 @@ namespace INPUTLAGFIX.Models
                     }
                 }
             }
-            return (null,null);
+            return (null, null);
         }
-        /*
-        public void MonitorInputLagFix()
+
+        public string GetValueFromRegedit(string valuePath, string valueName)
         {
-            const string MonitorsConfigsFolder = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration";
-            
+            string[] valuePathParts = valuePath.Split('\\');
+            if (valuePathParts.Length < 2)
+            {
+                throw new ArgumentException();
+            }
+            RegistryKey rootKey = GetRootKey(valuePathParts[0]);
+            if (rootKey == null)
+            {
+                throw new ArgumentException();
+            }
+
+            string subKeyPath = string.Join("\\", valuePathParts, 1, valuePathParts.Length - 1);
+
             try
             {
-                int deletedCount = 0;
-                string[] pathParts = MonitorsConfigsFolder.Split('\\');
-                RegistryKey rootKey = GetRootKey(pathParts[0]);
-                if (rootKey == null)
-                    AllLogMessages.Add("Не удалось определить корневой раздел реестра");
-
-                string subKeyPath = string.Join("\\", pathParts, 1, pathParts.Length - 1);
-                
-
-                using (RegistryKey configKey = rootKey.OpenSubKey(subKeyPath))
+                using (RegistryKey key = rootKey.CreateSubKey(subKeyPath, true))
                 {
-                   DeleteAllSimulatedMonitorsAndChangeToCorrectValues(configKey, MonitorsConfigsFolder, ref deletedCount);
-                }
-
-                AllLogMessages.Add($"Удалено {deletedCount} подразделов с SIMULATED");
-                List<string> monitorIds = _devConManager.GetMonitorId();
-                foreach (string monitorId in monitorIds)
-                {
-                    AllLogMessages.Add(_devConManager.ReinstallDeviceDriver(monitorId));
-                    Thread.Sleep(3000);
-                }
-                List<string> GpuIds = _devConManager.GetGpuId();
-                foreach (string GpuId in GpuIds)
-                {
-                    AllLogMessages.Add(_devConManager.RestartDeviceDriver(GpuId));
-                    Thread.Sleep(3000);
+                    object val = key.GetValue(valueName);
+                    return val == null? "delete": val.ToString();
                 }
             }
-            catch (UnauthorizedAccessException)
+            catch
             {
-                AllLogMessages.Add("Ошибка: Недостаточно прав (требуются права администратора)");
-            }
-            catch (Exception ex)
-            {
-                AllLogMessages.Add($"Ошибка при обработке: {ex.Message}");
+                return PowerRunManager.GetValueFromRegeditWithPowerRun(valuePath, valueName);
             }
         }
-        */
-        private void DeleteAllSimulatedMonitorsAndChangeToCorrectValues(RegistryKey configKey, string MonitorsConfigsFolder, ref int deletedCount)
-        {
-            if (configKey == null)
-                Logger.GetLogger().AllLogMessages.Add("Раздел Configuration не найден в реестре");
-
-            // Получаем все подразделы первого уровня
-            string[] subKeyNames = configKey.GetSubKeyNames();
-
-            foreach (string subKeyName in subKeyNames)
-            {
-                string fullPath = $"{MonitorsConfigsFolder}\\{subKeyName}";
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "ActiveSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "Stride", (SelectedResolution.Width * 32 + 7) / 8, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.bottom", SelectedResolution.Height, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00\\00", "DwmClipBox.right", SelectedResolution.Width, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cx", SelectedResolution.Width, RegistryValueKind.DWord));
-                Logger.GetLogger().AllLogMessages.Add(ChangeRegistryValue($"{fullPath}\\00", "PrimSurfSize.cy", SelectedResolution.Height, RegistryValueKind.DWord));
-            }
-        }
-
-
-
-        
     }
 }

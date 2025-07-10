@@ -18,7 +18,6 @@ using Windows.ApplicationModel.Appointments;
 
 namespace INPUTLAGFIX.Models
 {
-    [XmlRoot("AutoRuns")]
     public class AutoRunsModel:BackuperFromXml
     {
         private string _registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
