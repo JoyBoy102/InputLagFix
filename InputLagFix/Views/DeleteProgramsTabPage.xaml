@@ -14,7 +14,7 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}" Style="{StaticResource ListBoxStyle}">
+        <ListBox Grid.Column="0" ItemsSource="{Binding DeleteItemsCategories}" DisplayMemberPath="CategoryName" SelectedItem="{Binding SelectedDeleteItemsCategory}" Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
             
         </ListBox>
         <ContentControl Grid.Column="1" Content="{Binding SelectedDeleteItemsCategory.Control}" DataContext="{StaticResource SharedDelProgramsVM}">

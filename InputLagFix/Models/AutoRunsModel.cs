@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Xml;
 using System.Xml.Serialization;
 using Windows.ApplicationModel.Appointments;
+using Windows.Storage;
 
 namespace INPUTLAGFIX.Models
 {
@@ -218,13 +219,13 @@ namespace INPUTLAGFIX.Models
         public void SetCollectionsFromBackup(BackupItem backupItem)
         {
             var serializer = new XmlSerializer(typeof(AutoRunsModel));
-            string solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-            string backupsPath = Path.Combine(solutionPath, "Backups", backupItem.BackupName);
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string backupPath = Path.Combine(appDataPath, "InputLagFix", "Backups", backupItem.BackupName);
             AutoRunsItemsRegedit.Clear();
             AutoRunsItemsTasks.Clear();
             AutoRunsItemsServices.Clear();
 
-            using (var reader = XmlReader.Create(backupsPath))
+            using (var reader = XmlReader.Create(backupPath))
             {
                 while (reader.Read())
                 {

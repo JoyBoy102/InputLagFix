@@ -68,11 +68,11 @@ namespace INPUTLAGFIX.Models
         public void SetCollectionsFromBackup(BackupItem backupItem)
         {
             var serializer = new XmlSerializer(typeof(AutoRunsModel));
-            string solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-            string backupsPath = Path.Combine(solutionPath, "Backups", backupItem.BackupName);
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string backupPath = Path.Combine(appDataPath, "InputLagFix", "Backups", backupItem.BackupName);
             MsiModeDeviceItems.Clear();
 
-            using (var reader = XmlReader.Create(backupsPath))
+            using (var reader = XmlReader.Create(backupPath))
             {
                 while (reader.Read())
                 {

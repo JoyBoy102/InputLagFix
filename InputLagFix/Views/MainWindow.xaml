@@ -36,7 +36,7 @@
             <TextBlock Text="WindowsTweaker" FontSize="20" Foreground="Crimson" DockPanel.Dock="Left"></TextBlock>
         </DockPanel>
 
-        <ListBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}">
+        <ListBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}" ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

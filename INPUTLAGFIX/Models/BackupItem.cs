@@ -17,7 +17,7 @@ namespace INPUTLAGFIX.Models
 
         private SerializeModels serializeModels;
         private string appDataPath;
-        private string backupsPath;
+        private string backupsFolderPath;
 
 
         public BackupItem()
@@ -26,7 +26,7 @@ namespace INPUTLAGFIX.Models
             BackupDateTime = DateTime.Now;
             serializeModels = new SerializeModels();
             appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            backupsPath = Path.Combine(appDataPath, "InputLagFix", "Backups");
+            backupsFolderPath = Path.Combine(appDataPath, "InputLagFix", "Backups");
             SaveBackupToXml();
         }
 
@@ -38,12 +38,13 @@ namespace INPUTLAGFIX.Models
 
         private void SaveBackupToXml()
         {
-            if (!Directory.Exists(backupsPath))
+            if (!Directory.Exists(backupsFolderPath))
             {
-                Directory.CreateDirectory(backupsPath);
+                Directory.CreateDirectory(backupsFolderPath);
             }
+            string filePath = Path.Combine(backupsFolderPath, $"{BackupName}.xml");
             var serializer = new XmlSerializer(typeof(SerializeModels));
-            using (var writer = new StreamWriter(backupsPath))
+            using (var writer = new StreamWriter(filePath))
             {
                 serializer.Serialize(writer, serializeModels);
             }

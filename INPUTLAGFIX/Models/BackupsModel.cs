@@ -11,14 +11,14 @@ namespace INPUTLAGFIX.Models
 {
     public class BackupsModel
     {
-        private string solutionPath;
+        private string appDataPath;
         private string backupsPath;
         public ObservableCollection<BackupItem> BackupItems { get; set; }
 
         public BackupsModel()
         {
-            solutionPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-            backupsPath = Path.Combine(solutionPath, "Backups");
+            appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            backupsPath = Path.Combine(appDataPath, "InputLagFix", "Backups");
             BackupItems = GetSavedBackups();
         }
 
