@@ -69,8 +69,8 @@ namespace INPUTLAGFIX.Models
                     }
                 }
                 
-                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName, AddWindow = AddWindow });
-                resForBackup.Add(new Optimization { settings = settingsListBackup, ruName = OptimizationRuName, AddWindow = false });
+                res.Add(new Optimization { settings = settingsList, ruName = OptimizationRuName, AddWindow = AddWindow, Visibility = System.Windows.Visibility.Collapsed});
+                resForBackup.Add(new Optimization { settings = settingsListBackup, ruName = OptimizationRuName, AddWindow = false, Visibility = System.Windows.Visibility.Collapsed });
             }
             return (res, resForBackup);
         }

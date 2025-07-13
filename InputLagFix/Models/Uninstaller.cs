@@ -60,7 +60,10 @@ namespace INPUTLAGFIX.Models
                 {
                     Logger.GetLogger().AllLogMessages.Add($"Не удалось удалить программу {item.DisplayName}");
                 }
-                Logger.GetLogger().AllLogMessages.Add(_regeditManager.DeleteSubKey(item.keyname, item.subkeyname));
+                else
+                {
+                    Logger.GetLogger().AllLogMessages.Add(_regeditManager.DeleteSubKey(item.keyname, item.subkeyname));
+                }
                 return process.ExitCode == 0 ? true : false;
             }
             catch (Win32Exception ex)
@@ -80,14 +83,22 @@ namespace INPUTLAGFIX.Models
 
         public async Task<bool> UninstallUWPProgrammAsync(DeleteItem item)
         {
-            var packageManager = new PackageManager();
-            var removalResult = await packageManager.RemovePackageAsync(item.UninstallString);
-            if (removalResult.IsRegistered)
-                return true;
-            else
+            try
             {
-                MessageBox.Show($"Ошибка: {removalResult.ErrorText}");
-                Logger.GetLogger().AllLogMessages.Add($"Ошибка: {removalResult.ErrorText}");
+                var packageManager = new PackageManager();
+                var removalResult = await packageManager.RemovePackageAsync(item.UninstallString);
+                if (removalResult.IsRegistered)
+                    return true;
+                else
+                {
+                    MessageBox.Show($"Ошибка: {removalResult.ErrorText}");
+                    Logger.GetLogger().AllLogMessages.Add($"Ошибка: {removalResult.ErrorText}");
+                    return false;
+                }
+            }
+            catch
+            {
+                Logger.GetLogger().AllLogMessages.Add($"Не удалось удалить программу:{item.DisplayName}");
                 return false;
             }
         }

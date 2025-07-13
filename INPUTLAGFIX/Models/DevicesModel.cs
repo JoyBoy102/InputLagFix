@@ -132,6 +132,7 @@ namespace INPUTLAGFIX.Models
             {
                 return $"Ошибка: {ex.Message}";
             }
+            Thread.Sleep(3000);
         }
 
         public string DisableDevice(DeviceItem deviceItem)
@@ -162,6 +163,7 @@ namespace INPUTLAGFIX.Models
             {
                 return $"Ошибка: {ex.Message}";
             }
+            Thread.Sleep(3000);
         }
 
         public ObservableCollection<DeviceItem> GetDevices(Dictionary<string, string> AllDevicesIds)

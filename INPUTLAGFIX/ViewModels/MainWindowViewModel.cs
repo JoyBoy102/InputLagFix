@@ -1,4 +1,5 @@
-﻿using INPUTLAGFIX.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using INPUTLAGFIX.Models;
 using INPUTLAGFIX.Views;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace INPUTLAGFIX.ViewModels
@@ -60,6 +63,7 @@ namespace INPUTLAGFIX.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

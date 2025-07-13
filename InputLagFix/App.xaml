@@ -103,6 +103,11 @@
                 </Style.Triggers>
             </Style>
 
+            <Style x:Key="InfoListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <Setter Property="Background" Value="#FF000C10"/>
+                <Setter Property="BorderBrush" Value="#FF000C10"/>
+            </Style>
+
             <Style TargetType="CheckBox">
                 <Setter Property="Foreground" Value="LightGray"/>
                 <Setter Property="FontFamily" Value="Arial"/>
@@ -229,6 +234,42 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="ToggleButtonArrow" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="20"
+                                    Padding="7">
+                                <TextBlock x:Name="ArrowText"
+                                           Text="Показать детали изменений ▼"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           FontSize="14"></TextBlock>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="ArrowText" Property="Text" Value="Скрыть детали изменений ▲"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style TargetType="Button" x:Key="StackPanelButton">
                 <Setter Property="Foreground" Value="Black"></Setter>
                 <Setter Property="FontFamily" Value="Arial"/>
@@ -331,7 +372,12 @@
                 </Setter>
             </Style>
 
-            
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Helvetica"/>
+            </Style>
+
+           
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

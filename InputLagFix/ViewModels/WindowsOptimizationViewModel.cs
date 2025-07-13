@@ -23,6 +23,7 @@ namespace INPUTLAGFIX.ViewModels
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
         public IRelayCommand ApplySettingsCommand { get; }
+        public IRelayCommand<Optimization> ShowSettingInfoCommand { get; }
         
         public WindowsOptimizationViewModel()
         {
@@ -40,6 +41,7 @@ namespace INPUTLAGFIX.ViewModels
                 new SettingsCategory { CategoryName = "Твики", Settings = WindowsOptimizationModel.TweaksSettings}
             };
             ApplySettingsCommand = new RelayCommand(ApplySettings);
+            ShowSettingInfoCommand = new RelayCommand<Optimization>(ShowSettingInfo);
         }
 
         public ObservableCollection<SettingsCategory> SettingsCategories
@@ -68,6 +70,12 @@ namespace INPUTLAGFIX.ViewModels
             {
                 setting.ApplyOptimization(ref _regeditManager);
             }
+        }
+
+        private void ShowSettingInfo(Optimization optimization)
+        {
+            if (optimization.State) optimization.Visibility = System.Windows.Visibility.Visible;
+            else optimization.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public void SetCollectionsFromBackup(BackupItem backupItem)

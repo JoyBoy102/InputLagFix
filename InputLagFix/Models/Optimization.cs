@@ -1,19 +1,46 @@
 ﻿using INPUTLAGFIX.Views;
-using System.Collections.ObjectModel;
 using Microsoft.Win32.TaskScheduler;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace INPUTLAGFIX.Models
 {
-    public class Optimization
+    public class Optimization:INotifyPropertyChanged
     {
         public string ruName { get; set; }
         public bool CheckedState { get; set; }
 
         public bool AddWindow { get; set; }
-        public ObservableCollection<Setting> settings { get; set; }
+        private ObservableCollection<Setting> _settings { get; set; }
+
+        public ObservableCollection<Setting> settings
+        {
+            get => _settings;
+            set
+            {
+                _settings = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _visibility = Visibility.Collapsed;
+
+        public Visibility Visibility
+        {
+            get => _visibility;
+            set
+            {
+                _visibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool State {  get; set; }
         public void ApplyOptimization(ref RegeditManager regeditManager, bool isBackup = false)
         {
-            foreach (Setting setting in settings)
+            foreach (Setting setting in _settings)
             {
                 try
                 {
@@ -63,6 +90,7 @@ namespace INPUTLAGFIX.Models
                             Logger.GetLogger().AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value, setting.valueKind));
                     }
                 }
+                Thread.Sleep(250);
             }
             if (AddWindow && CheckedState)
             {
@@ -70,6 +98,9 @@ namespace INPUTLAGFIX.Models
                 infoWindow.Show();
             }
         }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
 }

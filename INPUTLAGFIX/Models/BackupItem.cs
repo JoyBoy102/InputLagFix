@@ -38,15 +38,13 @@ namespace INPUTLAGFIX.Models
 
         private void SaveBackupToXml()
         {
-            if (!Directory.Exists(backupsFolderPath))
-            {
-                Directory.CreateDirectory(backupsFolderPath);
-            }
-            string filePath = Path.Combine(backupsFolderPath, $"{BackupName}.xml");
+            Directory.CreateDirectory(backupsFolderPath);
+            string filePath = Path.Combine(backupsFolderPath, BackupName);
             var serializer = new XmlSerializer(typeof(SerializeModels));
             using (var writer = new StreamWriter(filePath))
             {
                 serializer.Serialize(writer, serializeModels);
+                writer.Flush();
             }
         }
 

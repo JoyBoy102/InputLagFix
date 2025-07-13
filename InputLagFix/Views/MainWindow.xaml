@@ -12,9 +12,6 @@
         FontSize="14"
         FontWeight="DemiBold"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-    <Window.Resources>
-
-    </Window.Resources>
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#FF252526" Offset="0"/>
@@ -22,9 +19,9 @@
             <GradientStop Color="#FF808080" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.3*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -32,11 +29,9 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" LastChildFill="False" Margin="5">
-            <TextBlock Text="WindowsTweaker" FontSize="20" Foreground="Crimson" DockPanel.Dock="Left"></TextBlock>
-        </DockPanel>
 
-        <ListBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}" ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
+
+        <ListBox Grid.Column="0" Grid.Row="0" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}" ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -46,15 +41,15 @@
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Width="24" Height="24" Source="{Binding Img}"/>
                         <TextBlock Grid.Column="1" Text="{Binding DisplayName}" 
-                            TextWrapping="Wrap" 
-                            Margin="2"/>
+                                TextWrapping="Wrap" 
+                                Margin="2"/>
                     </Grid>
-   
+
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" BorderThickness="0" Padding="20">
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Padding="20">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -71,9 +66,9 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation 
-                                Storyboard.TargetProperty="Opacity"
-                                From="0" To="1" 
-                                Duration="0:0:0.5"/>
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="0" To="1" 
+                                    Duration="0:0:0.5"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -84,26 +79,26 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Background="#FF1E1E1E"
-                BorderThickness="0,1,0,0" 
-                BorderBrush="#FF007ACC">
+        <Border Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Background="#FF1E1E1E"
+                    BorderThickness="0,1,0,0" 
+                    BorderBrush="#FF007ACC">
             <ListBox ItemsSource="{Binding AllLogMessages}" 
-                     Background="Transparent" 
-                     BorderThickness="0"
-                     Foreground="LightGray"
-                     FontFamily="Consolas"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                         Background="Transparent" 
+                         BorderThickness="0"
+                         Foreground="LightGray"
+                         FontFamily="Consolas"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <TextBlock Text="{Binding}" 
-                                               Margin="5,2"
-                                               TextWrapping="Wrap"/>
+                                                   Margin="5,2"
+                                                   TextWrapping="Wrap"/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -111,6 +106,5 @@
                 </ListBox.ItemContainerStyle>
             </ListBox>
         </Border>
-
     </Grid>
 </Window>

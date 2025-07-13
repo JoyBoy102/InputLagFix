@@ -25,6 +25,7 @@
                          SelectedItem="{Binding SelectedCategory}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          Padding="5"
+                         FontSize="18"
                          Style="{StaticResource ListBoxStyle}"
                          ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
                 <ListBox.ItemTemplate>
@@ -45,13 +46,77 @@
                     ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Content="{Binding ruName}" 
-                                IsChecked="{Binding CheckedState}"
-                                Padding="5"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox  Content="{Binding ruName}" 
+                                   IsChecked="{Binding CheckedState}"
+                                   Padding="5"
+                                   VerticalAlignment="Center"
+                                   Grid.Row="0"
+                                   Grid.Column="0"/>
+                        <ToggleButton Grid.Column="1" Grid.Row="0" Style="{StaticResource ToggleButtonArrow}" IsChecked="{Binding State}" Command="{Binding DataContext.ShowSettingInfoCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"></ToggleButton>
+                        <ListBox ItemsSource="{Binding settings}" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource InfoListBoxItemStyle}" Visibility="{Binding Visibility}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Путь: {0}">
+                                                    <Binding Path="valuePath"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="1">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Название: {0}">
+                                                    <Binding Path="valueName"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="2">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Значение: {0}">
+                                                    <Binding Path="value"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="3">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Тип: {0}">
+                                                    <Binding Path="valueKind"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="4">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Задача: {0}">
+                                                    <Binding Path="isTask"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             
         </ListBox>
-        <Button Grid.Column="0" Grid.Row="1" Content="Применить настройки" Command="{Binding ApplySettingsCommand}"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Content="Применить настройки" Command="{Binding ApplySettingsCommand}" Margin="20 0 0 20"></Button>
     </Grid>
 </UserControl>
