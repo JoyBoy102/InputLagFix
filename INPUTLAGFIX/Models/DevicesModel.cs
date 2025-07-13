@@ -44,15 +44,15 @@ namespace INPUTLAGFIX.Models
         {
             Dictionary<string, string> AllDevicesIds = new Dictionary<string, string>()
             {
-                { "SWD\\PRINTENUM\\PrintQueues", "Корневая очередь печати" },
-                { "SWD\\MSRRAS\\MS_PPPOEMINIPORT", "WAN Miniport (PPPOE)" },
-                { "SWD\\MSRRAS\\MS_PPTPMINIPORT", "WAN Miniport (PPTP)" },
-                { "SWD\\MSRRAS\\MS_AGILEVPNMINIPORT", "WAN Miniport (IKEv2)" },
-                { "SWD\\MSRRAS\\MS_NDISWANBH", "WAN Miniport (Network Monitor)" },
-                {"SWD\\MSRRAS\\MS_NDISWANIP", "WAN Miniport (IP)"},
-                {"SWD\\MSRRAS\\MS_SSTPMINIPORT", "WAN Miniport (SSTP)"},
-                {"SWD\\MSRRAS\\MS_NDISWANIPV6", "WAN Miniport (IPv6)"},
-                {"SWD\\MSRRAS\\MS_L2TPMINIPORT", "WAN Miniport (L2TP)"}
+                { "PRINTENUM\\LocalPrintQueue", "Корневая очередь печати" },
+                { "MS_PPPOEMINIPORT", "WAN Miniport (PPPOE)" },
+                { "MS_PPTPMINIPORT", "WAN Miniport (PPTP)" },
+                { "MS_AGILEVPNMINIPORT", "WAN Miniport (IKEv2)" },
+                { "MS_NDISWANBH", "WAN Miniport (Network Monitor)" },
+                { "MS_NDISWANIP", "WAN Miniport (IP)"},
+                { "MS_SSTPMINIPORT", "WAN Miniport (SSTP)"},
+                { "MS_NDISWANIPV6", "WAN Miniport (IPv6)"},
+                { "MS_L2TPMINIPORT", "WAN Miniport (L2TP)"}
             };
             return GetDevices(AllDevicesIds);
         }

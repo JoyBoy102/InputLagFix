@@ -19,6 +19,7 @@
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                <Setter Property="SelectedIndex" Value="0"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBox">
@@ -26,7 +27,7 @@
                                     Padding="5"
                                     Background="#FF252526"
                                     Margin="20">
-                                <ScrollViewer>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                                     <ItemsPresenter/>
                                     <!-- Вместо ContentPresenter -->
                                 </ScrollViewer>
@@ -46,7 +47,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
                             <Border Background="{TemplateBinding Background}" 
-                                    CornerRadius="4"
+                                    CornerRadius="20"
                                     Padding="8,4">
                                 <ContentPresenter />
                             </Border>
@@ -55,13 +56,22 @@
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0"/>
                         <Setter Property="Background" Value="#FF000C10"/>
                         <Setter Property="Foreground" Value="LightCyan"/>
                     </Trigger>
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="BorderBrush" Value="#FF007ACC"/>
-                        <Setter Property="BorderThickness" Value="2"/>
-                    </Trigger>
+                    <Trigger Property="IsVisible" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0" To="1" 
+                                        Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                    </Trigger>      
                 </Style.Triggers>
             </Style>
 
@@ -96,8 +106,12 @@
                                             Visibility="Hidden">
                                     </Border>
                                 </Border>
-                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
-
+                                <TextBlock 
+                                        Grid.Column="1"
+                                        Text="{TemplateBinding Content}" 
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
@@ -110,20 +124,42 @@
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="Foreground" Value="#2E3440"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
                 <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="LightGray" BorderBrush="Black" Width="{TemplateBinding Width}" Height="40" BorderThickness="1" CornerRadius="4" Padding="5" x:Name="ButtonBorder">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="{TemplateBinding Width}"></ContentPresenter>
+                            <Border x:Name="ButtonBorder" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderBrush="#3B4252" 
+                                    BorderThickness="1" 
+                                    CornerRadius="20"
+                                    Padding="5">
+                                <ContentPresenter/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="DarkBlue"></Setter>
-                                    <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="2"></Setter>
+                                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#4C566A"/>
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#ECEFF4"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#E5E9F0"/>
+                                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#3B4252"/>
+                                    <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="ButtonBorder" Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.6"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -139,7 +175,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="LightGray" BorderBrush="Black" Width="200" Height="40" BorderThickness="1" CornerRadius="4" Padding="5">
+                            <Border Background="LightGray" BorderBrush="Black" Width="200" Height="40" BorderThickness="1" CornerRadius="20" Padding="5">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                             </Border>
                         </ControlTemplate>

@@ -67,7 +67,7 @@ namespace INPUTLAGFIX.Models
             }
         }
 
-        private void SetCategoryFoldersSize(CleaningCategoryItem item)
+        public void SetCategoryFoldersSize(CleaningCategoryItem item)
         {
             long totalSize = 0;
 
@@ -116,7 +116,7 @@ namespace INPUTLAGFIX.Models
             List<CleaningCategoryItem> AllCleaninCategoryItems = _xmlManager.GetAllCleaningCategoryItems();
             foreach (var item in AllCleaninCategoryItems)
             {
-                SetCategoryFoldersSize(item);  // Гарантированно выполнится для каждого элемента
+                SetCategoryFoldersSize(item);
             }
 
             ObservableCollection<CleaningCategoryItem> parsedCleaningCategoryItems =  new ObservableCollection<CleaningCategoryItem>(AllCleaninCategoryItems);

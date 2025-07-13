@@ -61,7 +61,26 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="White" FontSize="32" Grid.Row="0" Text="{Binding SelectedOptimizationsCategory.DisplayName}"></TextBlock>
-                <ContentControl Grid.Row="1" Content="{Binding SelectedOptimizationsCategory.Control}" Padding="20" Margin="20"></ContentControl>
+                <ContentControl Grid.Row="1" Content="{Binding SelectedOptimizationsCategory.Control}" Padding="20" Margin="20">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Opacity" Value="0"/>
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <!-- Анимация при загрузке -->
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                Storyboard.TargetProperty="Opacity"
+                                From="0" To="1" 
+                                Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </Grid>
         </Border>
 
@@ -83,8 +102,8 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <TextBlock Text="{Binding}" 
-                               Margin="5,2"
-                               TextWrapping="Wrap"/>
+                                               Margin="5,2"
+                                               TextWrapping="Wrap"/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>

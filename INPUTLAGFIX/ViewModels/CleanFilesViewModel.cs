@@ -41,6 +41,7 @@ namespace INPUTLAGFIX.ViewModels
             {
                 _cleanFilesModel.CleanFolder(folder);
             }
+            _cleanFilesModel.SetCategoryFoldersSize(item);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
