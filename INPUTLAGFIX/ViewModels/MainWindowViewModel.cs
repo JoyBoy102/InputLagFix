@@ -19,6 +19,8 @@ namespace INPUTLAGFIX.ViewModels
     {
         private ObservableCollection<OptimizationsCategoryItem> _optimizationsCategoryItems;
         private OptimizationsCategoryItem _selectedOptimizationsCategory;
+        private Visibility _contentControlVisibility = Visibility.Visible;
+        private Visibility _loadingControlVisibility = Visibility.Collapsed;
         public MainWindowViewModel()
         {
             _optimizationsCategoryItems = new ObservableCollection<OptimizationsCategoryItem>()
@@ -30,6 +32,16 @@ namespace INPUTLAGFIX.ViewModels
                 new OptimizationsCategoryItem { DisplayName = "MsiMode", Control = new MsiModeView() },
                 new OptimizationsCategoryItem { DisplayName = "Очистка", Control = new CleanFilesView()},
                 new OptimizationsCategoryItem { DisplayName = "Бэкапы", Control = new BackupsView() }
+            };
+            (Application.Current.Resources["EventAggregator"] as EventAggregator).SettingsStartApplying += () =>
+            {
+                LoadingControlVisibility = Visibility.Visible;
+                ContentControlVisibility = Visibility.Collapsed;
+            };
+            (Application.Current.Resources["EventAggregator"] as EventAggregator).SettingsStopApplying += () =>
+            {
+                LoadingControlVisibility = Visibility.Collapsed;
+                ContentControlVisibility = Visibility.Visible;
             };
         }
 
@@ -60,6 +72,26 @@ namespace INPUTLAGFIX.ViewModels
             set
             {
                 Logger.GetLogger().AllLogMessages = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility ContentControlVisibility
+        {
+            get => _contentControlVisibility;
+            set
+            {
+                _contentControlVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility LoadingControlVisibility
+        {
+            get => _loadingControlVisibility;
+            set
+            {
+                _loadingControlVisibility = value;
                 OnPropertyChanged();
             }
         }

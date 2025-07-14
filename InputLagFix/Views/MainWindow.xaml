@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         FontWeight="DemiBold"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        DataContext="{StaticResource MainWindowVM}">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#FF252526" Offset="0"/>
@@ -49,7 +50,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Padding="20">
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Padding="20" Visibility="{Binding ContentControlVisibility}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -57,27 +58,16 @@
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="White" FontSize="32" Grid.Row="0" Text="{Binding SelectedOptimizationsCategory.DisplayName}"></TextBlock>
                 <ContentControl Grid.Row="1" Content="{Binding SelectedOptimizationsCategory.Control}" Padding="20" Margin="20">
-                    <ContentControl.Style>
-                        <Style TargetType="ContentControl">
-                            <Setter Property="Opacity" Value="0"/>
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="Loaded">
-                                    <!-- Анимация при загрузке -->
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation 
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="0" To="1" 
-                                    Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContentControl.Style>
                 </ContentControl>
+                
             </Grid>
         </Border>
+
+        <ContentControl Grid.Column="1" Grid.Row="0" Padding="20" Margin="20" Visibility="{Binding LoadingControlVisibility}">
+            <ContentControl.Content>
+                <v:LoadingControl></v:LoadingControl>
+            </ContentControl.Content>
+        </ContentControl>
 
         <Border Grid.Row="1"
                     Grid.ColumnSpan="2"

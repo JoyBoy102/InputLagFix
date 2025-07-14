@@ -16,6 +16,8 @@
             <vm:CleanFilesViewModel x:Key="CleanFilesVM"/>
             <vm:AutoRunsViewModel x:Key="AutoRunsVM"></vm:AutoRunsViewModel>
             <vm:BackupsViewModel x:Key="BackupsVM"></vm:BackupsViewModel>
+            <vm:MainWindowViewModel x:Key="MainWindowVM"></vm:MainWindowViewModel>
+            <local:EventAggregator x:Key="EventAggregator"></local:EventAggregator>
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>

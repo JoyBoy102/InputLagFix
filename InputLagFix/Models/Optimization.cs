@@ -38,7 +38,7 @@ namespace INPUTLAGFIX.Models
         }
 
         public bool State {  get; set; }
-        public void ApplyOptimization(ref RegeditManager regeditManager, bool isBackup = false)
+        public void ApplyOptimization(RegeditManager regeditManager, bool isBackup = false)
         {
             foreach (Setting setting in _settings)
             {
@@ -49,7 +49,13 @@ namespace INPUTLAGFIX.Models
                         if (!setting.isTask)
                         {
                             if (setting.value != "delete")
-                                Logger.GetLogger().AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value, setting.valueKind));
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    Logger.GetLogger().AllLogMessages.Add(regeditManager.ChangeRegistryValue(setting.valuePath, setting.valueName, setting.value, setting.valueKind));
+                                });
+                                
+                            }
                         }
                         else
                         {
@@ -64,18 +70,28 @@ namespace INPUTLAGFIX.Models
                                         try
                                         {
                                             task.Enabled = false;
-                                            Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} была остановлена");
+                                            Application.Current.Dispatcher.Invoke(() =>
+                                            {
+                                                Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} была остановлена");
+                                            });
+                                            
                                         }
                                         catch
                                         {
-                                            Logger.GetLogger().AllLogMessages.Add($"Задачу {taskPath} не удалось остановить");
+                                            Application.Current.Dispatcher.Invoke(() =>
+                                            {
+                                                Logger.GetLogger().AllLogMessages.Add($"Задачу {taskPath} не удалось остановить");
+                                            });
                                         }
                                     }
 
                                 }
                                 else
                                 {
-                                    Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} не найдена.");
+                                    Application.Current.Dispatcher.Invoke(() =>
+                                    {
+                                        Logger.GetLogger().AllLogMessages.Add($"Задача {taskPath} не найдена.");
+                                    });
                                 }
                             }
 
@@ -86,16 +102,25 @@ namespace INPUTLAGFIX.Models
                 {
                     if (CheckedState == true || isBackup)
                     {
-                        if (setting.value!="delete")
-                            Logger.GetLogger().AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value, setting.valueKind));
+
+                        if (setting.value != "delete")
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Logger.GetLogger().AllLogMessages.Add(PowerRunManager.ApplyRegSettingWithPowerRun(setting.valuePath, setting.valueName, setting.value, setting.valueKind));
+                            });
+                        }
                     }
                 }
                 Thread.Sleep(250);
             }
             if (AddWindow && CheckedState)
             {
-                var infoWindow = new Information();
-                infoWindow.Show();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var infoWindow = new Information();
+                    infoWindow.Show();
+                });
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;

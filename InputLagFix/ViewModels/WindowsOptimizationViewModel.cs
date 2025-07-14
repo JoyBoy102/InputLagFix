@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Windows.UI.WindowManagement;
 
@@ -19,7 +20,6 @@ namespace INPUTLAGFIX.ViewModels
     {
         public WindowsOptimizationModel WindowsOptimizationModel;
         private RegeditManager _regeditManager;
-        private AutoRunsModel _autoRunsModel;
         private ObservableCollection<SettingsCategory> _settingsCategories;
         private SettingsCategory _selectedSettingsCategory;
         public IRelayCommand ApplySettingsCommand { get; }
@@ -29,7 +29,6 @@ namespace INPUTLAGFIX.ViewModels
         {
             _regeditManager = new RegeditManager();
             WindowsOptimizationModel = new WindowsOptimizationModel();
-            _autoRunsModel = new AutoRunsModel();
             _settingsCategories = new ObservableCollection<SettingsCategory>
             {
                 new SettingsCategory { CategoryName = "Основная оптимизация", Settings = WindowsOptimizationModel.BaseOptimizationSettings },
@@ -64,12 +63,18 @@ namespace INPUTLAGFIX.ViewModels
             }
         }
 
-        private void ApplySettings()
+        private async void ApplySettings()
         {
-            foreach (var setting in _selectedSettingsCategory.Settings)
+            (Application.Current.Resources["EventAggregator"] as EventAggregator).ShowLoadingUI();
+            await Task.Delay(1);
+            await Task.Run(() =>
             {
-                setting.ApplyOptimization(ref _regeditManager);
-            }
+                foreach (var setting in _selectedSettingsCategory.Settings)
+                {
+                   setting.ApplyOptimization(_regeditManager);
+                }
+            });
+            (Application.Current.Resources["EventAggregator"] as EventAggregator).CollapseLoadingUI();
         }
 
         private void ShowSettingInfo(Optimization optimization)

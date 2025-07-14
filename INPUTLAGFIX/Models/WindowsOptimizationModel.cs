@@ -145,7 +145,7 @@ namespace INPUTLAGFIX.Models
             }
             foreach (var item in BaseOptimizationSettings.Concat(SecuritySettings).Concat(WindowsCustomizationSettings).Concat(ServicesSettings).Concat(PrivacySettings).Concat(TasksSettings).Concat(TweaksSettings))
             {
-                item.ApplyOptimization(ref _regeditManager, true);
+                item.ApplyOptimization(_regeditManager, true);
             }
         }
     }

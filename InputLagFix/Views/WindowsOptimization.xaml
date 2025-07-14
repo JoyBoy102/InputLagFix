@@ -18,9 +18,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <!-- Левая панель категорий -->
-            <ListBox Name="CategoriesList" 
+        <ListBox Name="CategoriesList" 
                          ItemsSource="{Binding SettingsCategories}" 
                          SelectedItem="{Binding SelectedCategory}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -115,7 +113,6 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            
         </ListBox>
         <Button Grid.Column="0" Grid.Row="1" Content="Применить настройки" Command="{Binding ApplySettingsCommand}" Margin="20 0 0 20"></Button>
     </Grid>

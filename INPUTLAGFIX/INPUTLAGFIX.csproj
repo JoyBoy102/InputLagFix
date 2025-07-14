@@ -32,6 +32,7 @@
     <PackageReference Include="System.Management" Version="9.0.5" />
     <PackageReference Include="TaskScheduler" Version="2.12.1" />
     <PackageReference Include="WPF-UI" Version="4.0.2" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
