@@ -12,7 +12,7 @@
     <Grid>
         <Border CornerRadius="20"
                 Padding="5"
-                Background="#FF252526"
+                Background="#151F28"
                 Margin="20"
                 Grid.Column="1">
             <Grid>

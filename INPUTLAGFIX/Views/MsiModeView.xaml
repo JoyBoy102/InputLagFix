@@ -23,6 +23,7 @@
     <Grid>
         <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                  Style="{StaticResource ListBoxStyle}"
-                 ItemsSource="{Binding MsiModeDeviceItems}"/>
+                 ItemsSource="{Binding MsiModeDeviceItems}"
+                 ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
     </Grid>
 </UserControl>

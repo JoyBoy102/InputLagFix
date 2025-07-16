@@ -15,9 +15,9 @@
         DataContext="{StaticResource MainWindowVM}">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#FF252526" Offset="0"/>
-            <GradientStop Color="#FF505050" Offset="0.5"/>
-            <GradientStop Color="#FF808080" Offset="1"/>
+
+            <GradientStop Color="#2E3F4F" Offset="1"/>
+
         </LinearGradientBrush>
     </Window.Background>
 
@@ -32,7 +32,13 @@
         </Grid.ColumnDefinitions>
 
 
-        <ListBox Grid.Column="0" Grid.Row="0" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOptimizationsCategory}" ItemsSource="{Binding OptimizationsCategoryItems}" ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
+        <ListBox Grid.Column="0"
+                 Grid.Row="0"
+                 Style="{StaticResource MainListBoxStyle}"
+                 SelectedItem="{Binding SelectedOptimizationsCategory}"
+                 ItemsSource="{Binding OptimizationsCategoryItems}" 
+                 ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}"
+                 Background="#151F28">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -75,7 +81,7 @@
                     BorderThickness="0,1,0,0" 
                     BorderBrush="#FF007ACC">
             <ListBox ItemsSource="{Binding AllLogMessages}" 
-                         Background="Transparent" 
+                         Background="#151F28"
                          BorderThickness="0"
                          Foreground="LightGray"
                          FontFamily="Consolas"

@@ -34,19 +34,22 @@
                 <GroupBox Header="Ключи реестра" Grid.Row="0">
                     <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                              ItemsSource="{Binding RegeditAutoRuns}" 
-                             Style="{StaticResource ListBoxStyle}"/>
+                             Style="{StaticResource ListBoxStyle}"
+                             ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
                 </GroupBox>
 
                 <GroupBox Header="Задачи" Grid.Row="1">
                     <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                              ItemsSource="{Binding TaskAutoRuns}" 
-                             Style="{StaticResource ListBoxStyle}"/>
+                             Style="{StaticResource ListBoxStyle}"
+                             ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
                 </GroupBox>
 
                 <GroupBox Header="Службы" Grid.Row="2">
                     <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                              ItemsSource="{Binding ServicesAutoRuns}" 
-                             Style="{StaticResource ListBoxStyle}"/>
+                             Style="{StaticResource ListBoxStyle}"
+                             ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
                 </GroupBox>
 
             </Grid>

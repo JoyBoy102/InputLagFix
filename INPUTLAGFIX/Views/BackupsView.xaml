@@ -34,8 +34,10 @@
             <Button HorizontalAlignment="Left" Content="Создать бэкап" Command="{Binding CreateBackupItemCommand}"></Button>
         </StackPanel>
         
-        <ListBox Grid.Row="1" ItemTemplate="{StaticResource ListBoxDataTemplate}" 
-         Style="{StaticResource ListBoxStyle}"
-         ItemsSource="{Binding BackupItems}"/>
+        <ListBox Grid.Row="1"
+                 ItemTemplate="{StaticResource ListBoxDataTemplate}" 
+                 Style="{StaticResource ListBoxStyle}"
+                 ItemsSource="{Binding BackupItems}"
+                 ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
     </Grid>
 </UserControl>

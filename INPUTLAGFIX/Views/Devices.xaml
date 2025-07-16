@@ -33,13 +33,15 @@
             <GroupBox Header="Ненужные устройства" Grid.Row="0">
                 <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                         ItemsSource="{Binding UnnecessaryDevices}" 
-                        Style="{StaticResource ListBoxStyle}"/>
+                        Style="{StaticResource ListBoxStyle}"
+                        ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
             </GroupBox>
 
             <GroupBox Header="Устройства (отключать в случае ненадобности)" Grid.Row="1">
                 <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
                         ItemsSource="{Binding Devices}" 
-                        Style="{StaticResource ListBoxStyle}"/>
+                        Style="{StaticResource ListBoxStyle}"
+                        ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
             </GroupBox>
         </Grid>
     </ScrollViewer>

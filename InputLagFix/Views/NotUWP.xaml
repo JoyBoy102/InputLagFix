@@ -12,7 +12,8 @@
         <ListBox ItemsSource="{Binding SelectedDeleteItemsCategory.AllItems}"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      HorizontalContentAlignment="Stretch"
-                     Style="{StaticResource ListBoxStyle}">
+                     Style="{StaticResource ListBoxStyle}"
+                     ItemContainerStyle="{StaticResource SecondListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

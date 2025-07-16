@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:INPUTLAGFIX.Views"
         mc:Ignorable="d"
         Title="Information" Height="450" Width="800"
-        Background="#FF252526"
+        Background="#151F28"
         Foreground="White"
         DataContext="{StaticResource InfoVM}">
     <Grid>

@@ -24,7 +24,7 @@
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          Padding="5"
                          FontSize="18"
-                         Style="{StaticResource ListBoxStyle}"
+                         Style="{StaticResource MainListBoxStyle}"
                          ItemContainerStyle="{StaticResource SelectedListBoxItemStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -41,7 +41,8 @@
                     BorderThickness="0"
                     Padding="10"
                     Style="{StaticResource ListBoxStyle}"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    ItemContainerStyle="{StaticResource SecondListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -60,7 +61,11 @@
                                    Grid.Row="0"
                                    Grid.Column="0"/>
                         <ToggleButton Grid.Column="1" Grid.Row="0" Style="{StaticResource ToggleButtonArrow}" IsChecked="{Binding State}" Command="{Binding DataContext.ShowSettingInfoCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"></ToggleButton>
-                        <ListBox ItemsSource="{Binding settings}" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource InfoListBoxItemStyle}" Visibility="{Binding Visibility}">
+                        <ListBox ItemsSource="{Binding settings}"
+                                 Grid.Row="1" Grid.ColumnSpan="2"
+                                 Style="{StaticResource MainListBoxStyle}"
+                                 ItemContainerStyle="{StaticResource InfoListBoxItemStyle}"
+                                 Visibility="{Binding Visibility}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

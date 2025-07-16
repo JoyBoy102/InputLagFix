@@ -33,14 +33,16 @@
 
                 <GroupBox Header="Файлы" Grid.Row="0">
                     <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
-                                            ItemsSource="{Binding CleaningCategoryItems}" 
-                                            Style="{StaticResource ListBoxStyle}"/>
+                             ItemsSource="{Binding CleaningCategoryItems}" 
+                             Style="{StaticResource ListBoxStyle}"
+                             ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>
                 </GroupBox>
 
                 <GroupBox Header="Устройства" Grid.Row="1">
                     <ListBox ItemTemplate="{StaticResource ListBoxDataTemplate}" 
-                                            ItemsSource="{Binding}" 
-                                            Style="{StaticResource ListBoxStyle}"/>     
+                             ItemsSource="{Binding}" 
+                             Style="{StaticResource ListBoxStyle}"
+                             ItemContainerStyle="{StaticResource SecondListBoxItemStyle}"/>     
                 </GroupBox>
             </Grid>
         </ScrollViewer>
